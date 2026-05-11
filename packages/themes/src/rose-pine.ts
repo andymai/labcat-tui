@@ -1,0 +1,51 @@
+import { type ThemeDefinition, defineTheme } from '@labcat/tui';
+
+export const rosePine: ThemeDefinition = defineTheme({
+  name: 'rosePine',
+  bg: '#191724',
+  surface: '#1f1d2e',
+  surface2: '#26233a',
+  fg: '#e0def4',
+  fgMuted: '#908caa',
+  fgDim: '#6e6a86',
+  accent: '#ebbcba',
+  accentDim: '#c4a7e7',
+  border: '#403d52',
+  success: '#9ccfd8',
+  error: '#eb6f92',
+  warning: '#f6c177',
+  info: '#31748f',
+  fontMono:
+    '"Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace',
+  leadingTight: '1.25',
+  leadingBody: '1.55',
+  contentMax: '72ch',
+  durFast: '120ms',
+  durBase: '220ms',
+  easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)',
+});
+
+export const rosePineDawn: ThemeDefinition = defineTheme({
+  name: 'rosePineDawn',
+  bg: '#faf4ed',
+  surface: '#fffaf3',
+  surface2: '#f2e9e1',
+  fg: '#575279',
+  fgMuted: '#797593',
+  fgDim: '#9893a5',
+  accent: '#b4637a',
+  accentDim: '#907aa9',
+  border: '#dfdad9',
+  success: '#286983',
+  error: '#b4637a',
+  warning: '#ea9d34',
+  info: '#56949f',
+  fontMono:
+    '"Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace',
+  leadingTight: '1.25',
+  leadingBody: '1.55',
+  contentMax: '72ch',
+  durFast: '120ms',
+  durBase: '220ms',
+  easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)',
+});

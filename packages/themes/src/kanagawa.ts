@@ -1,0 +1,51 @@
+import { type ThemeDefinition, defineTheme } from '@labcat/tui';
+
+export const kanagawa: ThemeDefinition = defineTheme({
+  name: 'kanagawa',
+  bg: '#1f1f28',
+  surface: '#2a2a37',
+  surface2: '#363646',
+  fg: '#dcd7ba',
+  fgMuted: '#a6a69c',
+  fgDim: '#727169',
+  accent: '#ffa066',
+  accentDim: '#b6927b',
+  border: '#54546d',
+  success: '#98bb6c',
+  error: '#e82424',
+  warning: '#dca561',
+  info: '#7e9cd8',
+  fontMono:
+    '"Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace',
+  leadingTight: '1.25',
+  leadingBody: '1.55',
+  contentMax: '72ch',
+  durFast: '120ms',
+  durBase: '220ms',
+  easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)',
+});
+
+export const kanagawaLotus: ThemeDefinition = defineTheme({
+  name: 'kanagawaLotus',
+  bg: '#f2ecbc',
+  surface: '#e7d8b1',
+  surface2: '#dcc9a3',
+  fg: '#545464',
+  fgMuted: '#766b90',
+  fgDim: '#8a8980',
+  accent: '#cc6d00',
+  accentDim: '#a25a14',
+  border: '#cebca0',
+  success: '#6f894e',
+  error: '#c84053',
+  warning: '#77713f',
+  info: '#4d699b',
+  fontMono:
+    '"Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace',
+  leadingTight: '1.25',
+  leadingBody: '1.55',
+  contentMax: '72ch',
+  durFast: '120ms',
+  durBase: '220ms',
+  easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)',
+});
