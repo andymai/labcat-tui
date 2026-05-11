@@ -169,6 +169,54 @@
         },
         {
           "kind": "js",
+          "name": "TuiChatBubble",
+          "declaration": {
+            "name": "TuiChatBubble",
+            "module": "./components/chat-bubble.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ChatRole",
+          "declaration": {
+            "name": "ChatRole",
+            "module": "./components/chat-bubble.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiDiffBlock",
+          "declaration": {
+            "name": "TuiDiffBlock",
+            "module": "./components/diff-block.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "DiffLine",
+          "declaration": {
+            "name": "DiffLine",
+            "module": "./components/diff-block.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "DiffLineKind",
+          "declaration": {
+            "name": "DiffLineKind",
+            "module": "./components/diff-block.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiToolUseTimeline",
+          "declaration": {
+            "name": "TuiToolUseTimeline",
+            "module": "./components/tool-use-timeline.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "defineTheme",
           "declaration": {
             "name": "defineTheme",
@@ -1208,6 +1256,269 @@
           "declaration": {
             "name": "TuiBox",
             "module": "src/components/box.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/chat-bubble.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-chat-bubble>` — Chat message with role/name/timestamp head + slot body.",
+          "name": "TuiChatBubble",
+          "cssParts": [
+            {
+              "description": "Header row container",
+              "name": "head"
+            },
+            {
+              "description": "Role indicator",
+              "name": "role"
+            },
+            {
+              "description": "Sender name",
+              "name": "name"
+            },
+            {
+              "description": "Timestamp text",
+              "name": "timestamp"
+            },
+            {
+              "description": "Body slot wrapper",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Message body",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "role",
+              "type": {
+                "text": "ChatRole"
+              },
+              "default": "'assistant'",
+              "attribute": "role",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "timestamp",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "timestamp",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "roleGlyph",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "ChatRole"
+              },
+              "name": "role",
+              "default": "'assistant'",
+              "fieldName": "role"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "name": "name",
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "name": "timestamp",
+              "default": "''",
+              "fieldName": "timestamp"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-chat-bubble",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiChatBubble",
+          "declaration": {
+            "name": "TuiChatBubble",
+            "module": "src/components/chat-bubble.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-chat-bubble",
+          "declaration": {
+            "name": "TuiChatBubble",
+            "module": "src/components/chat-bubble.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/diff-block.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-diff-block>` — Inline diff with add/remove/context line markers.",
+          "name": "TuiDiffBlock",
+          "cssParts": [
+            {
+              "description": "A single line row",
+              "name": "line"
+            },
+            {
+              "description": "The leading marker glyph",
+              "name": "marker"
+            },
+            {
+              "description": "The line text",
+              "name": "text"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Pre-rendered HTML alternative to `lines`",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "tool",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Edit'",
+              "attribute": "tool",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "args",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "args",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "lines",
+              "type": {
+                "text": "DiffLine[]"
+              },
+              "default": "[]",
+              "description": "`Array<{ kind: 'add' | 'remove' | 'context'; text: string }>`"
+            },
+            {
+              "kind": "field",
+              "name": "hasSlot",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "onSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Tool label (default `Edit`)",
+              "name": "tool",
+              "default": "'Edit'",
+              "fieldName": "tool"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Args label",
+              "name": "args",
+              "default": "''",
+              "fieldName": "args"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-diff-block",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiDiffBlock",
+          "declaration": {
+            "name": "TuiDiffBlock",
+            "module": "src/components/diff-block.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-diff-block",
+          "declaration": {
+            "name": "TuiDiffBlock",
+            "module": "src/components/diff-block.ts"
           }
         }
       ]
@@ -2902,6 +3213,58 @@
           "declaration": {
             "name": "TuiToolCall",
             "module": "src/components/tool-call.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tool-use-timeline.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-tool-use-timeline>` — Vertical timeline of slotted tool-call cards.",
+          "name": "TuiToolUseTimeline",
+          "cssParts": [
+            {
+              "description": "The vertical line linking entries",
+              "name": "connector"
+            },
+            {
+              "description": "The marker rendered alongside each slotted item",
+              "name": "dot"
+            }
+          ],
+          "slots": [
+            {
+              "description": "`<tui-tool-call>` (or any) elements",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-tool-use-timeline",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiToolUseTimeline",
+          "declaration": {
+            "name": "TuiToolUseTimeline",
+            "module": "src/components/tool-use-timeline.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-tool-use-timeline",
+          "declaration": {
+            "name": "TuiToolUseTimeline",
+            "module": "src/components/tool-use-timeline.ts"
           }
         }
       ]

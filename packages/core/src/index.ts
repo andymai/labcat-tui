@@ -11,6 +11,9 @@ import './components/todo-list.js';
 import './components/todo-item.js';
 import './components/streamed-text.js';
 import './components/prompt-input.js';
+import './components/chat-bubble.js';
+import './components/diff-block.js';
+import './components/tool-use-timeline.js';
 
 export { TuiToolCall } from './components/tool-call.js';
 export type { ToolCallStatus } from './components/tool-call.js';
@@ -30,6 +33,11 @@ export { TuiTodoItem } from './components/todo-item.js';
 export type { TodoStatus } from './components/todo-item.js';
 export { TuiStreamedText } from './components/streamed-text.js';
 export { TuiPromptInput } from './components/prompt-input.js';
+export { TuiChatBubble } from './components/chat-bubble.js';
+export type { ChatRole } from './components/chat-bubble.js';
+export { TuiDiffBlock } from './components/diff-block.js';
+export type { DiffLine, DiffLineKind } from './components/diff-block.js';
+export { TuiToolUseTimeline } from './components/tool-use-timeline.js';
 
 export {
   defineTheme,

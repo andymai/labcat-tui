@@ -12,3 +12,6 @@ export { TodoList } from './components/todo-list.js';
 export { TodoItem } from './components/todo-item.js';
 export { StreamedText } from './components/streamed-text.js';
 export { PromptInput } from './components/prompt-input.js';
+export { ChatBubble } from './components/chat-bubble.js';
+export { DiffBlock } from './components/diff-block.js';
+export { ToolUseTimeline } from './components/tool-use-timeline.js';
