@@ -11,10 +11,48 @@ export default defineConfig({
       sidebar: [
         {
           label: 'Start',
+          items: [{ label: 'Introduction', slug: 'index' }],
+        },
+        {
+          label: 'Surfaces',
           items: [
-            { label: 'Introduction', slug: 'index' },
-            { label: 'Tool call', slug: 'components/tool-call' },
+            { label: 'Session', slug: 'components/session' },
+            { label: 'Prompt input', slug: 'components/prompt-input' },
+            { label: 'Prompt line', slug: 'components/prompt-line' },
+            { label: 'Slash overlay', slug: 'components/slash-overlay' },
+            { label: 'Status line', slug: 'components/status-line' },
           ],
+        },
+        {
+          label: 'Tool I/O',
+          items: [
+            { label: 'Tool call', slug: 'components/tool-call' },
+            { label: 'Tool-use timeline', slug: 'components/tool-use-timeline' },
+            { label: 'Diff block', slug: 'components/diff-block' },
+            { label: 'Streamed text', slug: 'components/streamed-text' },
+            { label: 'Spinner', slug: 'components/spinner' },
+          ],
+        },
+        {
+          label: 'Conversation',
+          items: [
+            { label: 'Chat bubble', slug: 'components/chat-bubble' },
+            { label: 'Thinking block', slug: 'components/thinking-block' },
+            { label: 'Todo list', slug: 'components/todo-list' },
+            { label: 'Todo item', slug: 'components/todo-item' },
+            { label: 'Markdown', slug: 'components/md' },
+          ],
+        },
+        {
+          label: 'Layout',
+          items: [
+            { label: 'Box', slug: 'components/box' },
+            { label: 'Welcome banner', slug: 'components/welcome-banner' },
+          ],
+        },
+        {
+          label: 'Theming',
+          items: [{ label: 'Theme provider', slug: 'components/theme-provider' }],
         },
       ],
       customCss: ['@labcat/tui/styles.css'],

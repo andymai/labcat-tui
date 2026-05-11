@@ -1,0 +1,47 @@
+---
+title: '<tui-session>'
+description: High-level Light-DOM orchestrator that owns document-level keyboard shortcuts.
+---
+
+import '@labcat/tui';
+
+The high-level wrapper for a TUI surface. Holds the document-level keyboard shortcuts so child `<tui-prompt-input>` / `<tui-slash-overlay>` instances don't need to.
+
+## Example
+
+```html
+<tui-session>
+  <tui-welcome-banner glyph="✻" title="Welcome"></tui-welcome-banner>
+  <tui-slash-overlay></tui-slash-overlay>
+  <tui-prompt-input></tui-prompt-input>
+</tui-session>
+```
+
+## Shortcuts
+
+| Key | Behavior |
+| --- | --- |
+| `/` | Focus first descendant `<tui-prompt-input>` (skipped while typing in form fields). |
+| `Cmd`/`Ctrl`+`K` | Open first descendant `<tui-slash-overlay>`. |
+| `?` | Open the slash overlay (skipped in form fields). |
+| `Escape` | Close the slash overlay if open. |
+
+## Light DOM
+
+Per SPEC §7.2, `<tui-session>` uses **Light DOM** so slotted children behave naturally in any framework. The element only adds the `tui-session` class.
+
+## Opt-out
+
+To prevent shortcuts from firing inside a subtree (e.g. an embedded editor), add the `ignore-shortcuts` attribute to any ancestor:
+
+```html
+<tui-session>
+  <div ignore-shortcuts>
+    <my-code-editor></my-code-editor>
+  </div>
+</tui-session>
+```
+
+## Multiple sessions
+
+If multiple `<tui-session>` elements mount in the same document, **last-mounted wins** shortcut routing. A dev-mode `console.warn` is emitted on the second mount.

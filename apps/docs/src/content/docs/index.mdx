@@ -5,20 +5,7 @@ description: Claude Code-styled TUI component library for the web.
 
 import '@labcat/tui';
 
-A reader installs `@labcat/tui`, drops a single `<Session>` into their app, and gets a working Claude Code-style TUI: warm-dark background, coral accent, `●` tool-call cards, `›` prompt, status line.
-
-## v0.1 status
-
-This is the skeleton release. One component is wired end-to-end:
-
-<tui-tool-call tool="Read" args="posts/">
-  <ul>
-    <li>proxmox-tuning</li>
-    <li>k3s-on-pi</li>
-  </ul>
-</tui-tool-call>
-
-See [Tool call](/components/tool-call/) for the full contract.
+A web component library that brings Claude Code's terminal aesthetic to the browser. Drop `<tui-session>` into your app and get a working TUI surface: warm-dark background, coral accent, `●` tool-call cards, `›` prompt, status line — all themable.
 
 ## Install
 
@@ -29,4 +16,39 @@ pnpm add @labcat/tui
 ```ts
 import '@labcat/tui';
 import '@labcat/tui/styles.css';
+```
+
+## Minimal example
+
+```html
+<tui-session>
+  <tui-welcome-banner glyph="✻" title="Welcome to labcat" />
+  <tui-tool-call tool="Read" args="posts/">
+    <ul>
+      <li>proxmox-tuning</li>
+      <li>k3s-on-pi</li>
+    </ul>
+  </tui-tool-call>
+  <tui-slash-overlay></tui-slash-overlay>
+  <tui-prompt-input placeholder="Type / for commands"></tui-prompt-input>
+</tui-session>
+```
+
+## Status
+
+All 17 §4.1 components ship in v0.5. Highlights:
+
+- **Surfaces** — [`<tui-session>`](/components/session/), [`<tui-prompt-input>`](/components/prompt-input/), [`<tui-slash-overlay>`](/components/slash-overlay/), [`<tui-status-line>`](/components/status-line/).
+- **Tool I/O** — [`<tui-tool-call>`](/components/tool-call/), [`<tui-tool-use-timeline>`](/components/tool-use-timeline/), [`<tui-diff-block>`](/components/diff-block/), [`<tui-streamed-text>`](/components/streamed-text/), [`<tui-spinner>`](/components/spinner/).
+- **Conversation** — [`<tui-chat-bubble>`](/components/chat-bubble/), [`<tui-thinking-block>`](/components/thinking-block/), [`<tui-todo-list>`](/components/todo-list/), [`<tui-md>`](/components/md/).
+- **Theming** — [`<tui-theme-provider>`](/components/theme-provider/) with `claude` / `claudeLight` built in, plus `@labcat/tui-themes` for extras (gruvbox shipping in v0.5).
+
+## React?
+
+`@labcat/tui-react` wraps every component with `@lit/react` for type-safe JSX. Lit events are exposed as `onTui*` handler props.
+
+```tsx
+import { TuiToolCall } from '@labcat/tui-react';
+
+<TuiToolCall tool="Read" args="posts/">…</TuiToolCall>
 ```

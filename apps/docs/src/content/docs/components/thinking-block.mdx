@@ -1,0 +1,38 @@
+---
+title: '<tui-thinking-block>'
+description: Collapsible aside built on native `<details>`.
+---
+
+import '@labcat/tui';
+
+A collapsible thinking-aloud aside. Built on `<details>` so keyboard + screen reader behavior is native; the only added work is the styled summary glyph.
+
+## Example
+
+<tui-thinking-block label="thinking">
+  Considering whether to recurse or iterate...
+</tui-thinking-block>
+
+```html
+<tui-thinking-block label="thinking">
+  Considering whether to recurse or iterate...
+</tui-thinking-block>
+```
+
+## API
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `open` | `boolean` | Initially expanded when present. |
+| `label` | `string` | Summary text (default `thinking`). |
+
+### Slots
+
+| Slot | Description |
+| --- | --- |
+| `(default)` | Body content. |
+| `summary` | Optional override for the summary row. |
+
+### CSS parts
+
+`summary`, `body`.

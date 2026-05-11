@@ -1,0 +1,41 @@
+---
+title: '<tui-welcome-banner>'
+description: Boxed welcome with glyph + tips.
+---
+
+import '@labcat/tui';
+
+A first-screen banner with a glyph, title, and slotted tip list. Pairs naturally with `<tui-prompt-input>` on a fresh page.
+
+## Example
+
+<tui-welcome-banner glyph="✻" title="Welcome to labcat">
+  <ul>
+    <li>Try <code>/help</code> to see commands</li>
+    <li>Press <code>?</code> for keyboard shortcuts</li>
+  </ul>
+</tui-welcome-banner>
+
+```html
+<tui-welcome-banner glyph="✻" title="Welcome to labcat">
+  <ul>
+    <li>Try <code>/help</code> to see commands</li>
+    <li>Press <code>?</code> for keyboard shortcuts</li>
+  </ul>
+</tui-welcome-banner>
+```
+
+## API
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `glyph` | `string` | Decorative glyph (default `✻`). |
+| `title` | `string` | Title text rendered next to the glyph. |
+
+### Slot
+
+The default slot is the tips body.
+
+### CSS parts
+
+`chrome`, `glyph`, `title`, `subtitle`.

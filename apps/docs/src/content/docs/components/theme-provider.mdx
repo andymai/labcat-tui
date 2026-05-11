@@ -1,0 +1,55 @@
+---
+title: '<tui-theme-provider>'
+description: Wraps a subtree and applies a theme via CSS custom properties.
+---
+
+import '@labcat/tui';
+
+Resolves a theme name (or `ThemeDefinition` object) and applies its tokens as CSS custom properties on the host. Children inherit the theme through normal CSS variable cascade.
+
+## Example
+
+```html
+<tui-theme-provider theme="claudeLight">
+  <tui-tool-call tool="Read" args="posts/"></tui-tool-call>
+</tui-theme-provider>
+```
+
+For a programmatic theme:
+
+```ts
+import '@labcat/tui/components/theme-provider';
+import { gruvbox } from '@labcat/tui-themes';
+
+const el = document.querySelector('tui-theme-provider')!;
+(el as HTMLElement & { theme: typeof gruvbox }).theme = gruvbox;
+```
+
+## API
+
+| Attribute / Property | Type | Description |
+| --- | --- | --- |
+| `theme` | `string \| ThemeDefinition` | Built-in name (`'claude'`, `'claudeLight'`) or full theme object. |
+
+Built-in names are validated against the list in `listBuiltInThemes()`; unknown names log a warning and fall back to `'claude'`.
+
+### Events
+
+| Event | Detail | Description |
+| --- | --- | --- |
+| `tui-theme-change` | `{ from, to }` | Fired after a successful theme swap. |
+
+### Authoring custom themes
+
+```ts
+import { defineTheme } from '@labcat/tui';
+
+export const myTheme = defineTheme({
+  name: 'my-theme',
+  bg: '#101020',
+  fg: '#e0e0f0',
+  // …all required tokens
+});
+```
+
+In dev mode, missing required tokens throw `MissingTokenError`; invalid color values throw `InvalidColorError`. In production, both downgrade to a `console.warn` and the theme falls back to `claude`.

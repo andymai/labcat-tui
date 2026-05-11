@@ -1,0 +1,51 @@
+---
+title: '<tui-slash-overlay>'
+description: Modal command palette.
+---
+
+import '@labcat/tui';
+
+A modal overlay that filters a `Command[]` list by query and emits a selection event. Pair with `<tui-session>` to bind `Cmd/Ctrl-K` and `?` globally.
+
+## Example
+
+```html
+<tui-slash-overlay></tui-slash-overlay>
+```
+
+```ts
+import { defineCommands } from '@labcat/tui';
+
+const overlay = document.querySelector('tui-slash-overlay')!;
+(overlay as HTMLElement & { commands: unknown }).commands = defineCommands([
+  { name: 'posts', route: '/posts/' },
+  { name: 'help', description: 'show help', handler: () => alert('hi') },
+]);
+
+overlay.addEventListener('tui-slash-select', (e) => {
+  const { command } = (e as CustomEvent).detail;
+  console.log('picked', command);
+});
+```
+
+## API
+
+| Attribute / Property | Type | Description |
+| --- | --- | --- |
+| `open` | `boolean` | Reflected attribute; opens or closes the modal. |
+| `commands` | `Command[]` | Set as a property — list of commands to render. |
+
+### Events
+
+| Event | Detail | Description |
+| --- | --- | --- |
+| `tui-slash-select` | `{ command: string }` | A list item was activated. The overlay then closes itself. |
+| `tui-slash-dismiss` | — | The backdrop was clicked or the user pressed Escape. |
+
+### CSS parts
+
+`backdrop`, `list`, `item`.
+
+### Accessibility
+
+Renders with `role="dialog"` and `aria-modal="true"`. Focus is trapped in the internal `<input>` for filtering while open; Escape closes.

@@ -1,0 +1,35 @@
+---
+title: '<tui-spinner>'
+description: Inline TUI spinner with several glyph styles.
+---
+
+import '@labcat/tui';
+
+An inline spinner with four glyph sets. Respects `prefers-reduced-motion` and reports itself via `role="status"`.
+
+## Example
+
+<tui-spinner kind="dots" running></tui-spinner>
+<tui-spinner kind="line" running></tui-spinner>
+<tui-spinner kind="box" running></tui-spinner>
+<tui-spinner kind="pulse" running></tui-spinner>
+
+```html
+<tui-spinner kind="dots" running></tui-spinner>
+```
+
+## API
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `kind` | `'dots'` \| `'line'` \| `'box'` \| `'pulse'` | `'dots'` | Glyph set. |
+| `running` | `boolean` | `false` | Animates while present. |
+| `aria-label` | `string` | `'Loading'` | Override the announced label. |
+
+### CSS parts
+
+`glyph`.
+
+### Accessibility
+
+`role="status"` with a default `aria-label="Loading"`. When `prefers-reduced-motion: reduce` is set, the spinner falls back to a single static glyph.

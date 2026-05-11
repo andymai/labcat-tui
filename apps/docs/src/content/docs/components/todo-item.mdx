@@ -1,0 +1,36 @@
+---
+title: '<tui-todo-item>'
+description: Single item in a TUI todo list.
+---
+
+import '@labcat/tui';
+
+A single line in a TUI-style todo list. Best used inside [`<tui-todo-list>`](/components/todo-list/) — when nested, items inherit the list's `kind` glyph.
+
+## Example
+
+<tui-todo-item status="active">Ship gruvbox theme</tui-todo-item>
+
+```html
+<tui-todo-item status="active">Ship gruvbox theme</tui-todo-item>
+```
+
+## API
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `status` | `'pending'` \| `'active'` \| `'done'` \| `'error'` | Glyph + a11y state. |
+
+### Slot
+
+The default slot is the label.
+
+### Events
+
+| Event | Detail | Description |
+| --- | --- | --- |
+| `tui-todo-change` | `{ status }` | Fired when `status` changes (programmatic or attribute). |
+
+### CSS parts
+
+`dot`, `label`.

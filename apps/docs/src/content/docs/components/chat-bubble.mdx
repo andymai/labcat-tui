@@ -1,0 +1,40 @@
+---
+title: '<tui-chat-bubble>'
+description: Chat message with role/name/timestamp head + slot body.
+---
+
+import '@labcat/tui';
+
+A chat-style message row with role glyph, name, timestamp, and a slotted body. Compatible with light- and dark-mode themes.
+
+## Example
+
+<tui-chat-bubble role="user" name="andy" timestamp="14:32">
+  How's the build going?
+</tui-chat-bubble>
+
+<tui-chat-bubble role="assistant" name="claude" timestamp="14:32">
+  Green across Node 22 and 24.
+</tui-chat-bubble>
+
+```html
+<tui-chat-bubble role="user" name="andy" timestamp="14:32">
+  How's the build going?
+</tui-chat-bubble>
+```
+
+## API
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `role` | `'user'` \| `'assistant'` \| `'system'` | Selects glyph + color treatment. |
+| `name` | `string` | Display name. |
+| `timestamp` | `string` | Free-form timestamp text. |
+
+### Slot
+
+The default slot is the message body.
+
+### CSS parts
+
+`head`, `role`, `name`, `timestamp`, `body`.

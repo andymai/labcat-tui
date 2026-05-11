@@ -1,0 +1,80 @@
+---
+title: '<tui-prompt-input>'
+description: Functional `›` prompt with declarative commands.
+---
+
+import '@labcat/tui';
+
+The interactive prompt — a real `<input>` with command parsing, declarative routing, history, tab completion, and ARIA wiring. For the static variant see [`<tui-prompt-line>`](/components/prompt-line/).
+
+## Example
+
+```html
+<tui-prompt-input placeholder="Type / for commands"></tui-prompt-input>
+```
+
+```ts
+import { defineCommands } from '@labcat/tui';
+
+const input = document.querySelector('tui-prompt-input')!;
+(input as HTMLElement & { commands: unknown }).commands = defineCommands([
+  { name: 'posts', route: '/posts/' },
+  { name: 'ls posts', description: 'list posts', handler: (_, ctx) => ctx.navigate('/posts/') },
+  { name: 'theme', description: 'toggle theme', handler: (_, ctx) => ctx.toggleTheme() },
+]);
+```
+
+## API
+
+| Attribute / Property | Type | Description |
+| --- | --- | --- |
+| `placeholder` | `string` | Input placeholder. |
+| `history-key` | `string \| null` | localStorage key for per-instance history. Falls back to `id`, then a DOM-path hash. |
+| `history-limit` | `number` | Max entries retained (default `50`). |
+| `disabled` | `boolean` | Disables submission. |
+| `commands` | `Command[]` | Set as a property. See [Commands](#commands). |
+
+### Commands
+
+`defineCommands()` enforces an XOR between `route` and `handler`. Use `route` for declarative navigation, `handler` for ad-hoc actions:
+
+```ts
+import { defineCommands } from '@labcat/tui';
+// route: prompt fires tui-navigate with detail.url
+{ name: 'posts', route: '/posts/' }
+// handler: prompt calls handler(arg, ctx); aria-busy is toggled around async work
+{ name: 'theme', handler: (_, ctx) => ctx.toggleTheme() }
+```
+
+Multi-word names (`'ls posts'`) work — the registry scans decreasing-length prefixes and slices the remainder as the argument.
+
+### Events
+
+| Event | Detail | Description |
+| --- | --- | --- |
+| `tui-navigate` | `{ url }` | A `route` command was matched. |
+| `tui-toggle-theme` | — | `ctx.toggleTheme()` was called. |
+| `tui-set-theme` | `{ theme }` | `ctx.setTheme(...)` was called. |
+| `tui-command` | `{ name, arg }` | A command (route or handler) was submitted. |
+| `tui-command-success` | `{ name, arg }` | The handler resolved successfully. |
+| `tui-command-error` | `{ name, arg, error }` | The handler threw or rejected. |
+
+### Keyboard
+
+| Key | Behavior |
+| --- | --- |
+| `Enter` | Submit. |
+| `↑` / `↓` | Cycle history. |
+| `Tab` | Complete: longest unique prefix, or the registered `completions` callback. |
+
+### CSS parts
+
+`caret`, `input`, `cursor`.
+
+### Accessibility
+
+The internal `<input>` carries `aria-label="terminal command"`. While a handler is running, the host element sets `aria-busy="true"`.
+
+### Concurrency
+
+The prompt **rejects re-entrant submits**: while a handler is still running, additional Enter presses are dropped (no queueing). Use the `tui-command-success` / `tui-command-error` events to drive UI state from the outside.

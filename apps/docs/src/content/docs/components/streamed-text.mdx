@@ -1,0 +1,52 @@
+---
+title: '<tui-streamed-text>'
+description: Char-by-char CSS reveal of slotted text.
+---
+
+import '@labcat/tui';
+
+Renders text with a per-character reveal animation. Uses pure CSS `@keyframes` driven by inline `animation-delay`, so it works without JS once mounted. Honors `prefers-reduced-motion`.
+
+## Example
+
+<tui-streamed-text cps="40">
+  This text reveals one character at a time.
+</tui-streamed-text>
+
+```html
+<tui-streamed-text cps="40">
+  This text reveals one character at a time.
+</tui-streamed-text>
+```
+
+## API
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `speed` | `number` | Milliseconds per character (default `30`). |
+| `cps` | `number` | Characters per second (overrides `speed` when set). |
+| `delay` | `number` | Initial delay in ms before the reveal starts. |
+| `start-when-visible` | `boolean` | Delay reveal until the element enters the viewport. |
+| `skip-on-revisit` | `boolean` | If the user has seen this element in the current session, render instantly. |
+
+### Methods
+
+| Method | Description |
+| --- | --- |
+| `interrupt()` | Skip to the fully-revealed state immediately. |
+
+### Events
+
+| Event | Detail | Description |
+| --- | --- | --- |
+| `tui-stream-start` | — | Reveal animation began. |
+| `tui-stream-complete` | — | All characters revealed. |
+| `tui-stream-interrupt` | — | `interrupt()` was called. |
+
+### CSS parts
+
+`char` (each per-character `<span>`).
+
+### Accessibility
+
+The original slotted text is rendered into a hidden `<div aria-hidden="true">` mirror, while the visible characters use the same text — screen readers announce the text once, immediately, regardless of animation state.

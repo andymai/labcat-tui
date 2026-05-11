@@ -1,0 +1,41 @@
+---
+title: '<tui-diff-block>'
+description: Inline diff with add/remove/context line markers.
+---
+
+import '@labcat/tui';
+
+A line-prefixed diff renderer. Markers come from a per-line `data-marker` attribute on each child line — `+`, `-`, or `=` (context).
+
+## Example
+
+<tui-diff-block tool="Edit" args="package.json">
+  <div data-marker="=">name: my-package,</div>
+  <div data-marker="-">version: 0.1.0,</div>
+  <div data-marker="+">version: 0.2.0,</div>
+  <div data-marker="=">license: MIT,</div>
+</tui-diff-block>
+
+```html
+<tui-diff-block tool="Edit" args="package.json">
+  <div data-marker="=">name: my-package,</div>
+  <div data-marker="-">version: 0.1.0,</div>
+  <div data-marker="+">version: 0.2.0,</div>
+  <div data-marker="=">license: MIT,</div>
+</tui-diff-block>
+```
+
+## API
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `tool` | `string` | Tool name shown in the head (e.g. `Edit`). |
+| `args` | `string` | Argument summary, typically a file path. |
+
+### Slot
+
+Each direct child is rendered as a line. Each child should set `data-marker="+|-|="` on itself.
+
+### CSS parts
+
+`line`, `marker`, `text`.

@@ -1,0 +1,41 @@
+---
+title: '<tui-status-line>'
+description: Status bar with breadcrumb + segments.
+---
+
+import '@labcat/tui';
+
+A compact one-line status bar with a breadcrumb on the left and arbitrary slotted segments on the left/right.
+
+## Example
+
+<tui-status-line breadcrumb="labcat / posts">
+  <span slot="left">main</span>
+  <span slot="right">tokens: 1.2k</span>
+</tui-status-line>
+
+```html
+<tui-status-line breadcrumb="labcat / posts">
+  <span slot="left">main</span>
+  <span slot="right">tokens: 1.2k</span>
+</tui-status-line>
+```
+
+## API
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `breadcrumb` | `string` | Path-like text rendered first. |
+| `kind` | `'thin'` \| `'thick'` | Vertical density. |
+
+### Slots
+
+| Slot | Description |
+| --- | --- |
+| `(default)` | Centered segments. |
+| `left` | Segments rendered before the default slot. |
+| `right` | Segments rendered after the default slot. |
+
+### CSS parts
+
+`segment`, `separator`, `breadcrumb`.

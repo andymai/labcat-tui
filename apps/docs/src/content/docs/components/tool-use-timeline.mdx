@@ -1,0 +1,32 @@
+---
+title: '<tui-tool-use-timeline>'
+description: Vertical timeline of slotted tool-call cards.
+---
+
+import '@labcat/tui';
+
+A connector + dot rail that runs down the left side of any number of slotted `<tui-tool-call>` children. Purely decorative — the cards retain their own roles.
+
+## Example
+
+<tui-tool-use-timeline>
+  <tui-tool-call tool="Read" args="src/"></tui-tool-call>
+  <tui-tool-call tool="Edit" args="src/index.ts"></tui-tool-call>
+  <tui-tool-call tool="Bash" args="pnpm test"></tui-tool-call>
+</tui-tool-use-timeline>
+
+```html
+<tui-tool-use-timeline>
+  <tui-tool-call tool="Read" args="src/"></tui-tool-call>
+  <tui-tool-call tool="Edit" args="src/index.ts"></tui-tool-call>
+  <tui-tool-call tool="Bash" args="pnpm test"></tui-tool-call>
+</tui-tool-use-timeline>
+```
+
+## API
+
+The component has no attributes. It accepts any children in its default slot.
+
+### CSS parts
+
+`connector`, `dot`.

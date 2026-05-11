@@ -1,0 +1,35 @@
+---
+title: '<tui-box>'
+description: Box frame with rounded or sharp corners.
+---
+
+import '@labcat/tui';
+
+A framed container that draws an ASCII-style border around its slotted children.
+
+## Example
+
+<tui-box title="info">
+  Just some boxed content.
+</tui-box>
+
+```html
+<tui-box title="info">
+  Just some boxed content.
+</tui-box>
+```
+
+## API
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `kind` | `'rounded'` \| `'sharp'` | `'rounded'` | Corner glyph set. |
+| `title` | `string` | — | Optional title rendered in the top border. |
+
+### Slot
+
+The default slot is the body content.
+
+### CSS parts
+
+`chrome`, `title`, `body`.

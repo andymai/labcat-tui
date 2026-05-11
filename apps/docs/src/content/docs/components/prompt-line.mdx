@@ -1,0 +1,29 @@
+---
+title: '<tui-prompt-line>'
+description: Static `›` prompt with optional command + cursor.
+---
+
+import '@labcat/tui';
+
+A non-interactive prompt line. Useful for documentation, transcripts, and screenshots — for the interactive variant see [`<tui-prompt-input>`](/components/prompt-input/).
+
+## Example
+
+<tui-prompt-line command="/help"></tui-prompt-line>
+<tui-prompt-line command="/posts ls" cursor></tui-prompt-line>
+
+```html
+<tui-prompt-line command="/help"></tui-prompt-line>
+<tui-prompt-line command="/posts ls" cursor></tui-prompt-line>
+```
+
+## API
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `command` | `string` | Pre-rendered command text. |
+| `cursor` | `boolean` | When present, renders a blinking caret after the command. |
+
+### CSS parts
+
+`caret`, `command`, `cursor`.

@@ -1,0 +1,34 @@
+---
+title: '<tui-todo-list>'
+description: Dumb list container for `<tui-todo-item>` children.
+---
+
+import '@labcat/tui';
+
+A simple container that styles a stack of `<tui-todo-item>` children. Items register themselves with the parent on mount, so no explicit wiring is required.
+
+## Example
+
+<tui-todo-list>
+  <tui-todo-item status="done">Wire up CI</tui-todo-item>
+  <tui-todo-item status="active">Ship gruvbox theme</tui-todo-item>
+  <tui-todo-item status="pending">Add RTL snapshots</tui-todo-item>
+</tui-todo-list>
+
+```html
+<tui-todo-list>
+  <tui-todo-item status="done">Wire up CI</tui-todo-item>
+  <tui-todo-item status="active">Ship gruvbox theme</tui-todo-item>
+  <tui-todo-item status="pending">Add RTL snapshots</tui-todo-item>
+</tui-todo-list>
+```
+
+## API
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `kind` | `'check'` \| `'dot'` | `'check'` | Glyph style used by child items. |
+
+### Slot
+
+Slotted `<tui-todo-item>` children. Mixing in other elements is allowed but won't pick up the registration glue.

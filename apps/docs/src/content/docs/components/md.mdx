@@ -1,0 +1,36 @@
+---
+title: '<tui-md>'
+description: Light-DOM prose wrapper with TUI-mono styling.
+---
+
+import '@labcat/tui';
+
+A **Light DOM** prose container. Wrap rendered markdown (or any prose) in `<tui-md>` to inherit the TUI mono font, line-height, and CSS variables — without isolating styles in shadow DOM.
+
+## Example
+
+<tui-md>
+  <h2>Hello, world</h2>
+  <p>This wraps prose for TUI styling. Inline <code>code</code> and <a href="/">links</a> pick up theme tokens.</p>
+  <pre><code>fn main() &#123;
+  println!("hi");
+&#125;</code></pre>
+</tui-md>
+
+```html
+<tui-md>
+  <!-- any prose; commonly server-rendered markdown -->
+</tui-md>
+```
+
+## API
+
+No attributes. The element exists to apply the `.tui-md` class and namespace prose styles.
+
+### Why Light DOM?
+
+Server-rendered markdown (Astro `<Content />`, Next MDX, etc.) emits child elements directly into the DOM. Shadow DOM would force a slot rewrite. Light DOM keeps SSR clean and lets host page styles cascade through.
+
+### CSS tokens used
+
+`--tui-prose-h1-color`, `--tui-prose-link-color`, `--tui-prose-code-color`, with theme fallbacks (`--tui-fg`, `--tui-accent`, etc.). Override per page or per theme.
