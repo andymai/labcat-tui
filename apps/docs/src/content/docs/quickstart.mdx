@@ -1,0 +1,155 @@
+---
+title: Quickstart
+description: Drop @labcat/tui into any web project — vanilla HTML, Vite, Astro, Next.js, or a game dev tooling page.
+---
+
+`@labcat/tui` ships as ESM-only Lit web components. The components are framework-agnostic: any DOM consumes them by registering them once and emitting `<tui-*>` tags. This page covers four typical setups.
+
+## Vanilla HTML (no bundler)
+
+After `pnpm add @labcat/tui` — or, after the first npm publish, via a CDN like esm.sh / unpkg:
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>my tool</title>
+    <link rel="stylesheet" href="https://esm.sh/@labcat/tui/styles.css" />
+    <script type="module">
+      import 'https://esm.sh/@labcat/tui';
+    </script>
+  </head>
+  <body>
+    <tui-session>
+      <tui-welcome-banner glyph="✻" title="hello">
+        <ul><li>tui works in plain HTML</li></ul>
+      </tui-welcome-banner>
+
+      <tui-tool-call tool="Read" args="readme.md">
+        <p>No JSX. No bundler. Just web components.</p>
+      </tui-tool-call>
+
+      <tui-slash-overlay></tui-slash-overlay>
+      <tui-prompt-input placeholder="Type / for commands"></tui-prompt-input>
+    </tui-session>
+  </body>
+</html>
+```
+
+Best fit: game tooling pages, internal dashboards, README demos, anywhere you want zero build steps.
+
+## Vite
+
+```bash
+pnpm add @labcat/tui
+```
+
+```ts
+// src/main.ts
+import '@labcat/tui';
+import '@labcat/tui/styles.css';
+```
+
+```html
+<!-- index.html -->
+<tui-tool-call tool="Read" args="src/">…</tui-tool-call>
+<tui-prompt-input placeholder="Type / for commands"></tui-prompt-input>
+```
+
+For TypeScript: every component has a typed Lit element class, and `HTMLElementTagNameMap` is augmented so `document.querySelector('tui-prompt-input')` returns the right type.
+
+## Astro
+
+The library is SSR-safe (`customElements.define` is guarded), so dropping it into an Astro page just works:
+
+```astro
+---
+// src/layouts/Base.astro
+import '@labcat/tui/styles.css';
+---
+<html>
+  <head><script>import '@labcat/tui';</script></head>
+  <body>
+    <tui-session>
+      <slot />
+      <tui-slash-overlay></tui-slash-overlay>
+    </tui-session>
+  </body>
+</html>
+```
+
+Astro emits `<tui-*>` tags as static HTML; the client-side `<script>` upgrades them once `@labcat/tui` runs `customElements.define`. The library's `dist/styles.css` is server-side included so the elements have correct shape before JS upgrades them — no FOUC.
+
+## React / Next.js
+
+Use `@labcat/tui-react` for type-safe JSX wrappers:
+
+```bash
+pnpm add @labcat/tui @labcat/tui-react
+```
+
+```tsx
+'use client'; // Next.js app router
+
+import { Session, ToolCallCard, PromptInput } from '@labcat/tui-react';
+import '@labcat/tui/styles.css';
+
+export function App() {
+  return (
+    <Session>
+      <ToolCallCard tool="Read" args="src/">
+        <ul><li>file.ts</li></ul>
+      </ToolCallCard>
+      <PromptInput
+        placeholder="Type / for commands"
+        onTuiCommand={(e) => console.log(e.detail)}
+      />
+    </Session>
+  );
+}
+```
+
+Lit events surface as `onTui*` props (renamed to avoid colliding with Lit element properties of the same name — e.g. `tui-navigate` → `onTuiNavigate`).
+
+## Game-dev recipe
+
+For an in-game console / debug overlay served from an embedded webview:
+
+1. **Pin one entry point.** A single `<script type="module" src="/your-bundle.js">` registers all components.
+2. **Use `<tui-session>`** at the root so `/`, `Cmd/Ctrl-K`, and `?` are wired without your code touching keydown listeners.
+3. **Run console commands via `defineCommands`**:
+
+```ts
+import { defineCommands } from '@labcat/tui';
+
+const commands = defineCommands([
+  { name: 'spawn', description: 'spawn enemy at cursor',
+    handler: (arg) => game.spawn(arg.trim()) },
+  { name: 'tp', description: 'teleport to coords',
+    handler: (arg) => {
+      const [x, y, z] = arg.split(/\s+/).map(Number);
+      if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(z)) game.tp(x, y, z);
+    } },
+  { name: 'theme', description: 'cycle themes',
+    handler: (_, ctx) => ctx.toggleTheme() },
+]);
+
+document.querySelector('tui-prompt-input').commands = commands;
+document.querySelector('tui-slash-overlay').commands = commands;
+```
+
+4. **Theme it.** Default `claude` matches Claude Code. `@labcat/tui-themes` ships `synthwave`, `phosphorGreen`, and `phosphorAmber` for retro / arcade vibes:
+
+```ts
+import { phosphorGreen } from '@labcat/tui-themes';
+document.querySelector('tui-theme-provider').theme = phosphorGreen;
+```
+
+See the [Themes page](/themes/) for the full preset gallery.
+
+## Where next
+
+- Full [component catalogue](/components/session/)
+- [Theme inventory + author your own](/themes/)
+- Source: [github.com/andymai/labcat-tui](https://github.com/andymai/labcat-tui)
