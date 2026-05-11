@@ -1230,7 +1230,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "`<tui-diff-block>` — Inline diff with add/remove/context line markers.",
+          "description": "`<tui-diff-block>` — Inline diff with add/remove/context line markers.\n\nTwo ways to supply lines:\n- Set the `lines` property: `Array<{ kind, text }>`.\n- Slot child elements with a `data-marker` attribute. `data-marker=\"+\"` →\n  add, `data-marker=\"-\"` → remove, `data-marker=\"=\"` or `\" \"` (or absent) →\n  context. The slot is mirrored into shadow DOM with marker glyph + styling;\n  the original light-DOM children are hidden from assistive tech.",
           "name": "TuiDiffBlock",
           "cssParts": [
             {
@@ -1248,7 +1248,7 @@
           ],
           "slots": [
             {
-              "description": "Pre-rendered HTML alternative to `lines`",
+              "description": "Child elements with `data-marker` are parsed into lines",
               "name": ""
             }
           ],
@@ -1284,12 +1284,12 @@
             },
             {
               "kind": "field",
-              "name": "hasSlot",
+              "name": "slotLines",
               "type": {
-                "text": "boolean"
+                "text": "DiffLine[] | null"
               },
               "privacy": "private",
-              "default": "false"
+              "default": "null"
             },
             {
               "kind": "method",

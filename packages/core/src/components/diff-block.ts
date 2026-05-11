@@ -17,10 +17,17 @@ const MARKER: Record<DiffLineKind, string> = {
 /**
  * `<tui-diff-block>` — Inline diff with add/remove/context line markers.
  *
+ * Two ways to supply lines:
+ * - Set the `lines` property: `Array<{ kind, text }>`.
+ * - Slot child elements with a `data-marker` attribute. `data-marker="+"` →
+ *   add, `data-marker="-"` → remove, `data-marker="="` or `" "` (or absent) →
+ *   context. The slot is mirrored into shadow DOM with marker glyph + styling;
+ *   the original light-DOM children are hidden from assistive tech.
+ *
  * @attr {string} tool - Tool label (default `Edit`)
  * @attr {string} args - Args label
  * @prop lines - `Array<{ kind: 'add' | 'remove' | 'context'; text: string }>`
- * @slot - Pre-rendered HTML alternative to `lines`
+ * @slot - Child elements with `data-marker` are parsed into lines
  * @csspart line - A single line row
  * @csspart marker - The leading marker glyph
  * @csspart text - The line text
@@ -52,6 +59,12 @@ export class TuiDiffBlock extends LitElement {
       overflow-x: auto;
       white-space: pre;
       padding-block-start: 0.25rem;
+    }
+
+    /* The light-DOM slot acts as the source of truth for data-marker mode;
+       hide it visually + from AT so only the shadow mirror is announced. */
+    .src {
+      display: none;
     }
 
     .line {
@@ -93,40 +106,42 @@ export class TuiDiffBlock extends LitElement {
   lines: DiffLine[] = [];
 
   @state()
-  private hasSlot = false;
+  private slotLines: DiffLine[] | null = null;
 
   private onSlotChange(e: Event): void {
     const slot = e.target as HTMLSlotElement;
-    this.hasSlot = slot
-      .assignedNodes({ flatten: true })
-      .some((n) =>
-        n.nodeType === Node.ELEMENT_NODE
-          ? true
-          : !!(n.textContent && n.textContent.trim().length > 0),
-      );
+    const els = slot.assignedElements({ flatten: true });
+    if (els.length === 0) {
+      this.slotLines = null;
+      return;
+    }
+    this.slotLines = els.map((el): DiffLine => {
+      const marker = el.getAttribute('data-marker') ?? ' ';
+      const kind: DiffLineKind = marker === '+' ? 'add' : marker === '-' ? 'remove' : 'context';
+      return { kind, text: el.textContent ?? '' };
+    });
   }
 
   override render() {
+    const lines = this.slotLines ?? this.lines;
     return html`
       <div class="head">
         <span class="tool">${this.tool}</span>
         ${this.args ? html`<span class="args">${this.args}</span>` : nothing}
       </div>
       <div class="lines">
-        ${
-          this.hasSlot
-            ? nothing
-            : this.lines.map(
-                (line) => html`
-                <div class="line" part="line" data-kind=${line.kind}>
-                  <span class="marker" part="marker" aria-hidden="true">${MARKER[line.kind]}</span>
-                  <span class="text" part="text">${line.text}</span>
-                </div>
-              `,
-              )
-        }
-        <slot @slotchange=${this.onSlotChange}></slot>
+        ${lines.map(
+          (line) => html`
+            <div class="line" part="line" data-kind=${line.kind}>
+              <span class="marker" part="marker" aria-hidden="true">${MARKER[line.kind]}</span>
+              <span class="text" part="text">${line.text}</span>
+            </div>
+          `,
+        )}
       </div>
+      <span class="src" aria-hidden="true">
+        <slot @slotchange=${this.onSlotChange}></slot>
+      </span>
     `;
   }
 }
