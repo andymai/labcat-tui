@@ -7,9 +7,7 @@ export default defineConfig({
     starlight({
       title: '@labcat/tui',
       description: 'Claude Code-styled TUI component library for the web',
-      social: {
-        github: 'https://github.com/andymai/labcat-tui',
-      },
+      social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/andymai/labcat-tui' }],
       sidebar: [
         {
           label: 'Start',
