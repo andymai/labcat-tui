@@ -59,15 +59,17 @@ export interface ThemeDefinition {
   diffAddedWord: string;
   diffRemovedWord: string;
 
-  // Subagent persona palette
-  subagentRed: string;
-  subagentBlue: string;
-  subagentGreen: string;
-  subagentYellow: string;
-  subagentPurple: string;
-  subagentOrange: string;
-  subagentPink: string;
-  subagentCyan: string;
+  // Subagent persona palette (NATO phonetic callsigns — the names are
+  // intentionally not color-bound so themes can map them freely without
+  // misleading consumers).
+  subagentAlpha: string;
+  subagentBravo: string;
+  subagentCharlie: string;
+  subagentDelta: string;
+  subagentEcho: string;
+  subagentFoxtrot: string;
+  subagentGolf: string;
+  subagentHotel: string;
 
   // Chrome integration badges
   chromeYellow: string;
@@ -129,15 +131,15 @@ const REQUIRED_TOKENS = [
   'diffRemovedDimmed',
   'diffAddedWord',
   'diffRemovedWord',
-  // Subagent
-  'subagentRed',
-  'subagentBlue',
-  'subagentGreen',
-  'subagentYellow',
-  'subagentPurple',
-  'subagentOrange',
-  'subagentPink',
-  'subagentCyan',
+  // Subagent (NATO phonetic)
+  'subagentAlpha',
+  'subagentBravo',
+  'subagentCharlie',
+  'subagentDelta',
+  'subagentEcho',
+  'subagentFoxtrot',
+  'subagentGolf',
+  'subagentHotel',
   // Chrome
   'chromeYellow',
   // Typography
@@ -181,14 +183,14 @@ const COLOR_TOKENS = [
   'diffRemovedDimmed',
   'diffAddedWord',
   'diffRemovedWord',
-  'subagentRed',
-  'subagentBlue',
-  'subagentGreen',
-  'subagentYellow',
-  'subagentPurple',
-  'subagentOrange',
-  'subagentPink',
-  'subagentCyan',
+  'subagentAlpha',
+  'subagentBravo',
+  'subagentCharlie',
+  'subagentDelta',
+  'subagentEcho',
+  'subagentFoxtrot',
+  'subagentGolf',
+  'subagentHotel',
   'chromeYellow',
 ] as const satisfies readonly (keyof ThemeDefinition)[];
 

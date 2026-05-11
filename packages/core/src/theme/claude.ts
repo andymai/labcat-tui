@@ -65,14 +65,14 @@ export const claude = defineTheme({
   diffRemovedWord: '#b3596b',
 
   // Subagent personas (consistent across light/dark per reference)
-  subagentRed: '#dc2626',
-  subagentBlue: '#2563eb',
-  subagentGreen: '#16a34a',
-  subagentYellow: '#ca8a04',
-  subagentPurple: '#9333ea',
-  subagentOrange: '#ea580c',
-  subagentPink: '#db2777',
-  subagentCyan: '#0891b2',
+  subagentAlpha: '#dc2626',
+  subagentBravo: '#2563eb',
+  subagentCharlie: '#16a34a',
+  subagentDelta: '#ca8a04',
+  subagentEcho: '#9333ea',
+  subagentFoxtrot: '#ea580c',
+  subagentGolf: '#db2777',
+  subagentHotel: '#0891b2',
 
   // Chrome integration
   chromeYellow: '#fbbc04',
@@ -148,14 +148,14 @@ export const claudeLight = defineTheme({
   diffRemovedWord: '#d1454b',
 
   // Subagent personas (same hex in dark/light per reference)
-  subagentRed: '#dc2626',
-  subagentBlue: '#2563eb',
-  subagentGreen: '#16a34a',
-  subagentYellow: '#ca8a04',
-  subagentPurple: '#9333ea',
-  subagentOrange: '#ea580c',
-  subagentPink: '#db2777',
-  subagentCyan: '#0891b2',
+  subagentAlpha: '#dc2626',
+  subagentBravo: '#2563eb',
+  subagentCharlie: '#16a34a',
+  subagentDelta: '#ca8a04',
+  subagentEcho: '#9333ea',
+  subagentFoxtrot: '#ea580c',
+  subagentGolf: '#db2777',
+  subagentHotel: '#0891b2',
 
   // Chrome integration
   chromeYellow: '#fbbc04',

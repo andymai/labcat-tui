@@ -3,14 +3,14 @@ import { type ThemeDefinition, defineTheme } from '@labcat/tui';
 // Subagent palette is shared with claude — these are role-coded persona
 // colors, not palette identity, so we keep them consistent across themes.
 const subagent = {
-  subagentRed: '#fb4934',
-  subagentBlue: '#83a598',
-  subagentGreen: '#b8bb26',
-  subagentYellow: '#fabd2f',
-  subagentPurple: '#d3869b',
-  subagentOrange: '#fe8019',
-  subagentPink: '#d3869b',
-  subagentCyan: '#8ec07c',
+  subagentAlpha: '#fb4934',
+  subagentBravo: '#83a598',
+  subagentCharlie: '#b8bb26',
+  subagentDelta: '#fabd2f',
+  subagentEcho: '#d3869b',
+  subagentFoxtrot: '#fe8019',
+  subagentGolf: '#d3869b',
+  subagentHotel: '#8ec07c',
 } as const;
 
 const motion = {
@@ -128,14 +128,14 @@ export const gruvboxLight: ThemeDefinition = defineTheme({
   diffRemovedWord: '#9d0006',
 
   // Subagent: same persona palette as dark
-  subagentRed: '#cc241d',
-  subagentBlue: '#458588',
-  subagentGreen: '#98971a',
-  subagentYellow: '#d79921',
-  subagentPurple: '#b16286',
-  subagentOrange: '#d65d0e',
-  subagentPink: '#b16286',
-  subagentCyan: '#689d6a',
+  subagentAlpha: '#cc241d',
+  subagentBravo: '#458588',
+  subagentCharlie: '#98971a',
+  subagentDelta: '#d79921',
+  subagentEcho: '#b16286',
+  subagentFoxtrot: '#d65d0e',
+  subagentGolf: '#b16286',
+  subagentHotel: '#689d6a',
 
   chromeYellow: '#d79921',
   ...motion,

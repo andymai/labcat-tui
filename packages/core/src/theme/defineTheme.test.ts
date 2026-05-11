@@ -67,14 +67,14 @@ const valid: ThemeDefinition = {
   diffRemovedWord: '#a36',
 
   // Subagent
-  subagentRed: '#d22',
-  subagentBlue: '#25e',
-  subagentGreen: '#1a4',
-  subagentYellow: '#ca0',
-  subagentPurple: '#93e',
-  subagentOrange: '#ea1',
-  subagentPink: '#d27',
-  subagentCyan: '#09b',
+  subagentAlpha: '#d22',
+  subagentBravo: '#25e',
+  subagentCharlie: '#1a4',
+  subagentDelta: '#ca0',
+  subagentEcho: '#93e',
+  subagentFoxtrot: '#ea1',
+  subagentGolf: '#d27',
+  subagentHotel: '#09b',
 
   // Chrome
   chromeYellow: '#fbb',
@@ -116,7 +116,7 @@ describe('defineTheme', () => {
 
   it('requires the v0.6 fidelity tokens (shimmer, mode, subagent, diff variants)', () => {
     try {
-      const { accentShimmer: _a, modeAutoAccept: _m, subagentRed: _s, ...rest } = valid;
+      const { accentShimmer: _a, modeAutoAccept: _m, subagentAlpha: _s, ...rest } = valid;
       defineTheme(rest as ThemeDefinition);
       throw new Error('expected MissingTokenError');
     } catch (err) {
@@ -124,7 +124,7 @@ describe('defineTheme', () => {
       const tokens = (err as MissingTokenError).tokens;
       expect(tokens).toContain('accentShimmer');
       expect(tokens).toContain('modeAutoAccept');
-      expect(tokens).toContain('subagentRed');
+      expect(tokens).toContain('subagentAlpha');
     }
   });
 });
@@ -155,7 +155,7 @@ describe('themeToCssVars', () => {
     expect(vars['--tui-mode-bash-border']).toBe('#f5b');
     expect(vars['--tui-system-spinner']).toBe('#39f');
     expect(vars['--tui-diff-added-dimmed']).toBe('#475');
-    expect(vars['--tui-subagent-red']).toBe('#d22');
+    expect(vars['--tui-subagent-alpha']).toBe('#d22');
     expect(vars['--tui-chrome-yellow']).toBe('#fbb');
   });
 });

@@ -74,14 +74,14 @@ export const claudeAnsi = defineTheme({
   diffAddedWord: ansi.greenBright,
   diffRemovedWord: ansi.redBright,
 
-  subagentRed: ansi.red,
-  subagentBlue: ansi.blue,
-  subagentGreen: ansi.green,
-  subagentYellow: ansi.yellow,
-  subagentPurple: ansi.magenta,
-  subagentOrange: ansi.redBright,
-  subagentPink: ansi.magentaBright,
-  subagentCyan: ansi.cyan,
+  subagentAlpha: ansi.red,
+  subagentBravo: ansi.blue,
+  subagentCharlie: ansi.green,
+  subagentDelta: ansi.yellow,
+  subagentEcho: ansi.magenta,
+  subagentFoxtrot: ansi.redBright,
+  subagentGolf: ansi.magentaBright,
+  subagentHotel: ansi.cyan,
 
   chromeYellow: ansi.yellow,
 
