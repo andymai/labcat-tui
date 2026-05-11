@@ -48,7 +48,10 @@ All 17 §4.1 components ship in v0.5. Highlights:
 `@labcat/tui-react` wraps every component with `@lit/react` for type-safe JSX. Lit events are exposed as `onTui*` handler props.
 
 ```tsx
-import { TuiToolCall } from '@labcat/tui-react';
+import { ToolCallCard, PromptInput, Session } from '@labcat/tui-react';
 
-<TuiToolCall tool="Read" args="posts/">…</TuiToolCall>
+<Session>
+  <ToolCallCard tool="Read" args="posts/">…</ToolCallCard>
+  <PromptInput placeholder="Type / for commands" onTuiCommand={e => console.log(e.detail)} />
+</Session>
 ```
