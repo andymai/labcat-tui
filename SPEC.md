@@ -709,7 +709,7 @@ Co-located: `src/components/tool-call.ts` + `src/components/tool-call.test.ts`.
 
 ### 12.4 CI matrix
 
-- **Node**: 20.x LTS + 22.x current. (Drop 18 — EOL April 2025.)
+- **Node**: 22.x LTS + 24.x current. (Astro 6 requires ≥22.12; Node 20 dropped 2026-05-11 with Astro upgrade.)
 - **OS**: `ubuntu-latest` only. Contributors on macOS/Windows run unit tests locally; visual regression runs only on Linux baseline.
 - **pnpm**: pinned via `package.json#packageManager` (Corepack).
 - **Vitest browsers**: Chromium baseline in v0.1. Firefox + WebKit added in v0.5 via additional Playwright provider instances. WebKit on Linux can flake on shadow DOM bugs — flagged non-blocking until v1.0 baseline stabilizes.
