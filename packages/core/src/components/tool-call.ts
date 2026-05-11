@@ -97,6 +97,11 @@ export class TuiToolCall extends LitElement {
   @state()
   private hasBody = false;
 
+  // Tracks whether the current aria-label was set by this component (and so
+  // can be refreshed on attribute change) vs provided by the consumer (and so
+  // must be left alone).
+  private autoSetAriaLabel = false;
+
   override connectedCallback(): void {
     super.connectedCallback();
     if (!this.hasAttribute('role')) this.setAttribute('role', 'region');
@@ -108,9 +113,18 @@ export class TuiToolCall extends LitElement {
   }
 
   private applyAriaLabel(): void {
-    if (this.hasAttribute('aria-label') && this.getAttribute('aria-label')) return;
+    const consumerSet = this.hasAttribute('aria-label') && !this.autoSetAriaLabel;
+    if (consumerSet && this.getAttribute('aria-label')) return;
+
     const label = [this.tool, this.args].filter(Boolean).join(' ').trim();
-    if (label) this.setAttribute('aria-label', label);
+    if (label) {
+      this.setAttribute('aria-label', label);
+      this.autoSetAriaLabel = true;
+    } else if (this.autoSetAriaLabel) {
+      // Tool + args both cleared after we auto-set — drop the stale label.
+      this.removeAttribute('aria-label');
+      this.autoSetAriaLabel = false;
+    }
   }
 
   private onSlotChange(e: Event): void {

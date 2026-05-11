@@ -54,6 +54,24 @@ describe('<tui-tool-call>', () => {
     expect(el.getAttribute('aria-label')).toBe('custom');
   });
 
+  it('refreshes the auto-generated aria-label when tool or args change', async () => {
+    const el = await fixture<TuiToolCall>(
+      html`<tui-tool-call tool="Read" args="posts/"></tui-tool-call>`,
+    );
+    expect(el.getAttribute('aria-label')).toBe('Read posts/');
+
+    el.tool = 'Edit';
+    el.args = 'README.md';
+    await el.updateComplete;
+    expect(el.getAttribute('aria-label')).toBe('Edit README.md');
+
+    // Clearing both should drop the stale label.
+    el.tool = '';
+    el.args = '';
+    await el.updateComplete;
+    expect(el.hasAttribute('aria-label')).toBe(false);
+  });
+
   it('sets role="region" when not provided', async () => {
     const el = await fixture<TuiToolCall>(html`<tui-tool-call tool="Read"></tui-tool-call>`);
     expect(el.getAttribute('role')).toBe('region');
