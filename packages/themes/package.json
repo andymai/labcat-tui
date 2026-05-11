@@ -20,6 +20,7 @@
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
     "test": "echo \"themes will get snapshot coverage in v0.5\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "size": "echo \"size budgets per-theme — wired up when first theme lands in v0.5\"",
     "clean": "rm -rf dist *.tsbuildinfo"
   },

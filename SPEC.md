@@ -35,7 +35,7 @@ Three differentiators:
 | Library build        | Vite library mode (`build.lib`)                                 |
 | Monorepo build       | pnpm workspaces + Turborepo (caching, task graph)               |
 | TypeScript           | Strict; types ship as `.d.ts` + Custom Elements Manifest (CEM)  |
-| Unit tests           | `@web/test-runner` (Lit's canonical path)                       |
+| Unit tests           | Vitest browser mode (Playwright provider, Chromium)             |
 | Visual regression    | Playwright snapshots (Linux-only baseline)                      |
 | A11y testing         | `@axe-core/playwright` on docs                                  |
 | Docs site            | Astro 5 + Starlight                                             |
@@ -43,7 +43,7 @@ Three differentiators:
 | Linting / format     | Biome                                                           |
 | Bundle size CI       | `size-limit` enforced per package                               |
 
-**On Vitest vs Web Test Runner**: WTR is the canonical Lit testing path and runs components in real browsers via Playwright. Picking WTR for ecosystem alignment.
+**On Vitest vs Web Test Runner**: WTR was the original pick (canonical Lit path) but its default mocha framework was a non-starter. Vitest browser mode runs components in real browsers via the same Playwright provider, with `describe`/`it`/`expect` and modern ergonomics. Equivalent isolation guarantees, better DX.
 
 ## 3. Repository Layout
 
@@ -683,7 +683,7 @@ Standard custom-element hydration. No special directives needed.
 
 | Layer              | Tool                                              |
 | ------------------ | ------------------------------------------------- |
-| Unit / component   | `@web/test-runner` + Lit                          |
+| Unit / component   | Vitest browser mode + Lit (Chromium via Playwright provider) |
 | Visual regression  | Playwright snapshots                              |
 | A11y               | `@axe-core/playwright` on docs                    |
 | Reduced motion     | Playwright with `prefers-reduced-motion: reduce`  |
@@ -712,7 +712,7 @@ Co-located: `src/components/tool-call.ts` + `src/components/tool-call.test.ts`.
 - **Node**: 20.x LTS + 22.x current. (Drop 18 — EOL April 2025.)
 - **OS**: `ubuntu-latest` only. Contributors on macOS/Windows run unit tests locally; visual regression runs only on Linux baseline.
 - **pnpm**: pinned via `package.json#packageManager` (Corepack).
-- **WTR browsers**: Chromium, Firefox, WebKit. WebKit on Linux can flake on shadow DOM bugs — flagged non-blocking until v1.0 baseline stabilizes.
+- **Vitest browsers**: Chromium baseline in v0.1. Firefox + WebKit added in v0.5 via additional Playwright provider instances. WebKit on Linux can flake on shadow DOM bugs — flagged non-blocking until v1.0 baseline stabilizes.
 - **Snapshots**: `__snapshots__/linux/` only. Contributors don't commit local snapshot updates from non-Linux platforms.
 
 ### 12.5 `tsd` coverage

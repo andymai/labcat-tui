@@ -10,9 +10,11 @@
     "node": ">=20.0.0"
   },
   "scripts": {
+    "prepare": "husky",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
@@ -22,9 +24,16 @@
     "version": "changeset version",
     "release": "turbo run build && changeset publish"
   },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,mjs,cjs,json,css,md,mdx,yml,yaml}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
+  },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@changesets/cli": "^2.27.11",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.1",
     "size-limit": "^11.1.6",
     "turbo": "^2.3.3",
     "typescript": "^5.7.3"

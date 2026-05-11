@@ -20,6 +20,7 @@
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
     "test": "echo \"react tsd tests come in v0.5\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "size": "size-limit",
     "clean": "rm -rf dist *.tsbuildinfo"
   },
