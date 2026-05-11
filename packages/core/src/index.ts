@@ -7,6 +7,8 @@ import './components/theme-provider.js';
 import './components/welcome-banner.js';
 import './components/thinking-block.js';
 import './components/status-line.js';
+import './components/todo-list.js';
+import './components/todo-item.js';
 
 export { TuiToolCall } from './components/tool-call.js';
 export type { ToolCallStatus } from './components/tool-call.js';
@@ -20,6 +22,10 @@ export { TuiWelcomeBanner } from './components/welcome-banner.js';
 export { TuiThinkingBlock } from './components/thinking-block.js';
 export { TuiStatusLine } from './components/status-line.js';
 export type { StatusLineKind, StatusLiveness, StatusSegment } from './components/status-line.js';
+export { TuiTodoList } from './components/todo-list.js';
+export type { TodoListKind } from './components/todo-list.js';
+export { TuiTodoItem } from './components/todo-item.js';
+export type { TodoStatus } from './components/todo-item.js';
 
 export {
   defineTheme,

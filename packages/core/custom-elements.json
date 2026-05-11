@@ -121,6 +121,38 @@
         },
         {
           "kind": "js",
+          "name": "TuiTodoList",
+          "declaration": {
+            "name": "TuiTodoList",
+            "module": "./components/todo-list.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TodoListKind",
+          "declaration": {
+            "name": "TodoListKind",
+            "module": "./components/todo-list.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiTodoItem",
+          "declaration": {
+            "name": "TuiTodoItem",
+            "module": "./components/todo-item.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TodoStatus",
+          "declaration": {
+            "name": "TodoStatus",
+            "module": "./components/todo-item.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "defineTheme",
           "declaration": {
             "name": "defineTheme",
@@ -998,6 +1030,162 @@
           "declaration": {
             "name": "TuiThinkingBlock",
             "module": "src/components/thinking-block.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/todo-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-todo-item>` — Single item in a TUI todo list.",
+          "name": "TuiTodoItem",
+          "cssParts": [
+            {
+              "description": "The status glyph",
+              "name": "dot"
+            },
+            {
+              "description": "The label slot wrapper",
+              "name": "label"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Label text",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "TodoStatus"
+              },
+              "default": "'pending'",
+              "attribute": "status",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "previousStatus",
+              "type": {
+                "text": "TodoStatus | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            }
+          ],
+          "events": [
+            {
+              "name": "tui-todo-change",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ status, previousStatus }` when status changes"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "TodoStatus"
+              },
+              "description": "Item state",
+              "name": "status",
+              "default": "'pending'",
+              "fieldName": "status"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-todo-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiTodoItem",
+          "declaration": {
+            "name": "TuiTodoItem",
+            "module": "src/components/todo-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-todo-item",
+          "declaration": {
+            "name": "TuiTodoItem",
+            "module": "src/components/todo-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/todo-list.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-todo-list>` — Dumb list container. Items register themselves via\nshadow DOM slot — the list does NOT query or aggregate children.",
+          "name": "TuiTodoList",
+          "slots": [
+            {
+              "description": "`<tui-todo-item>` children",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "TodoListKind"
+              },
+              "default": "'flat'",
+              "attribute": "kind",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "TodoListKind"
+              },
+              "description": "Layout variant",
+              "name": "kind",
+              "default": "'flat'",
+              "fieldName": "kind"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-todo-list",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiTodoList",
+          "declaration": {
+            "name": "TuiTodoList",
+            "module": "src/components/todo-list.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-todo-list",
+          "declaration": {
+            "name": "TuiTodoList",
+            "module": "src/components/todo-list.ts"
           }
         }
       ]

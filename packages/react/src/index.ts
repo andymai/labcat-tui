@@ -8,3 +8,5 @@ export { ThemeProvider } from './components/theme-provider.js';
 export { WelcomeBanner } from './components/welcome-banner.js';
 export { ThinkingBlock } from './components/thinking-block.js';
 export { StatusLine } from './components/status-line.js';
+export { TodoList } from './components/todo-list.js';
+export { TodoItem } from './components/todo-item.js';
