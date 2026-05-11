@@ -1,0 +1,92 @@
+---
+title: Themes
+description: All built-in and add-on themes for @labcat/tui.
+---
+
+import '@labcat/tui';
+
+`@labcat/tui` ships with the `claude` + `claudeLight` pair in the core package. The `@labcat/tui-themes` add-on package contributes more curated palettes — all tree-shakable, all validated against the same `ThemeDefinition` contract.
+
+## Built-in (in `@labcat/tui` core)
+
+| Export | Variant |
+| ------ | ------- |
+| `claude` | dark — coral on warm dark |
+| `claudeLight` | light — coral on cream |
+
+```ts
+import { claudeLight } from '@labcat/tui';
+import '@labcat/tui/components/theme-provider';
+
+const el = document.querySelector('tui-theme-provider')!;
+(el as HTMLElement & { theme: typeof claudeLight }).theme = claudeLight;
+```
+
+The built-ins are also discoverable by string name without an import:
+
+```html
+<tui-theme-provider theme="claudeLight"></tui-theme-provider>
+```
+
+## Add-on (in `@labcat/tui-themes`)
+
+```bash
+pnpm add @labcat/tui-themes
+```
+
+| Export | Variant | Notes |
+| ------ | ------- | ----- |
+| `gruvbox`        | dark   | Pavel Pertsev's warm palette; orange accent. |
+| `gruvboxLight`   | light  | The light dual of gruvbox. |
+| `rosePine`       | dark   | Muted pink-rose accent on a deep night. |
+| `rosePineDawn`   | light  | Rosé Pine "Dawn" — cream + rose. |
+| `kanagawa`       | dark   | Wave-inspired indigo + orange. |
+| `kanagawaLotus`  | light  | Daylight variant — straw + saffron. |
+| `synthwave`      | dark   | Outrun neon on plum-black. |
+| `phosphorGreen`  | dark   | Old-CRT terminal — single phosphor hue. |
+| `phosphorAmber`  | dark   | Same CRT vocabulary in amber. |
+
+```ts
+import '@labcat/tui/components/theme-provider';
+import { rosePine } from '@labcat/tui-themes';
+
+const el = document.querySelector('tui-theme-provider')!;
+(el as HTMLElement & { theme: typeof rosePine }).theme = rosePine;
+```
+
+The whole package compresses to ~1.2 kB brotli; any single theme import compresses to a few hundred bytes.
+
+## Authoring your own
+
+```ts
+import { defineTheme } from '@labcat/tui';
+
+export const myTheme = defineTheme({
+  name: 'myTheme',
+  bg: '#101020',
+  fg: '#e0e0f0',
+  fgMuted: '#a0a0c0',
+  fgDim: '#606080',
+  surface: '#1a1a35',
+  accent: '#ff7edb',
+  accentDim: '#b967c7',
+  border: '#2a2a4a',
+  success: '#72f1b8',
+  error: '#fe4450',
+  warning: '#fede5d',
+  info: '#36f9f6',
+  fontMono: 'ui-monospace, monospace',
+});
+```
+
+In dev, missing required tokens throw `MissingTokenError`; invalid color values throw `InvalidColorError`. In production, both downgrade to a `console.warn` and the provider falls back to `claude`.
+
+## Built-in dark/light data attribute
+
+The library's own `dist/styles.css` defines a top-level selector:
+
+```css
+[data-tui-theme="claudeLight"] { /* token overrides */ }
+```
+
+So you can swap the built-in pair without JS: just toggle `<html data-tui-theme="claudeLight">`. For other themes, use `<tui-theme-provider>` (or apply tokens via `themeToCssText`).

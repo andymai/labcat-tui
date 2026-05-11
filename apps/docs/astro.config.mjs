@@ -52,7 +52,10 @@ export default defineConfig({
         },
         {
           label: 'Theming',
-          items: [{ label: 'Theme provider', slug: 'components/theme-provider' }],
+          items: [
+            { label: 'Themes', slug: 'themes' },
+            { label: 'Theme provider', slug: 'components/theme-provider' },
+          ],
         },
       ],
       customCss: ['@labcat/tui/styles.css'],
