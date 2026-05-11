@@ -237,14 +237,23 @@ export class TuiPromptInput extends LitElement {
 
   private stepHistory(direction: 1 | -1): void {
     if (this.history.length === 0) return;
-    const next =
-      this.historyCursor === null ? (direction === 1 ? 0 : null) : this.historyCursor + direction;
-    if (next === null || next < 0) {
+
+    if (this.historyCursor === null) {
+      // ArrowDown with no active history browse is a no-op — preserves typed text.
+      if (direction === -1) return;
+      this.historyCursor = 0;
+      this.value = this.history[0] ?? '';
+      return;
+    }
+
+    const next = this.historyCursor + direction;
+    if (next < 0) {
+      // Stepped past the newest entry — return to the empty prompt.
       this.historyCursor = null;
       this.value = '';
       return;
     }
-    if (next >= this.history.length) return;
+    if (next >= this.history.length) return; // stay at oldest
     this.historyCursor = next;
     this.value = this.history[next] ?? '';
   }

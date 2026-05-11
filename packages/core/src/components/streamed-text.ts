@@ -116,13 +116,19 @@ export class TuiStreamedText extends LitElement {
 
   private intersectionObserver: IntersectionObserver | null = null;
   private reducedMotion = false;
+  private reducedMotionMql: MediaQueryList | null = null;
+  private readonly onReducedMotionChange = (e: MediaQueryListEvent): void => {
+    this.reducedMotion = e.matches;
+  };
   private currentHash = '';
   private completed = false;
 
   override connectedCallback(): void {
     super.connectedCallback();
     if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
-      this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      this.reducedMotionMql = window.matchMedia('(prefers-reduced-motion: reduce)');
+      this.reducedMotion = this.reducedMotionMql.matches;
+      this.reducedMotionMql.addEventListener('change', this.onReducedMotionChange);
     }
   }
 
@@ -131,6 +137,8 @@ export class TuiStreamedText extends LitElement {
     pendingStarts.delete(this);
     this.intersectionObserver?.disconnect();
     this.intersectionObserver = null;
+    this.reducedMotionMql?.removeEventListener('change', this.onReducedMotionChange);
+    this.reducedMotionMql = null;
   }
 
   private onSlotChange(e: Event): void {
@@ -162,6 +170,16 @@ export class TuiStreamedText extends LitElement {
 
     this.instant = false;
     this.revealed = false;
+
+    // Empty text: nothing animates, so animationend never fires. Emit complete
+    // out-of-band so consumers waiting for it don't hang.
+    if (this.chars.length === 0) {
+      this.revealed = true;
+      scheduleStart(this);
+      queueMicrotask(() => this.emitComplete());
+      return;
+    }
+
     if (this.startWhenVisible) this.observeVisibility();
     else this.beginReveal();
   }

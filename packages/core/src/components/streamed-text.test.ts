@@ -77,6 +77,21 @@ describe('<tui-streamed-text>', () => {
     expect(events).toHaveLength(1);
   });
 
+  it('fires tui-stream-complete even when the slot is empty', async () => {
+    const completes: Event[] = [];
+    // Start with non-empty content so the initial slotchange runs and the
+    // listener (attached next) doesn't miss it.
+    const el = await fixture<TuiStreamedText>(html`<tui-streamed-text>seed</tui-streamed-text>`);
+    await el.updateComplete;
+    el.addEventListener('tui-stream-complete', (e) => completes.push(e));
+    // Now clear the slot — fresh slotchange with empty text.
+    el.textContent = '';
+    await new Promise((r) => requestAnimationFrame(() => r(null)));
+    await Promise.resolve();
+    await el.updateComplete;
+    expect(completes.length).toBeGreaterThanOrEqual(1);
+  });
+
   it('re-mirrors when slot content changes', async () => {
     const el = await fixture<TuiStreamedText>(html`<tui-streamed-text>abc</tui-streamed-text>`);
     await el.updateComplete;

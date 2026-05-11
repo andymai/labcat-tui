@@ -189,6 +189,25 @@ describe('<tui-prompt-input>', () => {
     expect(['posts', 'projects']).toContain(input?.value);
   });
 
+  it('ArrowDown with no active history browse leaves typed text alone', async () => {
+    const el = await fixture<TuiPromptInput>(html`<tui-prompt-input></tui-prompt-input>`);
+    el.commands = defineCommands([{ name: 'posts', route: '/posts/' }]);
+    el.onNavigate = () => undefined;
+
+    // Seed some history so the .length > 0 guard doesn't short-circuit.
+    typeInto(el, 'posts one');
+    pressEnter(el);
+    await el.updateComplete;
+
+    // User types fresh input, then accidentally hits ArrowDown.
+    typeInto(el, 'in progress');
+    pressKey(el, 'ArrowDown');
+    await el.updateComplete;
+
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>('input');
+    expect(input?.value).toBe('in progress');
+  });
+
   it('emits tui-command even when the input is unrecognized', async () => {
     const events: CustomEvent[] = [];
     const el = await fixture<TuiPromptInput>(html`<tui-prompt-input></tui-prompt-input>`);

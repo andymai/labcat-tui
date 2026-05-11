@@ -129,9 +129,20 @@ export class TuiSlashOverlay extends LitElement {
   }
 
   override updated(changed: Map<string, unknown>): void {
-    if (!changed.has('open')) return;
-    if (this.open) this.openOverlay();
-    else this.closeOverlay();
+    if (changed.has('open')) {
+      if (this.open) this.openOverlay();
+      else this.closeOverlay();
+    }
+    if (changed.has('selected') || changed.has('query_')) {
+      this.scrollSelectedIntoView();
+    }
+  }
+
+  private scrollSelectedIntoView(): void {
+    const item = this.shadowRoot?.querySelector<HTMLElement>(
+      `[part~="item"][aria-selected="true"]`,
+    );
+    item?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   }
 
   private openOverlay(): void {
