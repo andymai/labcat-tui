@@ -153,6 +153,14 @@
         },
         {
           "kind": "js",
+          "name": "TuiStreamedText",
+          "declaration": {
+            "name": "TuiStreamedText",
+            "module": "./components/streamed-text.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "defineTheme",
           "declaration": {
             "name": "defineTheme",
@@ -827,6 +835,338 @@
           "declaration": {
             "name": "TuiStatusLine",
             "module": "src/components/status-line.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/streamed-text.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-streamed-text>` — char-by-char CSS reveal of slotted text.\n\nNon-destructive: the slotted light DOM is never mutated. Text is mirrored\ninto shadow DOM as per-char `<span part=\"char\">`s with inline\n`animation-delay`. The light-DOM `<slot>` is `aria-hidden` + visually\nhidden so AT only announces the mirror.",
+          "name": "TuiStreamedText",
+          "cssParts": [
+            {
+              "description": "Each per-character span in the mirror",
+              "name": "char"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Text content (inline phrasing only — block content unsupported in v1)",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "speed",
+              "type": {
+                "text": "number | null"
+              },
+              "default": "null",
+              "attribute": "speed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "cps",
+              "type": {
+                "text": "number | null"
+              },
+              "default": "null",
+              "attribute": "cps",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "delay",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "delay",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "startWhenVisible",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "start-when-visible",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "skipOnRevisit",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "skip-on-revisit",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "chars",
+              "type": {
+                "text": "string[]"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "revealed",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "instant",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "intersectionObserver",
+              "type": {
+                "text": "IntersectionObserver | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "reducedMotion",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "currentHash",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "completed",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "onSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "applyText",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "text",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "observeVisibility",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "beginReveal",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emitComplete",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "interrupt",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Interrupt the in-progress reveal — fire tui-stream-interrupt and snap\nto the fully-revealed state. Safe to call after completion (no-op)."
+            },
+            {
+              "kind": "field",
+              "name": "effectiveSpeedMs",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "onCharAnimationEnd",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "AnimationEvent"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "tui-stream-start",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "name": "tui-stream-complete",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "name": "tui-stream-interrupt",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "number | null"
+              },
+              "description": "Milliseconds between chars (default 30)",
+              "name": "speed",
+              "default": "null",
+              "fieldName": "speed"
+            },
+            {
+              "type": {
+                "text": "number | null"
+              },
+              "description": "Characters per second (alternative to `speed`)",
+              "name": "cps",
+              "default": "null",
+              "fieldName": "cps"
+            },
+            {
+              "type": {
+                "text": "number"
+              },
+              "description": "Initial delay before the reveal starts (ms)",
+              "name": "delay",
+              "default": "0",
+              "fieldName": "delay"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Wait until intersecting the viewport",
+              "name": "start-when-visible",
+              "default": "false",
+              "fieldName": "startWhenVisible"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Skip animation if this exact text has been animated before in this session (sessionStorage marker)",
+              "name": "skip-on-revisit",
+              "default": "false",
+              "fieldName": "skipOnRevisit"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-streamed-text",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiStreamedText",
+          "declaration": {
+            "name": "TuiStreamedText",
+            "module": "src/components/streamed-text.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-streamed-text",
+          "declaration": {
+            "name": "TuiStreamedText",
+            "module": "src/components/streamed-text.ts"
           }
         }
       ]

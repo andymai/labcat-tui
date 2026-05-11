@@ -9,6 +9,7 @@ import './components/thinking-block.js';
 import './components/status-line.js';
 import './components/todo-list.js';
 import './components/todo-item.js';
+import './components/streamed-text.js';
 
 export { TuiToolCall } from './components/tool-call.js';
 export type { ToolCallStatus } from './components/tool-call.js';
@@ -26,6 +27,7 @@ export { TuiTodoList } from './components/todo-list.js';
 export type { TodoListKind } from './components/todo-list.js';
 export { TuiTodoItem } from './components/todo-item.js';
 export type { TodoStatus } from './components/todo-item.js';
+export { TuiStreamedText } from './components/streamed-text.js';
 
 export {
   defineTheme,
