@@ -1,0 +1,170 @@
+---
+import '@labcat/tui';
+import '@labcat/tui/styles.css';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@labcat/tui — live demo</title>
+    <meta name="description" content="Live demo of every @labcat/tui component running in a single page." />
+  </head>
+  <body>
+    <tui-session>
+      <main>
+        <tui-welcome-banner glyph="✻" title="@labcat/tui — live demo">
+          <ul>
+            <li>every component on one page · type <code>/</code> to focus the prompt · <code>Cmd/Ctrl-K</code> for palette</li>
+            <li><a href="/">← back to docs</a></li>
+          </ul>
+        </tui-welcome-banner>
+
+        <tui-prompt-line command="ls components/"></tui-prompt-line>
+
+        <tui-tool-use-timeline>
+          <tui-tool-call tool="Read" args="posts/">
+            <ul>
+              <li>proxmox-tuning</li>
+              <li>k3s-on-pi</li>
+              <li>zfs-deepdive</li>
+            </ul>
+          </tui-tool-call>
+
+          <tui-tool-call tool="Bash" args="homelab status">
+            <pre>online:  14/14    uptime: 99.97% (30d)
+host:    47d 3h   load:   0.42</pre>
+          </tui-tool-call>
+
+          <tui-tool-call tool="Edit" args="package.json" status="ok">
+            <tui-diff-block tool="Edit" args="package.json">
+              <div data-marker="=">name: my-package,</div>
+              <div data-marker="-">version: 0.1.0,</div>
+              <div data-marker="+">version: 0.2.0,</div>
+              <div data-marker="=">license: MIT,</div>
+            </tui-diff-block>
+          </tui-tool-call>
+
+          <tui-tool-call tool="Bash" args="pnpm build" status="running">
+            <tui-spinner kind="dots" running></tui-spinner>
+            <span class="dim"> building...</span>
+          </tui-tool-call>
+        </tui-tool-use-timeline>
+
+        <tui-prompt-line command="cat now"></tui-prompt-line>
+
+        <tui-tool-call tool="Read" args="~/now">
+          <tui-todo-list>
+            <tui-todo-item status="completed">Ship v0.5 component inventory</tui-todo-item>
+            <tui-todo-item status="in-progress">Polish docs site</tui-todo-item>
+            <tui-todo-item status="pending">Claim @labcat npm scope</tui-todo-item>
+          </tui-todo-list>
+        </tui-tool-call>
+
+        <tui-prompt-line command="ask"></tui-prompt-line>
+
+        <tui-chat-bubble role="user" name="andy" timestamp="14:32">
+          how's the build going?
+        </tui-chat-bubble>
+        <tui-chat-bubble role="assistant" name="claude" timestamp="14:32">
+          green across Node 22 and 24.
+        </tui-chat-bubble>
+
+        <tui-thinking-block label="thinking">
+          considering whether to recurse or iterate over the modules…
+        </tui-thinking-block>
+
+        <tui-prompt-line command="echo"></tui-prompt-line>
+
+        <tui-tool-call tool="Output" args="streamed">
+          <tui-streamed-text cps="40">
+            this text reveals one character at a time using a pure CSS animation.
+          </tui-streamed-text>
+        </tui-tool-call>
+
+        <tui-slash-overlay></tui-slash-overlay>
+        <tui-prompt-input placeholder="Type / for commands"></tui-prompt-input>
+      </main>
+
+      <tui-status-line breadcrumb="@labcat/tui / demo">
+        <span slot="right">137 tests green</span>
+        <span slot="right">v0.5-beta</span>
+      </tui-status-line>
+    </tui-session>
+
+    <script>
+      import { defineCommands } from '@labcat/tui';
+
+      const commands = defineCommands([
+        { name: 'home', description: 'back to docs', route: '/' },
+        { name: 'themes', description: 'browse themes', route: '/themes/' },
+        { name: 'quickstart', description: 'setup recipes', route: '/quickstart/' },
+        { name: 'github', description: 'view source', handler: () => window.open('https://github.com/andymai/labcat-tui', '_blank') },
+        { name: 'theme', description: 'toggle light / dark', handler: (_, ctx) => ctx.toggleTheme() },
+      ]);
+
+      function wire(): void {
+        for (const el of document.querySelectorAll<HTMLElement & { commands?: unknown }>('tui-prompt-input, tui-slash-overlay')) {
+          el.commands = commands;
+        }
+        document.addEventListener('tui-navigate', (e) => {
+          const url = (e as CustomEvent<{ url: string }>).detail?.url;
+          if (typeof url === 'string') window.location.assign(url);
+        });
+        document.addEventListener('tui-toggle-theme', () => {
+          const root = document.documentElement;
+          root.dataset.tuiTheme = root.dataset.tuiTheme === 'claudeLight' ? 'claude' : 'claudeLight';
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', wire);
+      } else {
+        wire();
+      }
+    </script>
+
+    <style is:global>
+      html, body {
+        margin: 0;
+        background: var(--tui-bg);
+        color: var(--tui-fg);
+        font-family: var(--tui-font-mono);
+        line-height: var(--tui-leading-body);
+        min-block-size: 100vh;
+      }
+      main {
+        max-inline-size: 72ch;
+        margin: 0 auto;
+        padding: 2rem clamp(1rem, 4vw, 2rem) 4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      a { color: var(--tui-fg); text-decoration: underline; text-underline-offset: 3px; }
+      a:hover { color: var(--tui-accent); }
+      code {
+        color: var(--tui-accent);
+        background: var(--tui-surface);
+        padding: 0.05em 0.4ch;
+        border-radius: 2px;
+      }
+      pre {
+        margin: 0;
+        color: var(--tui-fg-muted);
+        font-family: var(--tui-font-mono);
+        line-height: var(--tui-leading-tight);
+      }
+      .dim {
+        color: var(--tui-fg-muted);
+        font-size: 0.9em;
+      }
+      tui-status-line {
+        position: fixed;
+        inset: auto 0 0 0;
+        background: var(--tui-surface);
+        border-block-start: 1px solid var(--tui-border);
+      }
+    </style>
+  </body>
+</html>
