@@ -4,16 +4,16 @@ import type { TuiTodoChangeDetail } from '../events/types.js';
 
 export type TodoStatus = 'pending' | 'in-progress' | 'completed';
 
-const ARIA_CHECKED: Record<TodoStatus, 'true' | 'false' | 'mixed'> = {
-  pending: 'false',
-  'in-progress': 'mixed',
-  completed: 'true',
-};
-
 const DOT: Record<TodoStatus, string> = {
   pending: '☐',
   'in-progress': '◐',
   completed: '☑',
+};
+
+const STATUS_LABEL: Record<TodoStatus, string> = {
+  pending: 'Pending',
+  'in-progress': 'In progress',
+  completed: 'Completed',
 };
 
 /**
@@ -61,6 +61,19 @@ export class TuiTodoItem extends LitElement {
       color: var(--tui-fg-muted);
       text-decoration: line-through;
     }
+
+    /* Visually-hidden status announcement for screen readers. */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
   `;
 
   @property({ type: String, reflect: true })
@@ -71,13 +84,11 @@ export class TuiTodoItem extends LitElement {
   override connectedCallback(): void {
     super.connectedCallback();
     if (!this.hasAttribute('role')) this.setAttribute('role', 'listitem');
-    this.setAttribute('aria-checked', ARIA_CHECKED[this.status]);
     this.previousStatus = this.status;
   }
 
   override updated(changed: Map<string, unknown>): void {
     if (!changed.has('status')) return;
-    this.setAttribute('aria-checked', ARIA_CHECKED[this.status]);
     const previous = (changed.get('status') as TodoStatus | undefined) ?? this.previousStatus;
     if (previous && previous !== this.status) {
       this.dispatchEvent(
@@ -94,6 +105,7 @@ export class TuiTodoItem extends LitElement {
   override render() {
     return html`
       <span class="dot" part="dot" aria-hidden="true">${DOT[this.status]}</span>
+      <span class="sr-only">${STATUS_LABEL[this.status]}: </span>
       <span class="label" part="label"><slot></slot></span>
     `;
   }

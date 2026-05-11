@@ -14,23 +14,33 @@ describe('<tui-todo-item>', () => {
     expect(el.getAttribute('role')).toBe('listitem');
   });
 
-  it('maps status="pending" → aria-checked="false"', async () => {
+  it('announces "Pending" for pending status', async () => {
     const el = await fixture<TuiTodoItem>(html`<tui-todo-item status="pending">x</tui-todo-item>`);
-    expect(el.getAttribute('aria-checked')).toBe('false');
+    const sr = el.shadowRoot?.querySelector('.sr-only');
+    expect(sr?.textContent?.trim()).toBe('Pending:');
   });
 
-  it('maps status="in-progress" → aria-checked="mixed"', async () => {
+  it('announces "In progress" for in-progress status', async () => {
     const el = await fixture<TuiTodoItem>(
       html`<tui-todo-item status="in-progress">x</tui-todo-item>`,
     );
-    expect(el.getAttribute('aria-checked')).toBe('mixed');
+    const sr = el.shadowRoot?.querySelector('.sr-only');
+    expect(sr?.textContent?.trim()).toBe('In progress:');
   });
 
-  it('maps status="completed" → aria-checked="true"', async () => {
+  it('announces "Completed" for completed status', async () => {
     const el = await fixture<TuiTodoItem>(
       html`<tui-todo-item status="completed">x</tui-todo-item>`,
     );
-    expect(el.getAttribute('aria-checked')).toBe('true');
+    const sr = el.shadowRoot?.querySelector('.sr-only');
+    expect(sr?.textContent?.trim()).toBe('Completed:');
+  });
+
+  it('does not set aria-checked (invalid on role=listitem)', async () => {
+    const el = await fixture<TuiTodoItem>(
+      html`<tui-todo-item status="completed">x</tui-todo-item>`,
+    );
+    expect(el.hasAttribute('aria-checked')).toBe(false);
   });
 
   it('fires tui-todo-change with previousStatus when status changes', async () => {

@@ -5,21 +5,21 @@ description: Single item in a TUI todo list.
 
 import '@labcat/tui';
 
-A single line in a TUI-style todo list. Best used inside [`<tui-todo-list>`](/components/todo-list/) — when nested, items inherit the list's `kind` glyph.
+A single line in a TUI-style todo list. Best used inside [`<tui-todo-list>`](/components/todo-list/).
 
 ## Example
 
-<tui-todo-item status="active">Ship gruvbox theme</tui-todo-item>
+<tui-todo-item status="in-progress">Ship gruvbox theme</tui-todo-item>
 
 ```html
-<tui-todo-item status="active">Ship gruvbox theme</tui-todo-item>
+<tui-todo-item status="in-progress">Ship gruvbox theme</tui-todo-item>
 ```
 
 ## API
 
-| Attribute | Type | Description |
-| --- | --- | --- |
-| `status` | `'pending'` \| `'active'` \| `'done'` \| `'error'` | Glyph + a11y state. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `status` | `'pending'` \| `'in-progress'` \| `'completed'` | `'pending'` | Glyph + visually-hidden status announcement for screen readers. |
 
 ### Slot
 
@@ -29,8 +29,12 @@ The default slot is the label.
 
 | Event | Detail | Description |
 | --- | --- | --- |
-| `tui-todo-change` | `{ status }` | Fired when `status` changes (programmatic or attribute). |
+| `tui-todo-change` | `{ status, previousStatus }` | Fired when `status` changes (programmatic or attribute). |
 
 ### CSS parts
 
 `dot`, `label`.
+
+### Accessibility
+
+`role="listitem"` (so it sits in a `<tui-todo-list role="list">` correctly). A visually-hidden span announces the current status prefix (`"Pending: "`, `"In progress: "`, `"Completed: "`) before the slotted label so screen readers convey state without needing `aria-checked` — which isn't a valid attribute on `listitem` and was removed in v0.5.
