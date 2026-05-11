@@ -11,3 +11,4 @@ export { StatusLine } from './components/status-line.js';
 export { TodoList } from './components/todo-list.js';
 export { TodoItem } from './components/todo-item.js';
 export { StreamedText } from './components/streamed-text.js';
+export { PromptInput } from './components/prompt-input.js';

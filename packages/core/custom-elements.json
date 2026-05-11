@@ -161,6 +161,14 @@
         },
         {
           "kind": "js",
+          "name": "TuiPromptInput",
+          "declaration": {
+            "name": "TuiPromptInput",
+            "module": "./components/prompt-input.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "defineTheme",
           "declaration": {
             "name": "defineTheme",
@@ -892,196 +900,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/events/names.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND_SUCCESS",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command-success'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND_ERROR",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command-error'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_NAVIGATE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-navigate'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_THEME_CHANGE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-theme-change'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_START",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-start'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_COMPLETE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-complete'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_INTERRUPT",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-interrupt'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_SLASH_SELECT",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-slash-select'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_SLASH_DISMISS",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-slash-dismiss'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_TODO_CHANGE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-todo-change'"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND",
-          "declaration": {
-            "name": "TUI_COMMAND",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND_SUCCESS",
-          "declaration": {
-            "name": "TUI_COMMAND_SUCCESS",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND_ERROR",
-          "declaration": {
-            "name": "TUI_COMMAND_ERROR",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_NAVIGATE",
-          "declaration": {
-            "name": "TUI_NAVIGATE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_THEME_CHANGE",
-          "declaration": {
-            "name": "TUI_THEME_CHANGE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_START",
-          "declaration": {
-            "name": "TUI_STREAM_START",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_COMPLETE",
-          "declaration": {
-            "name": "TUI_STREAM_COMPLETE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_INTERRUPT",
-          "declaration": {
-            "name": "TUI_STREAM_INTERRUPT",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_SLASH_SELECT",
-          "declaration": {
-            "name": "TUI_SLASH_SELECT",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_SLASH_DISMISS",
-          "declaration": {
-            "name": "TUI_SLASH_DISMISS",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_TODO_CHANGE",
-          "declaration": {
-            "name": "TUI_TODO_CHANGE",
-            "module": "src/events/names.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/events/types.ts",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/box.ts",
       "declarations": [
         {
@@ -1200,6 +1018,447 @@
           "declaration": {
             "name": "TuiBox",
             "module": "src/components/box.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/prompt-input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-prompt-input>` — Functional `›` prompt with declarative commands.",
+          "name": "TuiPromptInput",
+          "cssParts": [
+            {
+              "description": "The leading `›` glyph",
+              "name": "caret"
+            },
+            {
+              "description": "The internal <input>",
+              "name": "input"
+            },
+            {
+              "description": "Reserved (unused in this implementation; native caret renders)",
+              "name": "cursor"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "placeholder",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "historyKey",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "attribute": "history-key",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "historyLimit",
+              "default": "50",
+              "attribute": "history-limit",
+              "reflects": true,
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "commands",
+              "type": {
+                "text": "Command[]"
+              },
+              "default": "[]",
+              "description": "Array of Command (route XOR handler)"
+            },
+            {
+              "kind": "field",
+              "name": "onNavigate",
+              "type": {
+                "text": "((url: string) => void) | null"
+              },
+              "default": "null",
+              "description": "Callback `(url: string) => void`; default sets window.location.href"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "running",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "history",
+              "type": {
+                "text": "string[]"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "historyCursor",
+              "type": {
+                "text": "number | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "resolvedKey",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "registryCache",
+              "type": {
+                "text": "CommandRegistry | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "cachedCommands",
+              "type": {
+                "text": "readonly Command[] | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "inputEl",
+              "type": {
+                "text": "HTMLInputElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "computeHistoryKey",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "registry",
+              "type": {
+                "text": "CommandRegistry"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "buildContext",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "CommandContext"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "navigate",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "url",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "pushHistory",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "entry",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onInput",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKeyDown",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "stepHistory",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "direction",
+                  "type": {
+                    "text": "1 | -1"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "complete",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "submit",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "dispatchSuccess",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "command",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "dispatchError",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "command",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "error",
+                  "type": {
+                    "text": "unknown"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Programmatically focus the inner input."
+            }
+          ],
+          "events": [
+            {
+              "name": "tui-toggle-theme",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "name": "tui-set-theme",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "name": "event",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "name": "tui-navigate",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ url }` after navigation callback fires"
+            },
+            {
+              "name": "tui-command",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ name, args }` on submit"
+            },
+            {
+              "name": "tui-command-success",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ command, args }` after handler resolves"
+            },
+            {
+              "name": "tui-command-error",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ command, args, error }` on handler rejection"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "name": "placeholder",
+              "default": "''",
+              "fieldName": "placeholder"
+            },
+            {
+              "type": {
+                "text": "string | null"
+              },
+              "description": "Override the auto-derived localStorage key",
+              "name": "history-key",
+              "default": "null",
+              "fieldName": "historyKey"
+            },
+            {
+              "type": {
+                "text": "number"
+              },
+              "description": "Max entries kept (default 50)",
+              "name": "history-limit",
+              "default": "DEFAULT_HISTORY_LIMIT",
+              "fieldName": "historyLimit"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "name": "disabled",
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-prompt-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiPromptInput",
+          "declaration": {
+            "name": "TuiPromptInput",
+            "module": "src/components/prompt-input.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-prompt-input",
+          "declaration": {
+            "name": "TuiPromptInput",
+            "module": "src/components/prompt-input.ts"
           }
         }
       ]
@@ -2557,6 +2816,196 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/events/names.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_SUCCESS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-success'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_ERROR",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-error'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_NAVIGATE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-navigate'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_THEME_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-theme-change'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_START",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-start'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_COMPLETE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-complete'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_INTERRUPT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-interrupt'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_SELECT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-select'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_DISMISS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-dismiss'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_TODO_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-todo-change'"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND",
+          "declaration": {
+            "name": "TUI_COMMAND",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_SUCCESS",
+          "declaration": {
+            "name": "TUI_COMMAND_SUCCESS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_ERROR",
+          "declaration": {
+            "name": "TUI_COMMAND_ERROR",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_NAVIGATE",
+          "declaration": {
+            "name": "TUI_NAVIGATE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_THEME_CHANGE",
+          "declaration": {
+            "name": "TUI_THEME_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_START",
+          "declaration": {
+            "name": "TUI_STREAM_START",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_COMPLETE",
+          "declaration": {
+            "name": "TUI_STREAM_COMPLETE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_INTERRUPT",
+          "declaration": {
+            "name": "TUI_STREAM_INTERRUPT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_SELECT",
+          "declaration": {
+            "name": "TUI_SLASH_SELECT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_DISMISS",
+          "declaration": {
+            "name": "TUI_SLASH_DISMISS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_TODO_CHANGE",
+          "declaration": {
+            "name": "TUI_TODO_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/events/types.ts",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
