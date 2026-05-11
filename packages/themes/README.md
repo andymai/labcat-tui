@@ -19,7 +19,7 @@ Additional theme presets for `@labcat/tui`. The `claude` / `claudeLight` themes 
 ## Usage
 
 ```ts
-import '@labcat/tui/components/theme-provider';
+import '@labcat/tui';
 import { rosePine } from '@labcat/tui-themes';
 ```
 

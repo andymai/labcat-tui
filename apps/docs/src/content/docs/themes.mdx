@@ -56,7 +56,7 @@ import ThemeCard from '../../components/ThemeCard.astro';
 
 ```ts
 import { claudeLight } from '@labcat/tui';
-import '@labcat/tui/components/theme-provider';
+import '@labcat/tui';
 
 const el = document.querySelector('tui-theme-provider')!;
 (el as HTMLElement & { theme: typeof claudeLight }).theme = claudeLight;
@@ -87,7 +87,7 @@ pnpm add @labcat/tui-themes
 | `phosphorAmber`  | dark   | Same CRT vocabulary in amber. |
 
 ```ts
-import '@labcat/tui/components/theme-provider';
+import '@labcat/tui';
 import { rosePine } from '@labcat/tui-themes';
 
 const el = document.querySelector('tui-theme-provider')!;
