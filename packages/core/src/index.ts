@@ -44,6 +44,26 @@ export {
 } from './theme/index.js';
 export type { ThemeDefinition } from './theme/index.js';
 
+export {
+  defineCommands,
+  CommandRegistry,
+  CommandDefinitionError,
+  normalizeName,
+  parseInput,
+  levenshtein,
+  closestMatch,
+} from './commands/index.js';
+export type {
+  BaseCommand,
+  Command,
+  CommandContext,
+  CommandHandler,
+  HandlerCommand,
+  MatchResult,
+  ParsedInput,
+  RouteCommand,
+} from './commands/index.js';
+
 export type {
   TuiCommandDetail,
   TuiCommandSuccessDetail,
