@@ -54,6 +54,8 @@ function writeHistory(key: string, entries: readonly string[]): void {
   }
 }
 
+export type PromptMode = 'autoAccept' | 'bashBorder' | 'permission' | 'planMode' | 'ide';
+
 /**
  * `<tui-prompt-input>` — Functional `›` prompt with declarative commands.
  *
@@ -61,6 +63,10 @@ function writeHistory(key: string, entries: readonly string[]): void {
  * @attr {string} history-key - Override the auto-derived localStorage key
  * @attr {number} history-limit - Max entries kept (default 50)
  * @attr {boolean} disabled
+ * @attr {"autoAccept"|"bashBorder"|"permission"|"planMode"|"ide"} mode -
+ *   Tint the caret + left border in the matching mode color. If omitted,
+ *   the prompt inherits `--tui-active-mode-color` set by a `<tui-session
+ *   mode="...">` ancestor.
  * @prop commands - Array of Command (route XOR handler)
  * @prop onNavigate - Callback `(url: string) => void`; default sets window.location.href
  * @fires tui-command - `{ name, args }` on submit
@@ -79,6 +85,26 @@ export class TuiPromptInput extends LitElement {
       font-family: var(--tui-font-mono);
       color: var(--tui-fg);
       line-height: var(--tui-leading-body);
+
+      /* Resolved mode color: own mode wins, else parent session's, else accent.
+         Each :host([mode=…]) selector below overrides --tui-prompt-mode-color. */
+      --tui-prompt-mode-color: var(--tui-active-mode-color, var(--tui-accent));
+    }
+
+    :host([mode='autoAccept']) {
+      --tui-prompt-mode-color: var(--tui-mode-auto-accept);
+    }
+    :host([mode='bashBorder']) {
+      --tui-prompt-mode-color: var(--tui-mode-bash-border);
+    }
+    :host([mode='permission']) {
+      --tui-prompt-mode-color: var(--tui-mode-permission);
+    }
+    :host([mode='planMode']) {
+      --tui-prompt-mode-color: var(--tui-mode-plan-mode);
+    }
+    :host([mode='ide']) {
+      --tui-prompt-mode-color: var(--tui-mode-ide);
     }
 
     :host([aria-busy='true']) .input {
@@ -90,10 +116,22 @@ export class TuiPromptInput extends LitElement {
       display: flex;
       align-items: baseline;
       gap: 0.5ch;
+      border-inline-start: 2px solid transparent;
+      padding-inline-start: 0.5ch;
+      transition: border-color var(--tui-dur-fast, 120ms) var(--tui-easing, ease);
+    }
+
+    /* Light up the left border only when a mode is active (own or inherited). */
+    :host([mode]) .row,
+    :host(:not([mode])) .row {
+      border-color: var(--tui-prompt-mode-color);
+    }
+    :host(:not([mode])) .row {
+      border-color: var(--tui-active-mode-color, transparent);
     }
 
     .caret {
-      color: var(--tui-accent);
+      color: var(--tui-prompt-mode-color);
       flex: 0 0 auto;
       line-height: 1;
     }
@@ -106,7 +144,7 @@ export class TuiPromptInput extends LitElement {
       color: var(--tui-fg);
       font: inherit;
       padding: 0;
-      caret-color: var(--tui-accent);
+      caret-color: var(--tui-prompt-mode-color);
       min-inline-size: 0;
     }
 
@@ -130,6 +168,9 @@ export class TuiPromptInput extends LitElement {
 
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  @property({ type: String, reflect: true })
+  mode: PromptMode | null = null;
 
   @property({ attribute: false })
   commands: Command[] = [];

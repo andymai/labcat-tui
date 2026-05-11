@@ -1,6 +1,6 @@
 {
   "name": "@labcat/tui-react",
-  "version": "0.1.0",
+  "version": "0.6.0-beta.0",
   "description": "React wrappers for @labcat/tui",
   "license": "MIT",
   "type": "module",

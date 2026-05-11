@@ -241,6 +241,54 @@
         },
         {
           "kind": "js",
+          "name": "SessionMode",
+          "declaration": {
+            "name": "SessionMode",
+            "module": "./components/session.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PromptMode",
+          "declaration": {
+            "name": "PromptMode",
+            "module": "./components/prompt-input.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiAgentBadge",
+          "declaration": {
+            "name": "TuiAgentBadge",
+            "module": "./components/agent-badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "AgentCallsign",
+          "declaration": {
+            "name": "AgentCallsign",
+            "module": "./components/agent-badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiShimmerText",
+          "declaration": {
+            "name": "TuiShimmerText",
+            "module": "./components/shimmer-text.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ShimmerKind",
+          "declaration": {
+            "name": "ShimmerKind",
+            "module": "./components/shimmer-text.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "defineTheme",
           "declaration": {
             "name": "defineTheme",
@@ -972,6 +1020,269 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/events/names.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_SUCCESS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-success'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_ERROR",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-error'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_NAVIGATE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-navigate'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_THEME_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-theme-change'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_START",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-start'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_COMPLETE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-complete'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_INTERRUPT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-interrupt'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_SELECT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-select'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_DISMISS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-dismiss'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_TODO_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-todo-change'"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND",
+          "declaration": {
+            "name": "TUI_COMMAND",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_SUCCESS",
+          "declaration": {
+            "name": "TUI_COMMAND_SUCCESS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_ERROR",
+          "declaration": {
+            "name": "TUI_COMMAND_ERROR",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_NAVIGATE",
+          "declaration": {
+            "name": "TUI_NAVIGATE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_THEME_CHANGE",
+          "declaration": {
+            "name": "TUI_THEME_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_START",
+          "declaration": {
+            "name": "TUI_STREAM_START",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_COMPLETE",
+          "declaration": {
+            "name": "TUI_STREAM_COMPLETE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_INTERRUPT",
+          "declaration": {
+            "name": "TUI_STREAM_INTERRUPT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_SELECT",
+          "declaration": {
+            "name": "TUI_SLASH_SELECT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_DISMISS",
+          "declaration": {
+            "name": "TUI_SLASH_DISMISS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_TODO_CHANGE",
+          "declaration": {
+            "name": "TUI_TODO_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/events/types.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/agent-badge.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-agent-badge>` — Per-agent persona indicator for multi-agent\nvisualisations (e.g. when several subagents are working in parallel).\n\nThe `callsign` attribute selects one of the 8 NATO-phonetic personas\nshipped in every theme (`subagentAlpha` … `subagentHotel`). The colors\nare intentionally not bound to color names — each theme maps callsigns\nto whatever palette colors fit its identity.",
+          "name": "TuiAgentBadge",
+          "cssParts": [
+            {
+              "description": "The persona dot indicator",
+              "name": "dot"
+            },
+            {
+              "description": "The slotted label wrapper",
+              "name": "label"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The agent's label (e.g. \"claude-1\")",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "callsign",
+              "type": {
+                "text": "AgentCallsign"
+              },
+              "default": "'alpha'",
+              "attribute": "callsign",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "AgentCallsign"
+              },
+              "name": "callsign",
+              "default": "'alpha'",
+              "fieldName": "callsign"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-agent-badge",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiAgentBadge",
+          "declaration": {
+            "name": "TuiAgentBadge",
+            "module": "src/components/agent-badge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-agent-badge",
+          "declaration": {
+            "name": "TuiAgentBadge",
+            "module": "src/components/agent-badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/box.ts",
       "declarations": [
         {
@@ -1458,6 +1769,16 @@
             },
             {
               "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "PromptMode | null"
+              },
+              "default": "null",
+              "attribute": "mode",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "commands",
               "type": {
                 "text": "Command[]"
@@ -1805,6 +2126,15 @@
               "name": "disabled",
               "default": "false",
               "fieldName": "disabled"
+            },
+            {
+              "type": {
+                "text": "PromptMode | null"
+              },
+              "description": "Tint the caret + left border in the matching mode color. If omitted, the prompt inherits `--tui-active-mode-color` set by a `<tui-session mode=\"...\">` ancestor.",
+              "name": "mode",
+              "default": "null",
+              "fieldName": "mode"
             }
           ],
           "superclass": {
@@ -1931,14 +2261,44 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "`<tui-session>` — High-level Light-DOM orchestrator. Holds the\ndocument-level keyboard shortcuts so embedded `<tui-prompt-input>` /\n`<tui-slash-overlay>` instances don't need to.\n\nPer SPEC §10.2:\n  /           → focus first descendant <tui-prompt-input> (skipped in form fields)\n  Cmd/Ctrl-K  → open first descendant <tui-slash-overlay>\n  ?           → open the slash overlay (skipped in form fields)\n  Escape      → close the slash overlay if open\n\nMultiple sessions on a page: **last-mounted wins** shortcut routing\n(with `console.warn` in dev). Subtrees opt out via the\n`ignore-shortcuts` attribute on any ancestor element.\n\nLight DOM (per SPEC §7.2) — slotted children behave naturally in any\nframework. Layout is consumer-driven; the element only adds the\n`tui-session` class.",
+          "description": "`<tui-session>` — High-level Light-DOM orchestrator. Holds the\ndocument-level keyboard shortcuts so embedded `<tui-prompt-input>` /\n`<tui-slash-overlay>` instances don't need to.\n\nPer SPEC §10.2:\n  /           → focus first descendant <tui-prompt-input> (skipped in form fields)\n  Cmd/Ctrl-K  → open first descendant <tui-slash-overlay>\n  ?           → open the slash overlay (skipped in form fields)\n  Escape      → close the slash overlay if open\n\nv0.6: `mode` attribute sets the active prompt mode (autoAccept /\nbashBorder / permission / planMode / ide). The session exposes the\nresolved color via the `--tui-active-mode-color` CSS variable, which\ndescendant `<tui-prompt-input>` instances read for their caret + left\nborder. A prompt-input can set its own `mode` attribute to override.\n\nMultiple sessions on a page: **last-mounted wins** shortcut routing\n(with `console.warn` in dev). Subtrees opt out via the\n`ignore-shortcuts` attribute on any ancestor element.\n\nLight DOM (per SPEC §7.2) — slotted children behave naturally in any\nframework. Layout is consumer-driven; the element only adds the\n`tui-session` class.",
           "name": "TuiSession",
           "members": [
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "SessionMode | null"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "applyMode",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "string | null"
+                  }
+                }
+              ]
+            },
             {
               "kind": "field",
               "name": "onKeyDown",
               "privacy": "private",
               "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "mode"
             }
           ],
           "superclass": {
@@ -1964,6 +2324,89 @@
           "declaration": {
             "name": "TuiSession",
             "module": "src/components/session.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/shimmer-text.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-shimmer-text>` — Animates slotted text between a base color and\nits shimmer companion, matching Claude Code's breathing / pulse effect.\n\nThe `kind` attribute selects one of the shimmer pairs from the active\ntheme: `accent`, `systemSpinner`, `permission`, `warning`, `inactive`,\n`fastMode`, or `promptBorder`. Honors `prefers-reduced-motion` — when\nset, the slot renders in the base color with no animation.",
+          "name": "TuiShimmerText",
+          "slots": [
+            {
+              "description": "Text content to shimmer",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "ShimmerKind"
+              },
+              "default": "'accent'",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "1800",
+              "attribute": "duration",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "ShimmerKind"
+              },
+              "description": "Which color pair to animate (default `accent`)",
+              "name": "kind",
+              "default": "'accent'",
+              "fieldName": "kind"
+            },
+            {
+              "type": {
+                "text": "number"
+              },
+              "description": "Pulse cycle in ms (default 1800)",
+              "name": "duration",
+              "default": "1800",
+              "fieldName": "duration"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-shimmer-text",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiShimmerText",
+          "declaration": {
+            "name": "TuiShimmerText",
+            "module": "src/components/shimmer-text.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-shimmer-text",
+          "declaration": {
+            "name": "TuiShimmerText",
+            "module": "src/components/shimmer-text.ts"
           }
         }
       ]
@@ -3525,196 +3968,6 @@
           }
         }
       ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/events/names.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND_SUCCESS",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command-success'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND_ERROR",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command-error'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_NAVIGATE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-navigate'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_THEME_CHANGE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-theme-change'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_START",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-start'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_COMPLETE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-complete'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_INTERRUPT",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-interrupt'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_SLASH_SELECT",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-slash-select'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_SLASH_DISMISS",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-slash-dismiss'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_TODO_CHANGE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-todo-change'"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND",
-          "declaration": {
-            "name": "TUI_COMMAND",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND_SUCCESS",
-          "declaration": {
-            "name": "TUI_COMMAND_SUCCESS",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND_ERROR",
-          "declaration": {
-            "name": "TUI_COMMAND_ERROR",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_NAVIGATE",
-          "declaration": {
-            "name": "TUI_NAVIGATE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_THEME_CHANGE",
-          "declaration": {
-            "name": "TUI_THEME_CHANGE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_START",
-          "declaration": {
-            "name": "TUI_STREAM_START",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_COMPLETE",
-          "declaration": {
-            "name": "TUI_STREAM_COMPLETE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_INTERRUPT",
-          "declaration": {
-            "name": "TUI_STREAM_INTERRUPT",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_SLASH_SELECT",
-          "declaration": {
-            "name": "TUI_SLASH_SELECT",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_SLASH_DISMISS",
-          "declaration": {
-            "name": "TUI_SLASH_DISMISS",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_TODO_CHANGE",
-          "declaration": {
-            "name": "TUI_TODO_CHANGE",
-            "module": "src/events/names.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/events/types.ts",
-      "declarations": [],
-      "exports": []
     },
     {
       "kind": "javascript-module",

@@ -84,6 +84,21 @@ describe('<tui-session>', () => {
     expect(secondSpy).toHaveBeenCalled();
   });
 
+  it('exposes the active mode color as --tui-active-mode-color on the host', async () => {
+    const el = await fixture<TuiSession>(html`<tui-session mode="autoAccept"></tui-session>`);
+    expect(el.style.getPropertyValue('--tui-active-mode-color').trim()).toBe(
+      'var(--tui-mode-auto-accept)',
+    );
+
+    el.mode = 'planMode';
+    expect(el.style.getPropertyValue('--tui-active-mode-color').trim()).toBe(
+      'var(--tui-mode-plan-mode)',
+    );
+
+    el.mode = null;
+    expect(el.style.getPropertyValue('--tui-active-mode-color').trim()).toBe('');
+  });
+
   it('ignores subtrees marked with the ignore-shortcuts attribute', async () => {
     const el = await fixture<TuiSession>(html`
       <tui-session>

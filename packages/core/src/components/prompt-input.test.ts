@@ -208,6 +208,16 @@ describe('<tui-prompt-input>', () => {
     expect(input?.value).toBe('in progress');
   });
 
+  it('reflects the mode attribute on the host so CSS can resolve a per-mode color', async () => {
+    const el = await fixture<TuiPromptInput>(
+      html`<tui-prompt-input mode="autoAccept"></tui-prompt-input>`,
+    );
+    expect(el.getAttribute('mode')).toBe('autoAccept');
+    el.mode = 'planMode';
+    await el.updateComplete;
+    expect(el.getAttribute('mode')).toBe('planMode');
+  });
+
   it('emits tui-command even when the input is unrecognized', async () => {
     const events: CustomEvent[] = [];
     const el = await fixture<TuiPromptInput>(html`<tui-prompt-input></tui-prompt-input>`);

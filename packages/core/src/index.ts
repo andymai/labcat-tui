@@ -17,6 +17,8 @@ import './components/tool-use-timeline.js';
 import './components/md.js';
 import './components/slash-overlay.js';
 import './components/session.js';
+import './components/agent-badge.js';
+import './components/shimmer-text.js';
 
 export { TuiToolCall } from './components/tool-call.js';
 export type { ToolCallStatus } from './components/tool-call.js';
@@ -44,6 +46,12 @@ export { TuiToolUseTimeline } from './components/tool-use-timeline.js';
 export { TuiMd } from './components/md.js';
 export { TuiSlashOverlay } from './components/slash-overlay.js';
 export { TuiSession } from './components/session.js';
+export type { SessionMode } from './components/session.js';
+export type { PromptMode } from './components/prompt-input.js';
+export { TuiAgentBadge } from './components/agent-badge.js';
+export type { AgentCallsign } from './components/agent-badge.js';
+export { TuiShimmerText } from './components/shimmer-text.js';
+export type { ShimmerKind } from './components/shimmer-text.js';
 
 export {
   defineTheme,

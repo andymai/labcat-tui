@@ -18,3 +18,5 @@ export { ToolUseTimeline } from './components/tool-use-timeline.js';
 export { Md } from './components/md.js';
 export { SlashOverlay } from './components/slash-overlay.js';
 export { Session } from './components/session.js';
+export { AgentBadge } from './components/agent-badge.js';
+export { ShimmerText } from './components/shimmer-text.js';

@@ -73,12 +73,17 @@ export class TuiDiffBlock extends LitElement {
       padding-inline-start: 0.25rem;
     }
 
+    /* Per v0.6 fidelity tokens: use the dimmed background for the whole
+       row + the word-level color for the foreground text. Lines without a
+       data-word-highlight attribute display the row in the word color. */
     .line[data-kind='add'] {
-      color: var(--tui-success);
+      color: var(--tui-diff-added-word, var(--tui-success));
+      background: var(--tui-diff-added-dimmed, transparent);
     }
 
     .line[data-kind='remove'] {
-      color: var(--tui-error);
+      color: var(--tui-diff-removed-word, var(--tui-error));
+      background: var(--tui-diff-removed-dimmed, transparent);
     }
 
     .line[data-kind='context'] {
