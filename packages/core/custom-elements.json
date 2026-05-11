@@ -233,6 +233,14 @@
         },
         {
           "kind": "js",
+          "name": "TuiSession",
+          "declaration": {
+            "name": "TuiSession",
+            "module": "./components/session.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "defineTheme",
           "declaration": {
             "name": "defineTheme",
@@ -1912,6 +1920,49 @@
           "declaration": {
             "name": "TuiPromptLine",
             "module": "src/components/prompt-line.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/session.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-session>` — High-level Light-DOM orchestrator. Holds the\ndocument-level keyboard shortcuts so embedded `<tui-prompt-input>` /\n`<tui-slash-overlay>` instances don't need to.\n\nPer SPEC §10.2:\n  /           → focus first descendant <tui-prompt-input> (skipped in form fields)\n  Cmd/Ctrl-K  → open first descendant <tui-slash-overlay>\n  ?           → open the slash overlay (skipped in form fields)\n  Escape      → close the slash overlay if open\n\nMultiple sessions on a page: **last-mounted wins** shortcut routing\n(with `console.warn` in dev). Subtrees opt out via the\n`ignore-shortcuts` attribute on any ancestor element.\n\nLight DOM (per SPEC §7.2) — slotted children behave naturally in any\nframework. Layout is consumer-driven; the element only adds the\n`tui-session` class.",
+          "name": "TuiSession",
+          "members": [
+            {
+              "kind": "field",
+              "name": "onKeyDown",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "superclass": {
+            "name": "Base",
+            "module": "src/components/session.ts"
+          },
+          "tagName": "tui-session",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiSession",
+          "declaration": {
+            "name": "TuiSession",
+            "module": "src/components/session.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-session",
+          "declaration": {
+            "name": "TuiSession",
+            "module": "src/components/session.ts"
           }
         }
       ]
