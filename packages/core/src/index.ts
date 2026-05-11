@@ -4,6 +4,9 @@ import './components/box.js';
 import './components/spinner.js';
 import './components/prompt-line.js';
 import './components/theme-provider.js';
+import './components/welcome-banner.js';
+import './components/thinking-block.js';
+import './components/status-line.js';
 
 export { TuiToolCall } from './components/tool-call.js';
 export type { ToolCallStatus } from './components/tool-call.js';
@@ -13,6 +16,10 @@ export { TuiSpinner } from './components/spinner.js';
 export type { SpinnerKind } from './components/spinner.js';
 export { TuiPromptLine } from './components/prompt-line.js';
 export { TuiThemeProvider } from './components/theme-provider.js';
+export { TuiWelcomeBanner } from './components/welcome-banner.js';
+export { TuiThinkingBlock } from './components/thinking-block.js';
+export { TuiStatusLine } from './components/status-line.js';
+export type { StatusLineKind, StatusLiveness, StatusSegment } from './components/status-line.js';
 
 export {
   defineTheme,
