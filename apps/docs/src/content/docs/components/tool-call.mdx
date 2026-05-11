@@ -1,0 +1,58 @@
+---
+title: '<tui-tool-call>'
+description: Signature `●` tool-call card.
+---
+
+import '@labcat/tui';
+
+The `<tui-tool-call>` element renders a Claude Code-style tool invocation row with an optional body.
+
+## Example
+
+<tui-tool-call tool="Read" args="posts/">
+  <ul>
+    <li>proxmox-tuning</li>
+    <li>k3s-on-pi</li>
+  </ul>
+</tui-tool-call>
+
+```html
+<tui-tool-call tool="Read" args="posts/">
+  <ul>
+    <li>proxmox-tuning</li>
+    <li>k3s-on-pi</li>
+  </ul>
+</tui-tool-call>
+```
+
+## API
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `tool` | `string` | Tool name |
+| `args` | `string` | Argument summary |
+| `status` | `ok` \| `pending` \| `running` \| `error` | Visual + a11y state |
+| `aria-label` | `string` | Overrides auto-generated label |
+
+### Slot
+
+The default slot renders below the head as the optional body.
+
+### CSS parts
+
+`dot`, `head`, `tool`, `args`, `body`.
+
+## Astro recipe
+
+Components are client-rendered. Inside an Astro page:
+
+```astro
+---
+import '@labcat/tui';
+import '@labcat/tui/styles.css';
+---
+
+<tui-tool-call tool="Read" args="posts/" />
+```
+
+For full sessions (later releases), wrap in `client:load`.

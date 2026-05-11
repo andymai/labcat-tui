@@ -1,0 +1,51 @@
+import { defineTheme } from './defineTheme.js';
+
+export const claude = defineTheme({
+  name: 'claude',
+  bg: '#1a1816',
+  surface: '#221f1c',
+  surface2: '#2a2622',
+  fg: '#e8e3dc',
+  fgMuted: '#a89c8a',
+  fgDim: '#6e6353',
+  accent: '#d97757',
+  accentDim: '#8a4a36',
+  border: '#3a3530',
+  success: '#7ab87a',
+  error: '#e07b7b',
+  warning: '#d9b06a',
+  info: '#7ab1d9',
+  fontMono:
+    '"Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace',
+  leadingTight: '1.25',
+  leadingBody: '1.55',
+  contentMax: '72ch',
+  durFast: '120ms',
+  durBase: '220ms',
+  easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)',
+});
+
+export const claudeLight = defineTheme({
+  name: 'claudeLight',
+  bg: '#faf6f1',
+  surface: '#f1ece4',
+  surface2: '#e7e1d6',
+  fg: '#2a2622',
+  fgMuted: '#5c544a',
+  fgDim: '#8e8678',
+  accent: '#c45a37',
+  accentDim: '#9a4326',
+  border: '#d4cdc1',
+  success: '#3f8a3f',
+  error: '#b04545',
+  warning: '#a87825',
+  info: '#3e7ba8',
+  fontMono:
+    '"Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace',
+  leadingTight: '1.25',
+  leadingBody: '1.55',
+  contentMax: '72ch',
+  durFast: '120ms',
+  durBase: '220ms',
+  easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)',
+});

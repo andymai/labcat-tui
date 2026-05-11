@@ -1,0 +1,10 @@
+:not(:defined) {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --tui-dur-fast: 0ms;
+    --tui-dur-base: 0ms;
+  }
+}

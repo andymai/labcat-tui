@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.turbo/
+.astro/
+*.tsbuildinfo
+.DS_Store
+.env
+.env.local
+coverage/
+playwright-report/
+test-results/
+__snapshots__/macos/
+__snapshots__/windows/
+.vscode/*
+!.vscode/extensions.json

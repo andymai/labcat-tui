@@ -1,0 +1,40 @@
+:root {
+  --tui-bg: #1a1816;
+  --tui-surface: #221f1c;
+  --tui-surface-2: #2a2622;
+  --tui-fg: #e8e3dc;
+  --tui-fg-muted: #a89c8a;
+  --tui-fg-dim: #6e6353;
+  --tui-accent: #d97757;
+  --tui-accent-dim: #8a4a36;
+  --tui-border: #3a3530;
+  --tui-success: #7ab87a;
+  --tui-error: #e07b7b;
+  --tui-warning: #d9b06a;
+  --tui-info: #7ab1d9;
+  --tui-font-mono: "Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --tui-leading-tight: 1.25;
+  --tui-leading-body: 1.55;
+  --tui-content-max: 72ch;
+  --tui-dur-fast: 120ms;
+  --tui-dur-base: 220ms;
+  --tui-easing: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.tui-theme-claude-light,
+[data-tui-theme="claudeLight"] {
+  --tui-bg: #faf6f1;
+  --tui-surface: #f1ece4;
+  --tui-surface-2: #e7e1d6;
+  --tui-fg: #2a2622;
+  --tui-fg-muted: #5c544a;
+  --tui-fg-dim: #8e8678;
+  --tui-accent: #c45a37;
+  --tui-accent-dim: #9a4326;
+  --tui-border: #d4cdc1;
+  --tui-success: #3f8a3f;
+  --tui-error: #b04545;
+  --tui-warning: #a87825;
+  --tui-info: #3e7ba8;
+}

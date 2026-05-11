@@ -1,0 +1,732 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiToolCall",
+          "declaration": {
+            "name": "TuiToolCall",
+            "module": "./components/tool-call.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ToolCallStatus",
+          "declaration": {
+            "name": "ToolCallStatus",
+            "module": "./components/tool-call.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "defineTheme",
+          "declaration": {
+            "name": "defineTheme",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "themeToCssText",
+          "declaration": {
+            "name": "themeToCssText",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "themeToCssVars",
+          "declaration": {
+            "name": "themeToCssVars",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "claude",
+          "declaration": {
+            "name": "claude",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "claudeLight",
+          "declaration": {
+            "name": "claudeLight",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "listBuiltInThemes",
+          "declaration": {
+            "name": "listBuiltInThemes",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getBuiltInTheme",
+          "declaration": {
+            "name": "getBuiltInTheme",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ThemeDefinition",
+          "declaration": {
+            "name": "ThemeDefinition",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiCommandDetail",
+          "declaration": {
+            "name": "TuiCommandDetail",
+            "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiCommandSuccessDetail",
+          "declaration": {
+            "name": "TuiCommandSuccessDetail",
+            "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiCommandErrorDetail",
+          "declaration": {
+            "name": "TuiCommandErrorDetail",
+            "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiNavigateDetail",
+          "declaration": {
+            "name": "TuiNavigateDetail",
+            "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiThemeChangeDetail",
+          "declaration": {
+            "name": "TuiThemeChangeDetail",
+            "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiSlashSelectDetail",
+          "declaration": {
+            "name": "TuiSlashSelectDetail",
+            "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiTodoChangeDetail",
+          "declaration": {
+            "name": "TuiTodoChangeDetail",
+            "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiEventMap",
+          "declaration": {
+            "name": "TuiEventMap",
+            "module": "./events/types.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tool-call.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-tool-call>` — Signature `●` tool-call card.",
+          "name": "TuiToolCall",
+          "cssParts": [
+            {
+              "description": "The leading `●` indicator",
+              "name": "dot"
+            },
+            {
+              "description": "The header row container",
+              "name": "head"
+            },
+            {
+              "description": "The tool name span",
+              "name": "tool"
+            },
+            {
+              "description": "The args span",
+              "name": "args"
+            },
+            {
+              "description": "The body slot wrapper",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Optional body content (rendered below the head)",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "tool",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "tool",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "args",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "args",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "ToolCallStatus"
+              },
+              "default": "'ok'",
+              "attribute": "status",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hasBody",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "applyAriaLabel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Tool name (e.g., \"Read\", \"Edit\")",
+              "name": "tool",
+              "default": "''",
+              "fieldName": "tool"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Tool arguments summary",
+              "name": "args",
+              "default": "''",
+              "fieldName": "args"
+            },
+            {
+              "type": {
+                "text": "ToolCallStatus"
+              },
+              "description": "Visual + a11y state",
+              "name": "status",
+              "default": "'ok'",
+              "fieldName": "status"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Overrides the auto-generated label",
+              "name": "aria-label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-tool-call",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiToolCall",
+          "declaration": {
+            "name": "TuiToolCall",
+            "module": "src/components/tool-call.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-tool-call",
+          "declaration": {
+            "name": "TuiToolCall",
+            "module": "src/components/tool-call.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/events/names.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_SUCCESS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-success'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_ERROR",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-error'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_NAVIGATE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-navigate'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_THEME_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-theme-change'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_START",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-start'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_COMPLETE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-complete'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_INTERRUPT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-interrupt'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_SELECT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-select'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_DISMISS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-dismiss'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_TODO_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-todo-change'"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND",
+          "declaration": {
+            "name": "TUI_COMMAND",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_SUCCESS",
+          "declaration": {
+            "name": "TUI_COMMAND_SUCCESS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_ERROR",
+          "declaration": {
+            "name": "TUI_COMMAND_ERROR",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_NAVIGATE",
+          "declaration": {
+            "name": "TUI_NAVIGATE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_THEME_CHANGE",
+          "declaration": {
+            "name": "TUI_THEME_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_START",
+          "declaration": {
+            "name": "TUI_STREAM_START",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_COMPLETE",
+          "declaration": {
+            "name": "TUI_STREAM_COMPLETE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_INTERRUPT",
+          "declaration": {
+            "name": "TUI_STREAM_INTERRUPT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_SELECT",
+          "declaration": {
+            "name": "TUI_SLASH_SELECT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_DISMISS",
+          "declaration": {
+            "name": "TUI_SLASH_DISMISS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_TODO_CHANGE",
+          "declaration": {
+            "name": "TUI_TODO_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/events/types.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/theme/claude.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "claude"
+        },
+        {
+          "kind": "variable",
+          "name": "claudeLight"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "claude",
+          "declaration": {
+            "name": "claude",
+            "module": "src/theme/claude.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "claudeLight",
+          "declaration": {
+            "name": "claudeLight",
+            "module": "src/theme/claude.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/theme/defineTheme.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "defineTheme",
+          "return": {
+            "type": {
+              "text": "ThemeDefinition"
+            }
+          },
+          "parameters": [
+            {
+              "name": "theme",
+              "type": {
+                "text": "ThemeDefinition"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "themeToCssVars",
+          "return": {
+            "type": {
+              "text": "Record<string, string>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "theme",
+              "type": {
+                "text": "ThemeDefinition"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "themeToCssText",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          },
+          "parameters": [
+            {
+              "name": "theme",
+              "type": {
+                "text": "ThemeDefinition"
+              }
+            },
+            {
+              "name": "selector",
+              "default": "':root'"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "defineTheme",
+          "declaration": {
+            "name": "defineTheme",
+            "module": "src/theme/defineTheme.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "themeToCssVars",
+          "declaration": {
+            "name": "themeToCssVars",
+            "module": "src/theme/defineTheme.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "themeToCssText",
+          "declaration": {
+            "name": "themeToCssText",
+            "module": "src/theme/defineTheme.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/theme/index.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "listBuiltInThemes",
+          "return": {
+            "type": {
+              "text": "string[]"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "getBuiltInTheme",
+          "return": {
+            "type": {
+              "text": "ThemeDefinition | undefined"
+            }
+          },
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "defineTheme",
+          "declaration": {
+            "name": "defineTheme",
+            "module": "./defineTheme.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "themeToCssText",
+          "declaration": {
+            "name": "themeToCssText",
+            "module": "./defineTheme.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "themeToCssVars",
+          "declaration": {
+            "name": "themeToCssVars",
+            "module": "./defineTheme.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ThemeDefinition",
+          "declaration": {
+            "name": "ThemeDefinition",
+            "module": "./defineTheme.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "claude",
+          "declaration": {
+            "name": "claude",
+            "module": "./claude.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "claudeLight",
+          "declaration": {
+            "name": "claudeLight",
+            "module": "./claude.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "listBuiltInThemes",
+          "declaration": {
+            "name": "listBuiltInThemes",
+            "module": "src/theme/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getBuiltInTheme",
+          "declaration": {
+            "name": "getBuiltInTheme",
+            "module": "src/theme/index.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

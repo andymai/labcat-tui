@@ -1,0 +1,11 @@
+export const TUI_COMMAND = 'tui-command';
+export const TUI_COMMAND_SUCCESS = 'tui-command-success';
+export const TUI_COMMAND_ERROR = 'tui-command-error';
+export const TUI_NAVIGATE = 'tui-navigate';
+export const TUI_THEME_CHANGE = 'tui-theme-change';
+export const TUI_STREAM_START = 'tui-stream-start';
+export const TUI_STREAM_COMPLETE = 'tui-stream-complete';
+export const TUI_STREAM_INTERRUPT = 'tui-stream-interrupt';
+export const TUI_SLASH_SELECT = 'tui-slash-select';
+export const TUI_SLASH_DISMISS = 'tui-slash-dismiss';
+export const TUI_TODO_CHANGE = 'tui-todo-change';

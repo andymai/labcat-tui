@@ -1,0 +1,32 @@
+{
+  "name": "@labcat/tui-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Claude Code-styled TUI component library for the web",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "cem": "turbo run cem",
+    "size": "turbo run size",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "turbo run build && changeset publish"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@changesets/cli": "^2.27.11",
+    "size-limit": "^11.1.6",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.3"
+  }
+}
