@@ -1,24 +1,24 @@
 ---
 title: '<tui-chat-bubble>'
-description: Chat message with role/name/timestamp head + slot body.
+description: Chat message with sender / name / timestamp head + slot body.
 ---
 
 import '@labcat/tui';
 
-A chat-style message row with role glyph, name, timestamp, and a slotted body. Compatible with light- and dark-mode themes.
+A chat-style message row with sender glyph, name, timestamp, and a slotted body. Compatible with light- and dark-mode themes.
 
 ## Example
 
-<tui-chat-bubble role="user" name="andy" timestamp="14:32">
+<tui-chat-bubble from="user" name="andy" timestamp="14:32">
   How's the build going?
 </tui-chat-bubble>
 
-<tui-chat-bubble role="assistant" name="claude" timestamp="14:32">
+<tui-chat-bubble from="assistant" name="claude" timestamp="14:32">
   Green across Node 22 and 24.
 </tui-chat-bubble>
 
 ```html
-<tui-chat-bubble role="user" name="andy" timestamp="14:32">
+<tui-chat-bubble from="user" name="andy" timestamp="14:32">
   How's the build going?
 </tui-chat-bubble>
 ```
@@ -27,9 +27,11 @@ A chat-style message row with role glyph, name, timestamp, and a slotted body. C
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `role` | `'user'` \| `'assistant'` \| `'system'` | Selects glyph + color treatment. |
+| `from` | `'user'` \| `'assistant'` \| `'system'` | Selects glyph + color treatment. |
 | `name` | `string` | Display name. |
 | `timestamp` | `string` | Free-form timestamp text. |
+
+> **Why `from` and not `role`?** `role` is the global ARIA attribute. Setting `<tui-chat-bubble role="user">` would assign an invalid ARIA role to the element. The component instead uses `from` for sender identity and sets `role="article"` on the host so screen readers treat each bubble as a discrete content article.
 
 ### Slot
 
@@ -37,4 +39,4 @@ The default slot is the message body.
 
 ### CSS parts
 
-`head`, `role`, `name`, `timestamp`, `body`.
+`head`, `sender`, `name`, `timestamp`, `body`.

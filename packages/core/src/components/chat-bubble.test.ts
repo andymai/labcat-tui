@@ -4,9 +4,14 @@ import './chat-bubble.js';
 import type { TuiChatBubble } from './chat-bubble.js';
 
 describe('<tui-chat-bubble>', () => {
-  it('defaults to role="assistant"', async () => {
+  it('defaults to from="assistant"', async () => {
     const el = await fixture<TuiChatBubble>(html`<tui-chat-bubble>hi</tui-chat-bubble>`);
-    expect(el.role).toBe('assistant');
+    expect(el.from).toBe('assistant');
+  });
+
+  it('sets role="article" on the host (not the misused ARIA role from before v0.5)', async () => {
+    const el = await fixture<TuiChatBubble>(html`<tui-chat-bubble from="user">x</tui-chat-bubble>`);
+    expect(el.getAttribute('role')).toBe('article');
   });
 
   it('renders the name and timestamp when provided', async () => {
@@ -22,14 +27,14 @@ describe('<tui-chat-bubble>', () => {
     expect(el.shadowRoot?.querySelector('[part~="name"]')).toBeNull();
   });
 
-  it('picks a role-specific glyph', async () => {
+  it('picks a sender-specific glyph', async () => {
     const user = await fixture<TuiChatBubble>(
-      html`<tui-chat-bubble role="user">x</tui-chat-bubble>`,
+      html`<tui-chat-bubble from="user">x</tui-chat-bubble>`,
     );
     const sys = await fixture<TuiChatBubble>(
-      html`<tui-chat-bubble role="system">x</tui-chat-bubble>`,
+      html`<tui-chat-bubble from="system">x</tui-chat-bubble>`,
     );
-    expect(user.shadowRoot?.querySelector('[part~="role"]')?.textContent).toBe('›');
-    expect(sys.shadowRoot?.querySelector('[part~="role"]')?.textContent).toBe('◆');
+    expect(user.shadowRoot?.querySelector('[part~="sender"]')?.textContent).toBe('›');
+    expect(sys.shadowRoot?.querySelector('[part~="sender"]')?.textContent).toBe('◆');
   });
 });

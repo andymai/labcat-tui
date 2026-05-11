@@ -4,14 +4,18 @@ import { customElement, property } from 'lit/decorators.js';
 export type ChatRole = 'user' | 'assistant' | 'system';
 
 /**
- * `<tui-chat-bubble>` — Chat message with role/name/timestamp head + slot body.
+ * `<tui-chat-bubble>` — Chat message with sender / name / timestamp head + slot body.
  *
- * @attr {"user"|"assistant"|"system"} role
+ * @attr {"user"|"assistant"|"system"} from - Sender identity (NOT named "role"
+ *   on purpose: `role` is the global ARIA attribute, and setting it to "user"
+ *   etc. would assign an invalid ARIA role to the element). The host element
+ *   automatically gets `role="article"` so assistive tech treats each bubble
+ *   as a discrete content article.
  * @attr {string} name
  * @attr {string} timestamp
  * @slot - Message body
  * @csspart head - Header row container
- * @csspart role - Role indicator
+ * @csspart sender - Sender indicator (glyph)
  * @csspart name - Sender name
  * @csspart timestamp - Timestamp text
  * @csspart body - Body slot wrapper
@@ -35,16 +39,16 @@ export class TuiChatBubble extends LitElement {
       font-size: 0.875em;
     }
 
-    .role {
+    .sender {
       color: var(--tui-accent);
       flex: 0 0 auto;
     }
 
-    :host([role='user']) .role {
+    :host([from='user']) .sender {
       color: var(--tui-info);
     }
 
-    :host([role='system']) .role {
+    :host([from='system']) .sender {
       color: var(--tui-fg-dim);
     }
 
@@ -65,7 +69,7 @@ export class TuiChatBubble extends LitElement {
   `;
 
   @property({ type: String, reflect: true })
-  override role: ChatRole = 'assistant';
+  from: ChatRole = 'assistant';
 
   @property({ type: String, reflect: true })
   name = '';
@@ -73,10 +77,15 @@ export class TuiChatBubble extends LitElement {
   @property({ type: String, reflect: true })
   timestamp = '';
 
+  override connectedCallback(): void {
+    super.connectedCallback();
+    if (!this.hasAttribute('role')) this.setAttribute('role', 'article');
+  }
+
   override render() {
     return html`
       <div class="head" part="head">
-        <span class="role" part="role" aria-hidden="true">${this.roleGlyph}</span>
+        <span class="sender" part="sender" aria-hidden="true">${this.senderGlyph}</span>
         ${this.name ? html`<span class="name" part="name">${this.name}</span>` : nothing}
         ${
           this.timestamp
@@ -88,8 +97,8 @@ export class TuiChatBubble extends LitElement {
     `;
   }
 
-  private get roleGlyph(): string {
-    switch (this.role) {
+  private get senderGlyph(): string {
+    switch (this.from) {
       case 'user':
         return '›';
       case 'system':

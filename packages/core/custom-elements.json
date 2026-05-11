@@ -972,6 +972,196 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/events/names.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_SUCCESS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-success'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_ERROR",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-error'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_NAVIGATE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-navigate'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_THEME_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-theme-change'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_START",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-start'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_COMPLETE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-complete'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_INTERRUPT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-interrupt'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_SELECT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-select'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_DISMISS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-dismiss'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_TODO_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-todo-change'"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND",
+          "declaration": {
+            "name": "TUI_COMMAND",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_SUCCESS",
+          "declaration": {
+            "name": "TUI_COMMAND_SUCCESS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_ERROR",
+          "declaration": {
+            "name": "TUI_COMMAND_ERROR",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_NAVIGATE",
+          "declaration": {
+            "name": "TUI_NAVIGATE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_THEME_CHANGE",
+          "declaration": {
+            "name": "TUI_THEME_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_START",
+          "declaration": {
+            "name": "TUI_STREAM_START",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_COMPLETE",
+          "declaration": {
+            "name": "TUI_STREAM_COMPLETE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_INTERRUPT",
+          "declaration": {
+            "name": "TUI_STREAM_INTERRUPT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_SELECT",
+          "declaration": {
+            "name": "TUI_SLASH_SELECT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_DISMISS",
+          "declaration": {
+            "name": "TUI_SLASH_DISMISS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_TODO_CHANGE",
+          "declaration": {
+            "name": "TUI_TODO_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/events/types.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/box.ts",
       "declarations": [
         {
@@ -1100,7 +1290,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "`<tui-chat-bubble>` — Chat message with role/name/timestamp head + slot body.",
+          "description": "`<tui-chat-bubble>` — Chat message with sender / name / timestamp head + slot body.",
           "name": "TuiChatBubble",
           "cssParts": [
             {
@@ -1108,8 +1298,8 @@
               "name": "head"
             },
             {
-              "description": "Role indicator",
-              "name": "role"
+              "description": "Sender indicator (glyph)",
+              "name": "sender"
             },
             {
               "description": "Sender name",
@@ -1133,12 +1323,12 @@
           "members": [
             {
               "kind": "field",
-              "name": "role",
+              "name": "from",
               "type": {
                 "text": "ChatRole"
               },
               "default": "'assistant'",
-              "attribute": "role",
+              "attribute": "from",
               "reflects": true
             },
             {
@@ -1163,7 +1353,7 @@
             },
             {
               "kind": "field",
-              "name": "roleGlyph",
+              "name": "senderGlyph",
               "type": {
                 "text": "string"
               },
@@ -1176,9 +1366,10 @@
               "type": {
                 "text": "ChatRole"
               },
-              "name": "role",
+              "description": "Sender identity (NOT named \"role\" on purpose: `role` is the global ARIA attribute, and setting it to \"user\" etc. would assign an invalid ARIA role to the element). The host element automatically gets `role=\"article\"` so assistive tech treats each bubble as a discrete content article.",
+              "name": "from",
               "default": "'assistant'",
-              "fieldName": "role"
+              "fieldName": "from"
             },
             {
               "type": {
@@ -3515,196 +3706,6 @@
           }
         }
       ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/events/names.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND_SUCCESS",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command-success'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND_ERROR",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command-error'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_NAVIGATE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-navigate'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_THEME_CHANGE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-theme-change'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_START",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-start'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_COMPLETE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-complete'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_INTERRUPT",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-interrupt'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_SLASH_SELECT",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-slash-select'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_SLASH_DISMISS",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-slash-dismiss'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_TODO_CHANGE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-todo-change'"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND",
-          "declaration": {
-            "name": "TUI_COMMAND",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND_SUCCESS",
-          "declaration": {
-            "name": "TUI_COMMAND_SUCCESS",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND_ERROR",
-          "declaration": {
-            "name": "TUI_COMMAND_ERROR",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_NAVIGATE",
-          "declaration": {
-            "name": "TUI_NAVIGATE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_THEME_CHANGE",
-          "declaration": {
-            "name": "TUI_THEME_CHANGE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_START",
-          "declaration": {
-            "name": "TUI_STREAM_START",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_COMPLETE",
-          "declaration": {
-            "name": "TUI_STREAM_COMPLETE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_INTERRUPT",
-          "declaration": {
-            "name": "TUI_STREAM_INTERRUPT",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_SLASH_SELECT",
-          "declaration": {
-            "name": "TUI_SLASH_SELECT",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_SLASH_DISMISS",
-          "declaration": {
-            "name": "TUI_SLASH_DISMISS",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_TODO_CHANGE",
-          "declaration": {
-            "name": "TUI_TODO_CHANGE",
-            "module": "src/events/names.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/events/types.ts",
-      "declarations": [],
-      "exports": []
     },
     {
       "kind": "javascript-module",
