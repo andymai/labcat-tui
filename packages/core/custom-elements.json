@@ -25,9 +25,65 @@
         },
         {
           "kind": "js",
+          "name": "TuiBox",
+          "declaration": {
+            "name": "TuiBox",
+            "module": "./components/box.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BoxKind",
+          "declaration": {
+            "name": "BoxKind",
+            "module": "./components/box.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiSpinner",
+          "declaration": {
+            "name": "TuiSpinner",
+            "module": "./components/spinner.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SpinnerKind",
+          "declaration": {
+            "name": "SpinnerKind",
+            "module": "./components/spinner.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiPromptLine",
+          "declaration": {
+            "name": "TuiPromptLine",
+            "module": "./components/prompt-line.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiThemeProvider",
+          "declaration": {
+            "name": "TuiThemeProvider",
+            "module": "./components/theme-provider.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "defineTheme",
           "declaration": {
             "name": "defineTheme",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "validateTheme",
+          "declaration": {
+            "name": "validateTheme",
             "module": "./theme/index.js"
           }
         },
@@ -44,6 +100,14 @@
           "name": "themeToCssVars",
           "declaration": {
             "name": "themeToCssVars",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "resolveTheme",
+          "declaration": {
+            "name": "resolveTheme",
             "module": "./theme/index.js"
           }
         },
@@ -76,6 +140,22 @@
           "name": "getBuiltInTheme",
           "declaration": {
             "name": "getBuiltInTheme",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MissingTokenError",
+          "declaration": {
+            "name": "MissingTokenError",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "InvalidColorError",
+          "declaration": {
+            "name": "InvalidColorError",
             "module": "./theme/index.js"
           }
         },
@@ -149,174 +229,6 @@
           "declaration": {
             "name": "TuiEventMap",
             "module": "./events/types.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/tool-call.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "`<tui-tool-call>` — Signature `●` tool-call card.",
-          "name": "TuiToolCall",
-          "cssParts": [
-            {
-              "description": "The leading `●` indicator",
-              "name": "dot"
-            },
-            {
-              "description": "The header row container",
-              "name": "head"
-            },
-            {
-              "description": "The tool name span",
-              "name": "tool"
-            },
-            {
-              "description": "The args span",
-              "name": "args"
-            },
-            {
-              "description": "The body slot wrapper",
-              "name": "body"
-            }
-          ],
-          "slots": [
-            {
-              "description": "Optional body content (rendered below the head)",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "tool",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "tool",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "args",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "args",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "status",
-              "type": {
-                "text": "ToolCallStatus"
-              },
-              "default": "'ok'",
-              "attribute": "status",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "hasBody",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "method",
-              "name": "applyAriaLabel",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onSlotChange",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            }
-          ],
-          "attributes": [
-            {
-              "type": {
-                "text": "string"
-              },
-              "description": "Tool name (e.g., \"Read\", \"Edit\")",
-              "name": "tool",
-              "default": "''",
-              "fieldName": "tool"
-            },
-            {
-              "type": {
-                "text": "string"
-              },
-              "description": "Tool arguments summary",
-              "name": "args",
-              "default": "''",
-              "fieldName": "args"
-            },
-            {
-              "type": {
-                "text": "ToolCallStatus"
-              },
-              "description": "Visual + a11y state",
-              "name": "status",
-              "default": "'ok'",
-              "fieldName": "status"
-            },
-            {
-              "type": {
-                "text": "string"
-              },
-              "description": "Overrides the auto-generated label",
-              "name": "aria-label"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "tui-tool-call",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "TuiToolCall",
-          "declaration": {
-            "name": "TuiToolCall",
-            "module": "src/components/tool-call.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "tui-tool-call",
-          "declaration": {
-            "name": "TuiToolCall",
-            "module": "src/components/tool-call.ts"
           }
         }
       ]
@@ -513,6 +425,651 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/box.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-box>` — Box frame with rounded or sharp corners.",
+          "name": "TuiBox",
+          "cssParts": [
+            {
+              "description": "The frame border container",
+              "name": "chrome"
+            },
+            {
+              "description": "The title row",
+              "name": "title"
+            },
+            {
+              "description": "The body slot wrapper",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Body content",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "BoxKind"
+              },
+              "default": "'rounded'",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "title",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hasBody",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "onSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "BoxKind"
+              },
+              "description": "Corner style",
+              "name": "kind",
+              "default": "'rounded'",
+              "fieldName": "kind"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Optional title rendered in the top chrome",
+              "name": "title",
+              "default": "''",
+              "fieldName": "title"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-box",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiBox",
+          "declaration": {
+            "name": "TuiBox",
+            "module": "src/components/box.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-box",
+          "declaration": {
+            "name": "TuiBox",
+            "module": "src/components/box.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/prompt-line.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-prompt-line>` — Static `›` prompt with optional command + cursor.\nDisplay-only (no input handling — see `<tui-prompt-input>` for that).",
+          "name": "TuiPromptLine",
+          "cssParts": [
+            {
+              "description": "The leading `›` glyph",
+              "name": "caret"
+            },
+            {
+              "description": "The command text",
+              "name": "command"
+            },
+            {
+              "description": "The blinking cursor",
+              "name": "cursor"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "command",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "command",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "cursor",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "cursor",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Command text rendered after the prompt",
+              "name": "command",
+              "default": "''",
+              "fieldName": "command"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Show a blinking cursor at the end",
+              "name": "cursor",
+              "default": "false",
+              "fieldName": "cursor"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-prompt-line",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiPromptLine",
+          "declaration": {
+            "name": "TuiPromptLine",
+            "module": "src/components/prompt-line.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-prompt-line",
+          "declaration": {
+            "name": "TuiPromptLine",
+            "module": "src/components/prompt-line.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/spinner.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-spinner>` — Inline TUI spinner with several glyph styles.",
+          "name": "TuiSpinner",
+          "cssParts": [
+            {
+              "description": "The animated character",
+              "name": "glyph"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "SpinnerKind"
+              },
+              "default": "'dots'",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "running",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "running",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "frameIndex",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "timer",
+              "type": {
+                "text": "ReturnType<typeof setInterval> | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "reducedMotionMql",
+              "type": {
+                "text": "MediaQueryList | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "onReducedMotionChange",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "prefersReducedMotion",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "syncTimer",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "startTimer",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "stopTimer",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "SpinnerKind"
+              },
+              "description": "Glyph set",
+              "name": "kind",
+              "default": "'dots'",
+              "fieldName": "kind"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Whether the animation is running",
+              "name": "running",
+              "default": "true",
+              "fieldName": "running"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessibility label (default \"Loading\")",
+              "name": "aria-label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-spinner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiSpinner",
+          "declaration": {
+            "name": "TuiSpinner",
+            "module": "src/components/spinner.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-spinner",
+          "declaration": {
+            "name": "TuiSpinner",
+            "module": "src/components/spinner.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/theme-provider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-theme-provider>` — wraps a subtree and applies a theme via CSS custom\nproperties on `:host`. Variables inherit into both shadow children and\nslotted light-DOM children.",
+          "name": "TuiThemeProvider",
+          "slots": [
+            {
+              "description": "Subtree to theme",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "theme",
+              "type": {
+                "text": "string | ThemeDefinition"
+              },
+              "default": "'claude'",
+              "attribute": "theme",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "currentName",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "method",
+              "name": "applyVars",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "theme",
+                  "type": {
+                    "text": "ThemeDefinition"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "tui-theme-change",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ from, to }` when the theme changes"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "string | ThemeDefinition"
+              },
+              "description": "Name of a built-in theme",
+              "name": "theme",
+              "default": "'claude'",
+              "fieldName": "theme"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-theme-provider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiThemeProvider",
+          "declaration": {
+            "name": "TuiThemeProvider",
+            "module": "src/components/theme-provider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-theme-provider",
+          "declaration": {
+            "name": "TuiThemeProvider",
+            "module": "src/components/theme-provider.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tool-call.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-tool-call>` — Signature `●` tool-call card.",
+          "name": "TuiToolCall",
+          "cssParts": [
+            {
+              "description": "The leading `●` indicator",
+              "name": "dot"
+            },
+            {
+              "description": "The header row container",
+              "name": "head"
+            },
+            {
+              "description": "The tool name span",
+              "name": "tool"
+            },
+            {
+              "description": "The args span",
+              "name": "args"
+            },
+            {
+              "description": "The body slot wrapper",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Optional body content (rendered below the head)",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "tool",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "tool",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "args",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "args",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "ToolCallStatus"
+              },
+              "default": "'ok'",
+              "attribute": "status",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hasBody",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "applyAriaLabel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Tool name (e.g., \"Read\", \"Edit\")",
+              "name": "tool",
+              "default": "''",
+              "fieldName": "tool"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Tool arguments summary",
+              "name": "args",
+              "default": "''",
+              "fieldName": "args"
+            },
+            {
+              "type": {
+                "text": "ToolCallStatus"
+              },
+              "description": "Visual + a11y state",
+              "name": "status",
+              "default": "'ok'",
+              "fieldName": "status"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Overrides the auto-generated label",
+              "name": "aria-label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-tool-call",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiToolCall",
+          "declaration": {
+            "name": "TuiToolCall",
+            "module": "src/components/tool-call.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-tool-call",
+          "declaration": {
+            "name": "TuiToolCall",
+            "module": "src/components/tool-call.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/theme/claude.ts",
       "declarations": [
         {
@@ -547,6 +1104,61 @@
       "kind": "javascript-module",
       "path": "src/theme/defineTheme.ts",
       "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "MissingTokenError",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "'MissingTokenError'"
+            }
+          ],
+          "superclass": {
+            "name": "Error",
+            "module": "src/theme/defineTheme.ts"
+          }
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "InvalidColorError",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "'InvalidColorError'"
+            }
+          ],
+          "superclass": {
+            "name": "Error",
+            "module": "src/theme/defineTheme.ts"
+          }
+        },
+        {
+          "kind": "function",
+          "name": "validateTheme",
+          "return": {
+            "type": {
+              "text": "void"
+            }
+          },
+          "parameters": [
+            {
+              "name": "theme",
+              "type": {
+                "text": "ThemeDefinition"
+              }
+            }
+          ]
+        },
         {
           "kind": "function",
           "name": "defineTheme",
@@ -606,6 +1218,30 @@
       "exports": [
         {
           "kind": "js",
+          "name": "MissingTokenError",
+          "declaration": {
+            "name": "MissingTokenError",
+            "module": "src/theme/defineTheme.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "InvalidColorError",
+          "declaration": {
+            "name": "InvalidColorError",
+            "module": "src/theme/defineTheme.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "validateTheme",
+          "declaration": {
+            "name": "validateTheme",
+            "module": "src/theme/defineTheme.ts"
+          }
+        },
+        {
+          "kind": "js",
           "name": "defineTheme",
           "declaration": {
             "name": "defineTheme",
@@ -659,6 +1295,23 @@
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": "resolveTheme",
+          "return": {
+            "type": {
+              "text": "ThemeDefinition"
+            }
+          },
+          "parameters": [
+            {
+              "name": "theme",
+              "type": {
+                "text": "string | ThemeDefinition"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -683,6 +1336,30 @@
           "name": "themeToCssVars",
           "declaration": {
             "name": "themeToCssVars",
+            "module": "./defineTheme.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "validateTheme",
+          "declaration": {
+            "name": "validateTheme",
+            "module": "./defineTheme.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MissingTokenError",
+          "declaration": {
+            "name": "MissingTokenError",
+            "module": "./defineTheme.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "InvalidColorError",
+          "declaration": {
+            "name": "InvalidColorError",
             "module": "./defineTheme.js"
           }
         },
@@ -723,6 +1400,14 @@
           "name": "getBuiltInTheme",
           "declaration": {
             "name": "getBuiltInTheme",
+            "module": "src/theme/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "resolveTheme",
+          "declaration": {
+            "name": "resolveTheme",
             "module": "src/theme/index.ts"
           }
         }
