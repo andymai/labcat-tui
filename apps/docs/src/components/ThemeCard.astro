@@ -1,0 +1,132 @@
+---
+import type { ThemeDefinition } from '@labcat/tui';
+
+interface Props {
+  theme: ThemeDefinition;
+  exportName: string;
+}
+
+const { theme, exportName } = Astro.props;
+
+// Cards scope their tokens to a per-card class so multiple themes can preview
+// on the same page without colliding with the global Starlight theme.
+const cardClass = `theme-card-${exportName}`;
+
+const swatches: Array<{ label: string; var: string; value: string }> = [
+  { label: 'bg', var: '--tui-bg', value: theme.bg },
+  { label: 'surface', var: '--tui-surface', value: theme.surface },
+  { label: 'fg', var: '--tui-fg', value: theme.fg },
+  { label: 'fg-muted', var: '--tui-fg-muted', value: theme.fgMuted },
+  { label: 'accent', var: '--tui-accent', value: theme.accent },
+  { label: 'success', var: '--tui-success', value: theme.success },
+  { label: 'error', var: '--tui-error', value: theme.error },
+  { label: 'warning', var: '--tui-warning', value: theme.warning },
+];
+---
+<article class:list={['theme-card', cardClass]}>
+  <header>
+    <span class="dot" style={`color: ${theme.accent}`}>●</span>
+    <code class="export-name">{exportName}</code>
+    <span class="theme-name">"{theme.name}"</span>
+  </header>
+
+  <div class="preview" style={`background: ${theme.bg}; color: ${theme.fg}; border-color: ${theme.border}`}>
+    <div class="banner" style={`color: ${theme.fgMuted}`}>
+      <span style={`color: ${theme.accent}`}>✻</span> welcome
+    </div>
+    <div class="tool-row">
+      <span class="tool-dot" style={`color: ${theme.accent}`}>●</span>
+      <span class="tool-name" style={`color: ${theme.fg}`}>Read</span>
+      <span class="tool-args" style={`color: ${theme.fgMuted}`}>posts/</span>
+    </div>
+    <div class="prompt-row">
+      <span style={`color: ${theme.accent}`}>›</span>
+      <span style={`color: ${theme.fg}`}>ls</span>
+      <span class="cursor" style={`color: ${theme.accent}`}>▮</span>
+    </div>
+  </div>
+
+  <ol class="swatches">
+    {swatches.map(s => (
+      <li>
+        <span class="chip" style={`background: ${s.value}; border-color: ${theme.border}`}></span>
+        <code class="chip-label">{s.label}</code>
+      </li>
+    ))}
+  </ol>
+</article>
+
+<style>
+  .theme-card {
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 6px;
+    padding: 0.75rem;
+    background: var(--sl-color-bg-sidebar);
+    margin-block-end: 0;
+  }
+
+  header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5ch;
+    margin-block-end: 0.5rem;
+  }
+  .dot { font-size: 0.85em; }
+  .export-name { font-weight: 600; }
+  .theme-name {
+    color: var(--sl-color-gray-3);
+    font-size: 0.85em;
+  }
+
+  .preview {
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    margin-block-end: 0.5rem;
+  }
+  .banner {
+    margin-block-end: 0.35rem;
+  }
+  .tool-row,
+  .prompt-row {
+    display: flex;
+    gap: 0.5ch;
+    align-items: baseline;
+  }
+  .tool-name { font-weight: 600; }
+  .cursor {
+    animation: blink 1s steps(2) infinite;
+  }
+  @keyframes blink {
+    to { opacity: 0; }
+  }
+
+  .swatches {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+  }
+  .swatches li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    align-items: center;
+    text-align: center;
+  }
+  .chip {
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    border-radius: 3px;
+    border: 1px solid;
+  }
+  .chip-label {
+    font-size: 0.7rem;
+    color: var(--sl-color-gray-3);
+  }
+</style>

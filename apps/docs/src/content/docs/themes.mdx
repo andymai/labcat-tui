@@ -4,8 +4,48 @@ description: All built-in and add-on themes for @labcat/tui.
 ---
 
 import '@labcat/tui';
+import { claude, claudeLight } from '@labcat/tui';
+import {
+  gruvbox,
+  gruvboxLight,
+  rosePine,
+  rosePineDawn,
+  kanagawa,
+  kanagawaLotus,
+  synthwave,
+  phosphorGreen,
+  phosphorAmber,
+} from '@labcat/tui-themes';
+import ThemeCard from '../../components/ThemeCard.astro';
 
 `@labcat/tui` ships with the `claude` + `claudeLight` pair in the core package. The `@labcat/tui-themes` add-on package contributes more curated palettes — all tree-shakable, all validated against the same `ThemeDefinition` contract.
+
+## Previews
+
+<div class="theme-grid">
+  <ThemeCard theme={claude} exportName="claude" />
+  <ThemeCard theme={claudeLight} exportName="claudeLight" />
+  <ThemeCard theme={gruvbox} exportName="gruvbox" />
+  <ThemeCard theme={gruvboxLight} exportName="gruvboxLight" />
+  <ThemeCard theme={rosePine} exportName="rosePine" />
+  <ThemeCard theme={rosePineDawn} exportName="rosePineDawn" />
+  <ThemeCard theme={kanagawa} exportName="kanagawa" />
+  <ThemeCard theme={kanagawaLotus} exportName="kanagawaLotus" />
+  <ThemeCard theme={synthwave} exportName="synthwave" />
+  <ThemeCard theme={phosphorGreen} exportName="phosphorGreen" />
+  <ThemeCard theme={phosphorAmber} exportName="phosphorAmber" />
+</div>
+
+<style>
+{`
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-block: 1.5rem;
+}
+`}
+</style>
 
 ## Built-in (in `@labcat/tui` core)
 
