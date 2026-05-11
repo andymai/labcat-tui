@@ -29,4 +29,14 @@ describe('<tui-spinner>', () => {
     const el = await fixture<TuiSpinner>(html`<tui-spinner kind="line"></tui-spinner>`);
     expect(el.getAttribute('kind')).toBe('line');
   });
+
+  it('defaults to tone="accent"', async () => {
+    const el = await fixture<TuiSpinner>(html`<tui-spinner></tui-spinner>`);
+    expect(el.tone).toBe('accent');
+  });
+
+  it('reflects tone="system" so CSS resolves to the systemSpinner palette', async () => {
+    const el = await fixture<TuiSpinner>(html`<tui-spinner tone="system"></tui-spinner>`);
+    expect(el.getAttribute('tone')).toBe('system');
+  });
 });

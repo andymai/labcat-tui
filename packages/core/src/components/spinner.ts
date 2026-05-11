@@ -2,6 +2,7 @@ import { LitElement, css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 export type SpinnerKind = 'dots' | 'line' | 'box' | 'pulse';
+export type SpinnerTone = 'accent' | 'system';
 
 const FRAMES: Record<SpinnerKind, readonly string[]> = {
   dots: ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'],
@@ -14,6 +15,9 @@ const FRAMES: Record<SpinnerKind, readonly string[]> = {
  * `<tui-spinner>` — Inline TUI spinner with several glyph styles.
  *
  * @attr {"dots"|"line"|"box"|"pulse"} kind - Glyph set
+ * @attr {"accent"|"system"} tone - Color pair (default `accent` = brand
+ *   coral; `system` = Claude's blue system spinner). The glyph pulses
+ *   between the base and its shimmer companion via a CSS keyframe.
  * @attr {boolean} running - Whether the animation is running
  * @attr {string} aria-label - Accessibility label (default "Loading")
  * @csspart glyph - The animated character
@@ -24,19 +28,50 @@ export class TuiSpinner extends LitElement {
     :host {
       display: inline-block;
       font-family: var(--tui-font-mono);
-      color: var(--tui-accent);
       line-height: 1;
+
+      --tui-spinner-base: var(--tui-accent);
+      --tui-spinner-peak: var(--tui-accent-shimmer, var(--tui-accent));
+    }
+
+    :host([tone='system']) {
+      --tui-spinner-base: var(--tui-system-spinner, var(--tui-info));
+      --tui-spinner-peak: var(--tui-system-spinner-shimmer, var(--tui-info));
     }
 
     .glyph {
       display: inline-block;
       min-inline-size: 1ch;
       text-align: center;
+      color: var(--tui-spinner-base);
+    }
+
+    :host([running]) .glyph {
+      animation: tui-spinner-pulse 1800ms ease-in-out infinite;
+    }
+
+    @keyframes tui-spinner-pulse {
+      0%,
+      100% {
+        color: var(--tui-spinner-base);
+      }
+      50% {
+        color: var(--tui-spinner-peak);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :host([running]) .glyph {
+        animation: none;
+      }
     }
   `;
 
   @property({ type: String, reflect: true })
   kind: SpinnerKind = 'dots';
+
+  @property({ type: String, reflect: true })
+  tone: SpinnerTone = 'accent';
 
   @property({ type: Boolean, reflect: true })
   running = true;
