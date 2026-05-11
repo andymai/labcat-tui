@@ -3718,6 +3718,26 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/theme/claude-ansi.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "claudeAnsi"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "claudeAnsi",
+          "declaration": {
+            "name": "claudeAnsi",
+            "module": "src/theme/claude-ansi.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/theme/claude.ts",
       "declarations": [
         {
@@ -4033,6 +4053,14 @@
           "declaration": {
             "name": "claudeLight",
             "module": "./claude.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "claudeAnsi",
+          "declaration": {
+            "name": "claudeAnsi",
+            "module": "./claude-ansi.js"
           }
         },
         {

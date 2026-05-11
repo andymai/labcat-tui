@@ -2,19 +2,77 @@
 
 export interface ThemeDefinition {
   name: string;
+
+  // Surfaces
   bg: string;
   surface: string;
   surface2?: string;
+  border: string;
+  selectionBg: string;
+
+  // Text
   fg: string;
   fgMuted: string;
   fgDim: string;
+
+  // Brand
   accent: string;
   accentDim: string;
-  border: string;
+  accentShimmer: string;
+
+  // System spinner (Claude's distinctive blue throbber)
+  systemSpinner: string;
+  systemSpinnerShimmer: string;
+
+  // Prompt border (default state)
+  promptBorder: string;
+  promptBorderShimmer: string;
+
+  // Inactive / waiting indicators
+  inactive: string;
+  inactiveShimmer: string;
+
+  // Mode indicators (drawn around the prompt while in a specific mode)
+  modeAutoAccept: string;
+  modeBashBorder: string;
+  modePermission: string;
+  modePermissionShimmer: string;
+  modePlanMode: string;
+  modeIde: string;
+
+  // Fast mode (Claude Code's lightning ↯)
+  fastMode: string;
+  fastModeShimmer: string;
+
+  // Semantic
   success: string;
   error: string;
   warning: string;
+  warningShimmer: string;
   info: string;
+
+  // Diff
+  diffAdded: string;
+  diffRemoved: string;
+  diffAddedDimmed: string;
+  diffRemovedDimmed: string;
+  diffAddedWord: string;
+  diffRemovedWord: string;
+
+  // Subagent persona palette
+  subagentRed: string;
+  subagentBlue: string;
+  subagentGreen: string;
+  subagentYellow: string;
+  subagentPurple: string;
+  subagentOrange: string;
+  subagentPink: string;
+  subagentCyan: string;
+
+  // Chrome integration badges
+  chromeYellow: string;
+
+  // Typography + motion (optional — sensible defaults via tokens.css)
   fontMono: string;
   leadingTight?: string;
   leadingBody?: string;
@@ -26,18 +84,63 @@ export interface ThemeDefinition {
 
 const REQUIRED_TOKENS = [
   'name',
+  // Surfaces
   'bg',
   'surface',
+  'border',
+  'selectionBg',
+  // Text
   'fg',
   'fgMuted',
   'fgDim',
+  // Brand
   'accent',
   'accentDim',
-  'border',
+  'accentShimmer',
+  // System spinner
+  'systemSpinner',
+  'systemSpinnerShimmer',
+  // Prompt border
+  'promptBorder',
+  'promptBorderShimmer',
+  // Inactive
+  'inactive',
+  'inactiveShimmer',
+  // Mode indicators
+  'modeAutoAccept',
+  'modeBashBorder',
+  'modePermission',
+  'modePermissionShimmer',
+  'modePlanMode',
+  'modeIde',
+  // Fast mode
+  'fastMode',
+  'fastModeShimmer',
+  // Semantic
   'success',
   'error',
   'warning',
+  'warningShimmer',
   'info',
+  // Diff
+  'diffAdded',
+  'diffRemoved',
+  'diffAddedDimmed',
+  'diffRemovedDimmed',
+  'diffAddedWord',
+  'diffRemovedWord',
+  // Subagent
+  'subagentRed',
+  'subagentBlue',
+  'subagentGreen',
+  'subagentYellow',
+  'subagentPurple',
+  'subagentOrange',
+  'subagentPink',
+  'subagentCyan',
+  // Chrome
+  'chromeYellow',
+  // Typography
   'fontMono',
 ] as const satisfies readonly (keyof ThemeDefinition)[];
 
@@ -45,16 +148,48 @@ const COLOR_TOKENS = [
   'bg',
   'surface',
   'surface2',
+  'border',
+  'selectionBg',
   'fg',
   'fgMuted',
   'fgDim',
   'accent',
   'accentDim',
-  'border',
+  'accentShimmer',
+  'systemSpinner',
+  'systemSpinnerShimmer',
+  'promptBorder',
+  'promptBorderShimmer',
+  'inactive',
+  'inactiveShimmer',
+  'modeAutoAccept',
+  'modeBashBorder',
+  'modePermission',
+  'modePermissionShimmer',
+  'modePlanMode',
+  'modeIde',
+  'fastMode',
+  'fastModeShimmer',
   'success',
   'error',
   'warning',
+  'warningShimmer',
   'info',
+  'diffAdded',
+  'diffRemoved',
+  'diffAddedDimmed',
+  'diffRemovedDimmed',
+  'diffAddedWord',
+  'diffRemovedWord',
+  'subagentRed',
+  'subagentBlue',
+  'subagentGreen',
+  'subagentYellow',
+  'subagentPurple',
+  'subagentOrange',
+  'subagentPink',
+  'subagentCyan',
+  'chromeYellow',
 ] as const satisfies readonly (keyof ThemeDefinition)[];
 
 export class MissingTokenError extends Error {
