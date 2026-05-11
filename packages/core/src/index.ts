@@ -14,6 +14,8 @@ import './components/prompt-input.js';
 import './components/chat-bubble.js';
 import './components/diff-block.js';
 import './components/tool-use-timeline.js';
+import './components/md.js';
+import './components/slash-overlay.js';
 
 export { TuiToolCall } from './components/tool-call.js';
 export type { ToolCallStatus } from './components/tool-call.js';
@@ -38,6 +40,8 @@ export type { ChatRole } from './components/chat-bubble.js';
 export { TuiDiffBlock } from './components/diff-block.js';
 export type { DiffLine, DiffLineKind } from './components/diff-block.js';
 export { TuiToolUseTimeline } from './components/tool-use-timeline.js';
+export { TuiMd } from './components/md.js';
+export { TuiSlashOverlay } from './components/slash-overlay.js';
 
 export {
   defineTheme,

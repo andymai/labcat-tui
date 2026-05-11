@@ -1,0 +1,59 @@
+.tui-md {
+  font-family: var(--tui-font-mono);
+  color: var(--tui-fg);
+  line-height: var(--tui-leading-body);
+  max-inline-size: var(--tui-content-max);
+}
+
+.tui-md h1,
+.tui-md h2,
+.tui-md h3,
+.tui-md h4 {
+  color: var(--tui-prose-h1-color, var(--tui-fg));
+  line-height: var(--tui-leading-tight);
+  margin-block: 1em 0.5em;
+}
+
+.tui-md h1 {
+  font-size: 1.25em;
+}
+
+.tui-md h2 {
+  font-size: 1.15em;
+}
+
+.tui-md p,
+.tui-md ul,
+.tui-md ol {
+  margin-block: 0.5em;
+  color: var(--tui-fg);
+}
+
+.tui-md a {
+  color: var(--tui-prose-link-color, var(--tui-accent));
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.tui-md code {
+  font-family: var(--tui-font-mono);
+  color: var(--tui-prose-code-color, var(--tui-fg));
+  background: var(--tui-surface-2);
+  padding-inline: 0.25ch;
+  border-radius: 0.125rem;
+}
+
+.tui-md pre {
+  background: var(--tui-surface-2);
+  color: var(--tui-fg);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  overflow-x: auto;
+}
+
+.tui-md blockquote {
+  border-inline-start: 2px solid var(--tui-border);
+  padding-inline-start: 0.75rem;
+  color: var(--tui-fg-muted);
+  margin-inline: 0;
+}

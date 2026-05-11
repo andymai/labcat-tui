@@ -15,3 +15,5 @@ export { PromptInput } from './components/prompt-input.js';
 export { ChatBubble } from './components/chat-bubble.js';
 export { DiffBlock } from './components/diff-block.js';
 export { ToolUseTimeline } from './components/tool-use-timeline.js';
+export { Md } from './components/md.js';
+export { SlashOverlay } from './components/slash-overlay.js';

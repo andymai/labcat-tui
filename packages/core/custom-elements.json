@@ -217,6 +217,22 @@
         },
         {
           "kind": "js",
+          "name": "TuiMd",
+          "declaration": {
+            "name": "TuiMd",
+            "module": "./components/md.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiSlashOverlay",
+          "declaration": {
+            "name": "TuiSlashOverlay",
+            "module": "./components/slash-overlay.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "defineTheme",
           "declaration": {
             "name": "defineTheme",
@@ -948,196 +964,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/events/names.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND_SUCCESS",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command-success'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND_ERROR",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command-error'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_NAVIGATE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-navigate'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_THEME_CHANGE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-theme-change'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_START",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-start'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_COMPLETE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-complete'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_INTERRUPT",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-interrupt'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_SLASH_SELECT",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-slash-select'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_SLASH_DISMISS",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-slash-dismiss'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_TODO_CHANGE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-todo-change'"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND",
-          "declaration": {
-            "name": "TUI_COMMAND",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND_SUCCESS",
-          "declaration": {
-            "name": "TUI_COMMAND_SUCCESS",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND_ERROR",
-          "declaration": {
-            "name": "TUI_COMMAND_ERROR",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_NAVIGATE",
-          "declaration": {
-            "name": "TUI_NAVIGATE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_THEME_CHANGE",
-          "declaration": {
-            "name": "TUI_THEME_CHANGE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_START",
-          "declaration": {
-            "name": "TUI_STREAM_START",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_COMPLETE",
-          "declaration": {
-            "name": "TUI_STREAM_COMPLETE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_INTERRUPT",
-          "declaration": {
-            "name": "TUI_STREAM_INTERRUPT",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_SLASH_SELECT",
-          "declaration": {
-            "name": "TUI_SLASH_SELECT",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_SLASH_DISMISS",
-          "declaration": {
-            "name": "TUI_SLASH_DISMISS",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_TODO_CHANGE",
-          "declaration": {
-            "name": "TUI_TODO_CHANGE",
-            "module": "src/events/names.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/events/types.ts",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/box.ts",
       "declarations": [
         {
@@ -1519,6 +1345,41 @@
           "declaration": {
             "name": "TuiDiffBlock",
             "module": "src/components/diff-block.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/md.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "TuiMd",
+          "superclass": {
+            "name": "Base",
+            "module": "src/components/md.ts"
+          },
+          "tagName": "tui-md",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiMd",
+          "declaration": {
+            "name": "TuiMd",
+            "module": "src/components/md.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-md",
+          "declaration": {
+            "name": "TuiMd",
+            "module": "src/components/md.ts"
           }
         }
       ]
@@ -2051,6 +1912,206 @@
           "declaration": {
             "name": "TuiPromptLine",
             "module": "src/components/prompt-line.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/slash-overlay.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<tui-slash-overlay>` — Modal command palette.",
+          "name": "TuiSlashOverlay",
+          "cssParts": [
+            {
+              "name": "backdrop"
+            },
+            {
+              "name": "list"
+            },
+            {
+              "name": "item"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "commands",
+              "type": {
+                "text": "Command[]"
+              },
+              "default": "[]",
+              "description": "Array of Command"
+            },
+            {
+              "kind": "field",
+              "name": "query_",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "searchEl",
+              "type": {
+                "text": "HTMLInputElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "previousActive",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "method",
+              "name": "openOverlay",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "closeOverlay",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "filtered",
+              "type": {
+                "text": "Command[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onInput",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKeyDown",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "pick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "cmd",
+                  "type": {
+                    "text": "Command"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "dismiss",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onBackdropClick",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "tui-slash-select",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ command }` (command name) on pick"
+            },
+            {
+              "name": "tui-slash-dismiss",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "when the overlay is closed without a selection"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "name": "open",
+              "default": "false",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-slash-overlay",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiSlashOverlay",
+          "declaration": {
+            "name": "TuiSlashOverlay",
+            "module": "src/components/slash-overlay.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-slash-overlay",
+          "declaration": {
+            "name": "TuiSlashOverlay",
+            "module": "src/components/slash-overlay.ts"
           }
         }
       ]
@@ -3369,6 +3430,196 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/events/names.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_SUCCESS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-success'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_ERROR",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-error'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_NAVIGATE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-navigate'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_THEME_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-theme-change'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_START",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-start'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_COMPLETE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-complete'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_INTERRUPT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-interrupt'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_SELECT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-select'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_DISMISS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-dismiss'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_TODO_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-todo-change'"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND",
+          "declaration": {
+            "name": "TUI_COMMAND",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_SUCCESS",
+          "declaration": {
+            "name": "TUI_COMMAND_SUCCESS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_ERROR",
+          "declaration": {
+            "name": "TUI_COMMAND_ERROR",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_NAVIGATE",
+          "declaration": {
+            "name": "TUI_NAVIGATE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_THEME_CHANGE",
+          "declaration": {
+            "name": "TUI_THEME_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_START",
+          "declaration": {
+            "name": "TUI_STREAM_START",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_COMPLETE",
+          "declaration": {
+            "name": "TUI_STREAM_COMPLETE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_INTERRUPT",
+          "declaration": {
+            "name": "TUI_STREAM_INTERRUPT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_SELECT",
+          "declaration": {
+            "name": "TUI_SLASH_SELECT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_DISMISS",
+          "declaration": {
+            "name": "TUI_SLASH_DISMISS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_TODO_CHANGE",
+          "declaration": {
+            "name": "TUI_TODO_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/events/types.ts",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
