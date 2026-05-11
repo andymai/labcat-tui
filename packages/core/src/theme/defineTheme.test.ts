@@ -70,6 +70,12 @@ describe('themeToCssVars', () => {
     const vars = themeToCssVars(valid);
     expect(vars['--tui-name']).toBeUndefined();
   });
+
+  it('inserts a dash before digits so keys match the components (surface2 → surface-2)', () => {
+    const vars = themeToCssVars({ ...valid, surface2: '#333' });
+    expect(vars['--tui-surface-2']).toBe('#333');
+    expect(vars['--tui-surface2']).toBeUndefined();
+  });
 });
 
 describe('validateTheme', () => {

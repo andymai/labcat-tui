@@ -80,7 +80,15 @@ export class InvalidColorError extends Error {
   }
 }
 
-const camelToKebab = (key: string): string => key.replace(/([A-Z])/g, '-$1').toLowerCase();
+// Insert a dash before digits and uppercase boundaries: surface2 → surface-2,
+// accentDim → accent-dim. The components in this library all read CSS vars
+// using the dashed form (e.g. var(--tui-surface-2)), so the kebab-case mapping
+// must keep them in lockstep.
+const camelToKebab = (key: string): string =>
+  key
+    .replace(/([a-z])(\d)/g, '$1-$2')
+    .replace(/([A-Z])/g, '-$1')
+    .toLowerCase();
 
 function isDevMode(): boolean {
   try {

@@ -523,191 +523,450 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/events/names.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND_SUCCESS",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command-success'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND_ERROR",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command-error'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_NAVIGATE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-navigate'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_THEME_CHANGE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-theme-change'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_START",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-start'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_COMPLETE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-complete'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_INTERRUPT",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-interrupt'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_SLASH_SELECT",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-slash-select'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_SLASH_DISMISS",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-slash-dismiss'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_TODO_CHANGE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-todo-change'"
-        }
-      ],
+      "path": "src/commands/index.ts",
+      "declarations": [],
       "exports": [
         {
           "kind": "js",
-          "name": "TUI_COMMAND",
+          "name": "defineCommands",
           "declaration": {
-            "name": "TUI_COMMAND",
-            "module": "src/events/names.ts"
+            "name": "defineCommands",
+            "module": "./registry.js"
           }
         },
         {
           "kind": "js",
-          "name": "TUI_COMMAND_SUCCESS",
+          "name": "CommandRegistry",
           "declaration": {
-            "name": "TUI_COMMAND_SUCCESS",
-            "module": "src/events/names.ts"
+            "name": "CommandRegistry",
+            "module": "./registry.js"
           }
         },
         {
           "kind": "js",
-          "name": "TUI_COMMAND_ERROR",
+          "name": "CommandDefinitionError",
           "declaration": {
-            "name": "TUI_COMMAND_ERROR",
-            "module": "src/events/names.ts"
+            "name": "CommandDefinitionError",
+            "module": "./registry.js"
           }
         },
         {
           "kind": "js",
-          "name": "TUI_NAVIGATE",
+          "name": "normalizeName",
           "declaration": {
-            "name": "TUI_NAVIGATE",
-            "module": "src/events/names.ts"
+            "name": "normalizeName",
+            "module": "./registry.js"
           }
         },
         {
           "kind": "js",
-          "name": "TUI_THEME_CHANGE",
+          "name": "parseInput",
           "declaration": {
-            "name": "TUI_THEME_CHANGE",
-            "module": "src/events/names.ts"
+            "name": "parseInput",
+            "module": "./parser.js"
           }
         },
         {
           "kind": "js",
-          "name": "TUI_STREAM_START",
+          "name": "levenshtein",
           "declaration": {
-            "name": "TUI_STREAM_START",
-            "module": "src/events/names.ts"
+            "name": "levenshtein",
+            "module": "./levenshtein.js"
           }
         },
         {
           "kind": "js",
-          "name": "TUI_STREAM_COMPLETE",
+          "name": "closestMatch",
           "declaration": {
-            "name": "TUI_STREAM_COMPLETE",
-            "module": "src/events/names.ts"
+            "name": "closestMatch",
+            "module": "./levenshtein.js"
           }
         },
         {
           "kind": "js",
-          "name": "TUI_STREAM_INTERRUPT",
+          "name": "BaseCommand",
           "declaration": {
-            "name": "TUI_STREAM_INTERRUPT",
-            "module": "src/events/names.ts"
+            "name": "BaseCommand",
+            "module": "./types.js"
           }
         },
         {
           "kind": "js",
-          "name": "TUI_SLASH_SELECT",
+          "name": "Command",
           "declaration": {
-            "name": "TUI_SLASH_SELECT",
-            "module": "src/events/names.ts"
+            "name": "Command",
+            "module": "./types.js"
           }
         },
         {
           "kind": "js",
-          "name": "TUI_SLASH_DISMISS",
+          "name": "CommandContext",
           "declaration": {
-            "name": "TUI_SLASH_DISMISS",
-            "module": "src/events/names.ts"
+            "name": "CommandContext",
+            "module": "./types.js"
           }
         },
         {
           "kind": "js",
-          "name": "TUI_TODO_CHANGE",
+          "name": "CommandHandler",
           "declaration": {
-            "name": "TUI_TODO_CHANGE",
-            "module": "src/events/names.ts"
+            "name": "CommandHandler",
+            "module": "./types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HandlerCommand",
+          "declaration": {
+            "name": "HandlerCommand",
+            "module": "./types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MatchResult",
+          "declaration": {
+            "name": "MatchResult",
+            "module": "./types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ParsedInput",
+          "declaration": {
+            "name": "ParsedInput",
+            "module": "./types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RouteCommand",
+          "declaration": {
+            "name": "RouteCommand",
+            "module": "./types.js"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/events/types.ts",
+      "path": "src/commands/levenshtein.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "levenshtein",
+          "return": {
+            "type": {
+              "text": "number"
+            }
+          },
+          "parameters": [
+            {
+              "name": "a",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "b",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Standard Levenshtein distance. Used for \"did you mean…\" suggestions.\nAdjacent transposition counts as 2 edits (insertion + deletion); good\nenough for short command names where typos are usually substitutions."
+        },
+        {
+          "kind": "function",
+          "name": "closestMatch",
+          "return": {
+            "type": {
+              "text": "string | null"
+            }
+          },
+          "parameters": [
+            {
+              "name": "input",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "candidates",
+              "type": {
+                "text": "readonly string[]"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "levenshtein",
+          "declaration": {
+            "name": "levenshtein",
+            "module": "src/commands/levenshtein.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "closestMatch",
+          "declaration": {
+            "name": "closestMatch",
+            "module": "src/commands/levenshtein.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/commands/parser.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "parseInput",
+          "return": {
+            "type": {
+              "text": "ParsedInput"
+            }
+          },
+          "parameters": [
+            {
+              "name": "raw",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Parse raw input from `<tui-prompt-input>`. The first whitespace-separated\ntoken is the command name (with any leading slashes stripped); the rest is\nthe argument string (with its internal whitespace preserved)."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "parseInput",
+          "declaration": {
+            "name": "parseInput",
+            "module": "src/commands/parser.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/commands/registry.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "CommandDefinitionError",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "'CommandDefinitionError'"
+            }
+          ],
+          "superclass": {
+            "name": "Error",
+            "module": "src/commands/registry.ts"
+          }
+        },
+        {
+          "kind": "function",
+          "name": "defineCommands",
+          "return": {
+            "type": {
+              "text": "Command[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "commands",
+              "type": {
+                "text": "readonly Command[]"
+              }
+            }
+          ],
+          "description": "Runtime XOR validation: a Command must have exactly one of `route` or\n`handler`. TypeScript already enforces this at compile time, but raw\nJS callers (or `as any` escape hatches) can violate the invariant —\nthis catches that."
+        },
+        {
+          "kind": "function",
+          "name": "normalizeName",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          },
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "CommandRegistry",
+          "members": [
+            {
+              "kind": "field",
+              "name": "byKey",
+              "type": {
+                "text": "Map<string, Command>"
+              },
+              "privacy": "private",
+              "readonly": true,
+              "default": "new Map()"
+            },
+            {
+              "kind": "field",
+              "name": "aliasToKey",
+              "type": {
+                "text": "Map<string, string>"
+              },
+              "privacy": "private",
+              "readonly": true,
+              "default": "new Map()"
+            },
+            {
+              "kind": "field",
+              "name": "insertionOrder",
+              "type": {
+                "text": "Command[]"
+              },
+              "privacy": "private",
+              "readonly": true,
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "maxTriggerTokens",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "readonly": true,
+              "default": "1"
+            },
+            {
+              "kind": "method",
+              "name": "match",
+              "return": {
+                "type": {
+                  "text": "MatchResult | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "input",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Resolve a raw input string to a matched command + args. Tries\ndecreasing-length leading-token prefixes so multi-word aliases like\n`aliases: ['ls posts']` match `\"ls posts new my-post\"`."
+            },
+            {
+              "kind": "method",
+              "name": "suggest",
+              "return": {
+                "type": {
+                  "text": "string | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "input",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Suggest the closest command name when input doesn't match anything."
+            },
+            {
+              "kind": "method",
+              "name": "completions",
+              "return": {
+                "type": {
+                  "text": "Promise<string[]>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "input",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "ctx",
+                  "type": {
+                    "text": "Parameters<NonNullable<Command['completions']>>[1]"
+                  }
+                }
+              ],
+              "description": "Prefix-match completion candidates for tab completion.\nIf no args have been typed yet, suggests command names + aliases.\nOtherwise delegates to the matched command's `completions?` callback."
+            },
+            {
+              "kind": "method",
+              "name": "list",
+              "return": {
+                "type": {
+                  "text": "Command[]"
+                }
+              },
+              "description": "Every registered command (in insertion order)."
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CommandDefinitionError",
+          "declaration": {
+            "name": "CommandDefinitionError",
+            "module": "src/commands/registry.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "defineCommands",
+          "declaration": {
+            "name": "defineCommands",
+            "module": "src/commands/registry.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "normalizeName",
+          "declaration": {
+            "name": "normalizeName",
+            "module": "src/commands/registry.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CommandRegistry",
+          "declaration": {
+            "name": "CommandRegistry",
+            "module": "src/commands/registry.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/commands/types.ts",
       "declarations": [],
       "exports": []
     },
@@ -2603,6 +2862,15 @@
               "default": "''"
             },
             {
+              "kind": "field",
+              "name": "appliedKeys",
+              "type": {
+                "text": "Set<string>"
+              },
+              "privacy": "private",
+              "default": "new Set()"
+            },
+            {
               "kind": "method",
               "name": "applyVars",
               "privacy": "private",
@@ -3250,450 +3518,191 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/commands/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "defineCommands",
-          "declaration": {
-            "name": "defineCommands",
-            "module": "./registry.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CommandRegistry",
-          "declaration": {
-            "name": "CommandRegistry",
-            "module": "./registry.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CommandDefinitionError",
-          "declaration": {
-            "name": "CommandDefinitionError",
-            "module": "./registry.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "normalizeName",
-          "declaration": {
-            "name": "normalizeName",
-            "module": "./registry.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "parseInput",
-          "declaration": {
-            "name": "parseInput",
-            "module": "./parser.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "levenshtein",
-          "declaration": {
-            "name": "levenshtein",
-            "module": "./levenshtein.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "closestMatch",
-          "declaration": {
-            "name": "closestMatch",
-            "module": "./levenshtein.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "BaseCommand",
-          "declaration": {
-            "name": "BaseCommand",
-            "module": "./types.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Command",
-          "declaration": {
-            "name": "Command",
-            "module": "./types.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CommandContext",
-          "declaration": {
-            "name": "CommandContext",
-            "module": "./types.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CommandHandler",
-          "declaration": {
-            "name": "CommandHandler",
-            "module": "./types.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "HandlerCommand",
-          "declaration": {
-            "name": "HandlerCommand",
-            "module": "./types.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "MatchResult",
-          "declaration": {
-            "name": "MatchResult",
-            "module": "./types.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ParsedInput",
-          "declaration": {
-            "name": "ParsedInput",
-            "module": "./types.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "RouteCommand",
-          "declaration": {
-            "name": "RouteCommand",
-            "module": "./types.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/commands/levenshtein.ts",
+      "path": "src/events/names.ts",
       "declarations": [
         {
-          "kind": "function",
-          "name": "levenshtein",
-          "return": {
-            "type": {
-              "text": "number"
-            }
+          "kind": "variable",
+          "name": "TUI_COMMAND",
+          "type": {
+            "text": "string"
           },
-          "parameters": [
-            {
-              "name": "a",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "b",
-              "type": {
-                "text": "string"
-              }
-            }
-          ],
-          "description": "Standard Levenshtein distance. Used for \"did you mean…\" suggestions.\nAdjacent transposition counts as 2 edits (insertion + deletion); good\nenough for short command names where typos are usually substitutions."
+          "default": "'tui-command'"
         },
         {
-          "kind": "function",
-          "name": "closestMatch",
-          "return": {
-            "type": {
-              "text": "string | null"
-            }
+          "kind": "variable",
+          "name": "TUI_COMMAND_SUCCESS",
+          "type": {
+            "text": "string"
           },
-          "parameters": [
-            {
-              "name": "input",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "candidates",
-              "type": {
-                "text": "readonly string[]"
-              }
-            }
-          ]
+          "default": "'tui-command-success'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_ERROR",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-error'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_NAVIGATE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-navigate'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_THEME_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-theme-change'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_START",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-start'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_COMPLETE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-complete'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_INTERRUPT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-interrupt'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_SELECT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-select'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_DISMISS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-dismiss'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_TODO_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-todo-change'"
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "levenshtein",
+          "name": "TUI_COMMAND",
           "declaration": {
-            "name": "levenshtein",
-            "module": "src/commands/levenshtein.ts"
+            "name": "TUI_COMMAND",
+            "module": "src/events/names.ts"
           }
         },
         {
           "kind": "js",
-          "name": "closestMatch",
+          "name": "TUI_COMMAND_SUCCESS",
           "declaration": {
-            "name": "closestMatch",
-            "module": "src/commands/levenshtein.ts"
+            "name": "TUI_COMMAND_SUCCESS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_ERROR",
+          "declaration": {
+            "name": "TUI_COMMAND_ERROR",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_NAVIGATE",
+          "declaration": {
+            "name": "TUI_NAVIGATE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_THEME_CHANGE",
+          "declaration": {
+            "name": "TUI_THEME_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_START",
+          "declaration": {
+            "name": "TUI_STREAM_START",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_COMPLETE",
+          "declaration": {
+            "name": "TUI_STREAM_COMPLETE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_INTERRUPT",
+          "declaration": {
+            "name": "TUI_STREAM_INTERRUPT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_SELECT",
+          "declaration": {
+            "name": "TUI_SLASH_SELECT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_DISMISS",
+          "declaration": {
+            "name": "TUI_SLASH_DISMISS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_TODO_CHANGE",
+          "declaration": {
+            "name": "TUI_TODO_CHANGE",
+            "module": "src/events/names.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/commands/parser.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "parseInput",
-          "return": {
-            "type": {
-              "text": "ParsedInput"
-            }
-          },
-          "parameters": [
-            {
-              "name": "raw",
-              "type": {
-                "text": "string"
-              }
-            }
-          ],
-          "description": "Parse raw input from `<tui-prompt-input>`. The first whitespace-separated\ntoken is the command name (with any leading slashes stripped); the rest is\nthe argument string (with its internal whitespace preserved)."
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "parseInput",
-          "declaration": {
-            "name": "parseInput",
-            "module": "src/commands/parser.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/commands/registry.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "CommandDefinitionError",
-          "members": [
-            {
-              "kind": "field",
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "default": "'CommandDefinitionError'"
-            }
-          ],
-          "superclass": {
-            "name": "Error",
-            "module": "src/commands/registry.ts"
-          }
-        },
-        {
-          "kind": "function",
-          "name": "defineCommands",
-          "return": {
-            "type": {
-              "text": "Command[]"
-            }
-          },
-          "parameters": [
-            {
-              "name": "commands",
-              "type": {
-                "text": "readonly Command[]"
-              }
-            }
-          ],
-          "description": "Runtime XOR validation: a Command must have exactly one of `route` or\n`handler`. TypeScript already enforces this at compile time, but raw\nJS callers (or `as any` escape hatches) can violate the invariant —\nthis catches that."
-        },
-        {
-          "kind": "function",
-          "name": "normalizeName",
-          "return": {
-            "type": {
-              "text": "string"
-            }
-          },
-          "parameters": [
-            {
-              "name": "name",
-              "type": {
-                "text": "string"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "class",
-          "description": "",
-          "name": "CommandRegistry",
-          "members": [
-            {
-              "kind": "field",
-              "name": "byKey",
-              "type": {
-                "text": "Map<string, Command>"
-              },
-              "privacy": "private",
-              "readonly": true,
-              "default": "new Map()"
-            },
-            {
-              "kind": "field",
-              "name": "aliasToKey",
-              "type": {
-                "text": "Map<string, string>"
-              },
-              "privacy": "private",
-              "readonly": true,
-              "default": "new Map()"
-            },
-            {
-              "kind": "field",
-              "name": "insertionOrder",
-              "type": {
-                "text": "Command[]"
-              },
-              "privacy": "private",
-              "readonly": true,
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "maxTriggerTokens",
-              "type": {
-                "text": "number"
-              },
-              "privacy": "private",
-              "readonly": true,
-              "default": "1"
-            },
-            {
-              "kind": "method",
-              "name": "match",
-              "return": {
-                "type": {
-                  "text": "MatchResult | null"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "input",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ],
-              "description": "Resolve a raw input string to a matched command + args. Tries\ndecreasing-length leading-token prefixes so multi-word aliases like\n`aliases: ['ls posts']` match `\"ls posts new my-post\"`."
-            },
-            {
-              "kind": "method",
-              "name": "suggest",
-              "return": {
-                "type": {
-                  "text": "string | null"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "input",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ],
-              "description": "Suggest the closest command name when input doesn't match anything."
-            },
-            {
-              "kind": "method",
-              "name": "completions",
-              "return": {
-                "type": {
-                  "text": "Promise<string[]>"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "input",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "ctx",
-                  "type": {
-                    "text": "Parameters<NonNullable<Command['completions']>>[1]"
-                  }
-                }
-              ],
-              "description": "Prefix-match completion candidates for tab completion.\nIf no args have been typed yet, suggests command names + aliases.\nOtherwise delegates to the matched command's `completions?` callback."
-            },
-            {
-              "kind": "method",
-              "name": "list",
-              "return": {
-                "type": {
-                  "text": "Command[]"
-                }
-              },
-              "description": "Every registered command (in insertion order)."
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "CommandDefinitionError",
-          "declaration": {
-            "name": "CommandDefinitionError",
-            "module": "src/commands/registry.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "defineCommands",
-          "declaration": {
-            "name": "defineCommands",
-            "module": "src/commands/registry.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "normalizeName",
-          "declaration": {
-            "name": "normalizeName",
-            "module": "src/commands/registry.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CommandRegistry",
-          "declaration": {
-            "name": "CommandRegistry",
-            "module": "src/commands/registry.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/commands/types.ts",
+      "path": "src/events/types.ts",
       "declarations": [],
       "exports": []
     },

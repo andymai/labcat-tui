@@ -34,6 +34,49 @@ describe('<tui-theme-provider>', () => {
     warn.mockRestore();
   });
 
+  it('clears CSS vars that the previous theme set but the new one omits', async () => {
+    const el = await fixture<TuiThemeProvider>(html`<tui-theme-provider></tui-theme-provider>`);
+    el.theme = {
+      name: 'fancy',
+      bg: '#000',
+      surface: '#111',
+      surface2: '#222',
+      fg: '#fff',
+      fgMuted: '#aaa',
+      fgDim: '#777',
+      accent: '#f0f',
+      accentDim: '#a0a',
+      border: '#333',
+      success: '#0f0',
+      error: '#f00',
+      warning: '#ff0',
+      info: '#0ff',
+      fontMono: 'monospace',
+    };
+    await el.updateComplete;
+    expect(el.style.getPropertyValue('--tui-surface-2').trim()).toBe('#222');
+
+    // Switch to a theme that doesn't define surface2 — the stale value must clear.
+    el.theme = {
+      name: 'plain',
+      bg: '#000',
+      surface: '#111',
+      fg: '#fff',
+      fgMuted: '#aaa',
+      fgDim: '#777',
+      accent: '#f0f',
+      accentDim: '#a0a',
+      border: '#333',
+      success: '#0f0',
+      error: '#f00',
+      warning: '#ff0',
+      info: '#0ff',
+      fontMono: 'monospace',
+    };
+    await el.updateComplete;
+    expect(el.style.getPropertyValue('--tui-surface-2').trim()).toBe('');
+  });
+
   it('fires tui-theme-change when the theme changes after mount', async () => {
     const el = await fixture<TuiThemeProvider>(
       html`<tui-theme-provider theme="claude"></tui-theme-provider>`,
