@@ -19,17 +19,27 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
-    "test": "echo \"themes will get snapshot coverage in v0.5\"",
+    "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "size": "echo \"size budgets per-theme — wired up when first theme lands in v0.5\"",
+    "size": "size-limit",
     "clean": "rm -rf dist *.tsbuildinfo"
   },
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "2 kB",
+      "gzip": true
+    }
+  ],
   "peerDependencies": {
     "@labcat/tui": "workspace:^"
   },
   "devDependencies": {
     "@labcat/tui": "workspace:^",
-    "typescript": "^5.7.3"
+    "size-limit": "^11.1.6",
+    "@size-limit/preset-small-lib": "^11.1.6",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.0"
   },
   "publishConfig": {
     "access": "public",
