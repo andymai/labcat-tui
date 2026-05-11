@@ -1,24 +1,30 @@
 # @labcat/tui-themes
 
-Additional theme presets for `@labcat/tui`. The `claude` / `claudeLight` themes ship in `@labcat/tui` core; this package adds curated extras with light/dark pairs.
+Additional theme presets for `@labcat/tui`. The `claude` / `claudeLight` themes ship in `@labcat/tui` core; this package adds curated extras with light/dark pairs and single-tone palettes.
 
 ## Themes available
 
-| Token | Variants | Notes |
-| ----- | -------- | ----- |
-| `gruvbox` | dark + light | Pavel Pertsev's classic warm palette; orange accent on both. |
-
-More pairs (rose-pine, kanagawa, synthwave, phosphor green/amber) will land in subsequent releases.
+| Export | Variant | Notes |
+| ------ | ------- | ----- |
+| `gruvbox`        | dark   | Pavel Pertsev's classic warm palette; orange accent. |
+| `gruvboxLight`   | light  | The light dual of gruvbox. |
+| `rosePine`       | dark   | Muted pink-rose accent on a deep night. |
+| `rosePineDawn`   | light  | Rosé Pine "Dawn" — cream + rose. |
+| `kanagawa`       | dark   | Wave-inspired indigo + orange. |
+| `kanagawaLotus`  | light  | "Lotus" daylight variant — straw + saffron. |
+| `synthwave`      | dark   | Outrun neon: pink, cyan, magenta on plum-black. |
+| `phosphorGreen`  | dark   | Old-CRT terminal — single phosphor hue (green). |
+| `phosphorAmber`  | dark   | Same CRT vocabulary in amber. |
 
 ## Usage
 
 ```ts
 import '@labcat/tui/components/theme-provider';
-import { gruvbox } from '@labcat/tui-themes';
+import { rosePine } from '@labcat/tui-themes';
 ```
 
 ```html
-<tui-theme-provider .theme=${gruvbox}>
+<tui-theme-provider .theme=${rosePine}>
   <!-- your UI -->
 </tui-theme-provider>
 ```
@@ -27,4 +33,8 @@ Themes are plain objects validated against the same `ThemeDefinition` contract u
 
 ## Tree-shaking
 
-The package is `sideEffects: false` and each theme is a named export. Bundlers will drop themes you don't import.
+The package is `sideEffects: false` and each theme is a named export. Bundlers will drop themes you don't import. Importing the entire package is still cheap — all 9 themes total ~1.2 kB brotli.
+
+## Phosphor caveats
+
+`phosphorGreen` and `phosphorAmber` are intentionally monochrome — they rely on the accent for the entire color story. For full retro authenticity, set `--tui-font-mono` on the provider to something like IBM 3270 or VT323.
