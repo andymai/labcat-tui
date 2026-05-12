@@ -85,6 +85,12 @@ describe('<tui-theme-provider>', () => {
       subagentGolf: c,
       subagentHotel: c,
       chromeYellow: c,
+      codeKeyword: c,
+      codeString: c,
+      codeNumber: c,
+      codeComment: c,
+      codeFunction: c,
+      codeType: c,
       fontMono: 'monospace',
     };
 

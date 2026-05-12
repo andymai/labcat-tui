@@ -73,6 +73,14 @@ export const gruvbox: ThemeDefinition = defineTheme({
 
   ...subagent,
   chromeYellow: '#fabd2f',
+
+  codeKeyword: '#d3869b',
+  codeString: '#b8bb26',
+  codeNumber: '#d3869b',
+  codeComment: '#928374',
+  codeFunction: '#8ec07c',
+  codeType: '#fabd2f',
+
   ...motion,
 });
 
@@ -136,5 +144,13 @@ export const gruvboxLight: ThemeDefinition = defineTheme({
   subagentHotel: '#689d6a',
 
   chromeYellow: '#d79921',
+
+  codeKeyword: '#8f3f71',
+  codeString: '#79740e',
+  codeNumber: '#8f3f71',
+  codeComment: '#928374',
+  codeFunction: '#427b58',
+  codeType: '#b57614',
+
   ...motion,
 });

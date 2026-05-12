@@ -79,6 +79,14 @@ const valid: ThemeDefinition = {
   // Chrome
   chromeYellow: '#fbb',
 
+  // Code highlighting
+  codeKeyword: '#c9f',
+  codeString: '#7e9',
+  codeNumber: '#eaa',
+  codeComment: '#876',
+  codeFunction: '#9af',
+  codeType: '#fd8',
+
   fontMono: 'monospace',
 };
 

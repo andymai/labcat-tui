@@ -70,5 +70,13 @@ export const synthwave: ThemeDefinition = defineTheme({
   subagentHotel: '#36f9f6',
 
   chromeYellow: '#fede5d',
+
+  codeKeyword: '#ff7edb',
+  codeString: '#72f1b8',
+  codeNumber: '#fede5d',
+  codeComment: '#8067a3',
+  codeFunction: '#36f9f6',
+  codeType: '#ff8b39',
+
   ...motion,
 });

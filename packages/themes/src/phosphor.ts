@@ -76,6 +76,14 @@ export const phosphorGreen: ThemeDefinition = defineTheme({
   subagentHotel: '#22cccc',
 
   chromeYellow: '#ddff44',
+
+  codeKeyword: '#99ff99',
+  codeString: '#33ff33',
+  codeNumber: '#ddff44',
+  codeComment: '#118811',
+  codeFunction: '#66ff66',
+  codeType: '#22cccc',
+
   ...motion,
 });
 
@@ -138,5 +146,13 @@ export const phosphorAmber: ThemeDefinition = defineTheme({
   subagentHotel: '#ff8800',
 
   chromeYellow: '#ffd400',
+
+  codeKeyword: '#ffe055',
+  codeString: '#88dd00',
+  codeNumber: '#ffd400',
+  codeComment: '#885d00',
+  codeFunction: '#ff8800',
+  codeType: '#ffaa55',
+
   ...motion,
 });

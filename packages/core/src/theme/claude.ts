@@ -76,6 +76,14 @@ export const claude = defineTheme({
   // Chrome integration
   chromeYellow: '#fbbc04',
 
+  // Code highlighting
+  codeKeyword: '#c592ff',
+  codeString: '#7ec699',
+  codeNumber: '#eb9f7f',
+  codeComment: '#8a8070',
+  codeFunction: '#93a5ff',
+  codeType: '#ffdf85',
+
   // Typography + motion
   fontMono:
     '"Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace',
@@ -158,6 +166,14 @@ export const claudeLight = defineTheme({
 
   // Chrome integration
   chromeYellow: '#fbbc04',
+
+  // Code highlighting
+  codeKeyword: '#7c3aed',
+  codeString: '#2c7a39',
+  codeNumber: '#c45a2e',
+  codeComment: '#978c7e',
+  codeFunction: '#4a59cc',
+  codeType: '#966c1e',
 
   // Typography + motion
   fontMono:

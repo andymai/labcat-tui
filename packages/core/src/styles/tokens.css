@@ -75,6 +75,14 @@
   /* Chrome integration */
   --tui-chrome-yellow: #fbbc04;
 
+  /* Code highlighting */
+  --tui-code-keyword: #c592ff;
+  --tui-code-string: #7ec699;
+  --tui-code-number: #eb9f7f;
+  --tui-code-comment: #8a8070;
+  --tui-code-function: #93a5ff;
+  --tui-code-type: #ffdf85;
+
   /* Typography + motion */
   --tui-font-mono: "Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono",
     monospace;
@@ -131,4 +139,11 @@
   --tui-diff-removed-dimmed: #fdd2d8;
   --tui-diff-added-word: #2f9d44;
   --tui-diff-removed-word: #d1454b;
+
+  --tui-code-keyword: #7c3aed;
+  --tui-code-string: #2c7a39;
+  --tui-code-number: #c45a2e;
+  --tui-code-comment: #978c7e;
+  --tui-code-function: #4a59cc;
+  --tui-code-type: #966c1e;
 }

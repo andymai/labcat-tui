@@ -85,6 +85,13 @@ export const claudeAnsi = defineTheme({
 
   chromeYellow: ansi.yellow,
 
+  codeKeyword: ansi.magentaBright,
+  codeString: ansi.greenBright,
+  codeNumber: ansi.yellowBright,
+  codeComment: ansi.blackBright,
+  codeFunction: ansi.cyanBright,
+  codeType: ansi.yellow,
+
   fontMono:
     '"Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace',
   leadingTight: '1.25',

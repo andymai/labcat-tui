@@ -77,6 +77,16 @@ export interface ThemeDefinition {
   // surfaces that the library doesn't ship).
   chromeYellow?: string;
 
+  // Code highlighting (TextMate-style scopes for syntax-highlighted blocks;
+  // consumed by `@labcat/tui-shiki` to derive a per-theme Shiki theme at
+  // runtime so highlighted code tracks the active palette).
+  codeKeyword: string;
+  codeString: string;
+  codeNumber: string;
+  codeComment: string;
+  codeFunction: string;
+  codeType: string;
+
   // Typography + motion (optional — sensible defaults via tokens.css)
   fontMono: string;
   leadingTight?: string;
@@ -141,6 +151,13 @@ const REQUIRED_TOKENS = [
   'subagentFoxtrot',
   'subagentGolf',
   'subagentHotel',
+  // Code highlighting
+  'codeKeyword',
+  'codeString',
+  'codeNumber',
+  'codeComment',
+  'codeFunction',
+  'codeType',
   // Typography
   'fontMono',
 ] as const satisfies readonly (keyof ThemeDefinition)[];
@@ -191,6 +208,12 @@ const COLOR_TOKENS = [
   'subagentGolf',
   'subagentHotel',
   'chromeYellow',
+  'codeKeyword',
+  'codeString',
+  'codeNumber',
+  'codeComment',
+  'codeFunction',
+  'codeType',
 ] as const satisfies readonly (keyof ThemeDefinition)[];
 
 export class MissingTokenError extends Error {

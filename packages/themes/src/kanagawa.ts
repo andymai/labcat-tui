@@ -70,6 +70,14 @@ export const kanagawa: ThemeDefinition = defineTheme({
   subagentHotel: '#7aa89f',
 
   chromeYellow: '#dca561',
+
+  codeKeyword: '#957fb8',
+  codeString: '#98bb6c',
+  codeNumber: '#d27e99',
+  codeComment: '#727169',
+  codeFunction: '#7e9cd8',
+  codeType: '#dca561',
+
   ...motion,
 });
 
@@ -132,5 +140,13 @@ export const kanagawaLotus: ThemeDefinition = defineTheme({
   subagentHotel: '#597b75',
 
   chromeYellow: '#cc6d00',
+
+  codeKeyword: '#624c83',
+  codeString: '#6f894e',
+  codeNumber: '#b35b79',
+  codeComment: '#8a8980',
+  codeFunction: '#4d699b',
+  codeType: '#77713f',
+
   ...motion,
 });

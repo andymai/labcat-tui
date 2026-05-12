@@ -70,6 +70,14 @@ export const rosePine: ThemeDefinition = defineTheme({
   subagentHotel: '#9ccfd8',
 
   chromeYellow: '#f6c177',
+
+  codeKeyword: '#c4a7e7',
+  codeString: '#f6c177',
+  codeNumber: '#eb6f92',
+  codeComment: '#6e6a86',
+  codeFunction: '#9ccfd8',
+  codeType: '#ebbcba',
+
   ...motion,
 });
 
@@ -132,5 +140,13 @@ export const rosePineDawn: ThemeDefinition = defineTheme({
   subagentHotel: '#56949f',
 
   chromeYellow: '#ea9d34',
+
+  codeKeyword: '#907aa9',
+  codeString: '#ea9d34',
+  codeNumber: '#b4637a',
+  codeComment: '#9893a5',
+  codeFunction: '#286983',
+  codeType: '#d7827e',
+
   ...motion,
 });
