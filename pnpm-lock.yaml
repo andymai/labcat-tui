@@ -38,6 +38,9 @@ importers:
       '@labcat/tui':
         specifier: workspace:^
         version: link:../../packages/core
+      '@labcat/tui-shiki':
+        specifier: workspace:^
+        version: link:../../packages/shiki
       '@labcat/tui-themes':
         specifier: workspace:^
         version: link:../../packages/themes

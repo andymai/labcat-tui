@@ -44,6 +44,7 @@ export default defineConfig({
             { label: 'Todo list', slug: 'components/todo-list' },
             { label: 'Todo item', slug: 'components/todo-item' },
             { label: 'Markdown', slug: 'components/md' },
+            { label: 'Code block', slug: 'components/code-block' },
           ],
         },
         {

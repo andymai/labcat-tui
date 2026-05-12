@@ -1,0 +1,94 @@
+---
+title: '<tui-code-block>'
+description: Syntax-highlighted code blocks powered by Shiki, with copy button, filename header, and line-range emphasis.
+---
+
+import '@labcat/tui';
+import '@labcat/tui-shiki';
+
+A standalone, themed code block. Available in the **separate** `@labcat/tui-shiki` package — Shiki is lazy-loaded on first highlight, so importing the package costs ~9 kB brotli and the heavy chunk only loads if a block actually renders.
+
+## Install
+
+```bash
+pnpm add @labcat/tui @labcat/tui-shiki
+```
+
+`@labcat/tui` is a peer dep. React wrappers live at `@labcat/tui-shiki/react`.
+
+## Example
+
+<tui-code-block lang="ts" filename="hello.ts" highlight-lines="2,4">
+{`function greet(name: string): string {
+  // friendly hello
+  const message = \`Hello, \${name}!\`;
+  return message;
+}`}
+</tui-code-block>
+
+```html
+<tui-code-block lang="ts" filename="hello.ts" highlight-lines="2,4">
+function greet(name: string): string {
+  // friendly hello
+  const message = `Hello, ${name}!`;
+  return message;
+}
+</tui-code-block>
+```
+
+The block renders plain code immediately, then asynchronously upgrades to Shiki-highlighted spans once the runtime chunk loads. Highlight colors are derived from the active `@labcat/tui` theme via the `--tui-code-*` CSS variables — switch themes and the code recolors with it.
+
+## Attributes
+
+| Attribute         | Default | Description                                                                                                                                |
+| ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `lang`            | `""`    | Source language. Built-in grammars: `ts`, `tsx`, `js`, `jsx`, `json`, `bash`, `python`, `markdown`. Aliases: `typescript`, `shell`, `sh`, `zsh`, `py`, `md`. |
+| `filename`        | `""`    | Optional filename shown in the header.                                                                                                     |
+| `highlight-lines` | `""`    | Comma/range list of 1-indexed lines to emphasise. Example: `"2,4-6"`.                                                                       |
+| `no-copy`         | `false` | Hide the copy-to-clipboard button.                                                                                                         |
+| `code`            | `""`    | Optional escape hatch — supplies code as an attribute instead of as slotted text. Useful when the source contains characters tricky to slot. |
+
+## Events
+
+| Event           | Detail              | Notes                          |
+| --------------- | ------------------- | ------------------------------ |
+| `tui-code-copy` | `{ text: string }`  | Fires after copy succeeds.     |
+
+## Upgrading `<tui-md>` blocks
+
+Most markdown renderers emit `<pre><code class="language-xx">…</code></pre>`. The `upgradeMd` helper replaces those in place with `<tui-code-block>`:
+
+```ts
+import { upgradeMd, watchMd } from '@labcat/tui-shiki';
+
+const md = document.querySelector('tui-md')!;
+upgradeMd(md);          // one-shot
+
+// For streamed / incrementally-added content (e.g. SSE LLM output):
+const stop = watchMd(md);
+```
+
+Already-upgraded blocks are skipped on re-run, so `upgradeMd` is safe to call from a `slotchange` handler or framework effect.
+
+## React
+
+```tsx
+import { CodeBlock } from '@labcat/tui-shiki/react';
+
+<CodeBlock
+  lang="ts"
+  filename="hello.ts"
+  highlightLines="2,4"
+  onTuiCodeCopy={(e) => console.log(e.detail.text)}
+>
+{`function greet(name: string) {
+  return \`Hello, \${name}!\`;
+}`}
+</CodeBlock>
+```
+
+## How the theme is derived
+
+`deriveShikiTheme(host)` reads six `--tui-code-*` custom properties (`keyword`, `string`, `number`, `comment`, `function`, `type`) plus `--tui-surface-2` and `--tui-fg` from the host element's computed style and builds a TextMate theme JSON inline. The element re-derives whenever the document's `data-tui-theme` or `class` attribute changes, so theme swaps repaint live.
+
+If a code-scope variable is unset, the derivation falls back to the default `claude` palette — meaning the block stays useful even outside a `<tui-theme-provider>`.

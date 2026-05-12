@@ -3,7 +3,7 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [],
-  "linked": [["@labcat/tui", "@labcat/tui-react", "@labcat/tui-themes"]],
+  "linked": [["@labcat/tui", "@labcat/tui-react", "@labcat/tui-themes", "@labcat/tui-shiki"]],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",

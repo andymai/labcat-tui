@@ -4,6 +4,32 @@ All notable changes to `@labcat/tui` and the family packages.
 
 The format is loosely [Keep a Changelog](https://keepachangelog.com/), and the project follows [Semantic Versioning](https://semver.org/) once it leaves `0.x`. Until then, breaking changes can land on minor bumps.
 
+## Unreleased — syntax-highlighted code blocks
+
+A new package, `@labcat/tui-shiki`, adds first-class syntax highlighting for the chat / agent / tool-call surfaces this library covers. Existing themes gain six code-scope tokens so highlights track the active palette without anyone having to ship a separate Shiki theme alongside their `@labcat/tui` theme.
+
+### Added — `@labcat/tui-shiki` (new package)
+
+- `<tui-code-block lang filename highlight-lines no-copy code>` — open shadow DOM, paints raw code immediately, then asynchronously upgrades to highlighted spans once the Shiki runtime chunk loads. Copy button emits `tui-code-copy`. Highlight ranges via `highlight-lines="2,4-6"`.
+- `upgradeMd(root)` / `watchMd(root)` — find every `<pre><code class="language-xx">` inside a container (typically `<tui-md>`) and swap it for `<tui-code-block>`. Idempotent; `watchMd` keeps upgrading as new blocks stream in.
+- `deriveShikiTheme(host)` — read `--tui-code-*` CSS variables off any element and return a TextMate-style Shiki theme JSON. Re-runs automatically when the document's `data-tui-theme` or `class` attribute changes.
+- React wrapper at `@labcat/tui-shiki/react` (`<CodeBlock>` + typed `onTuiCodeCopy`).
+- Eight bundled grammars: `ts`, `tsx`, `js`, `jsx`, `json`, `bash`, `python`, `markdown`. Aliases: `typescript`, `shell`, `sh`, `zsh`, `py`, `md`.
+
+### Added — `@labcat/tui` + `@labcat/tui-themes`
+
+- Six new code-scope tokens on `ThemeDefinition`: `codeKeyword`, `codeString`, `codeNumber`, `codeComment`, `codeFunction`, `codeType`. Built-in themes (claude / claudeLight / claudeAnsi) and all nine add-on themes populated with palette-coherent values.
+
+### Changed
+
+- `validateTheme()` now requires the six new code-scope tokens. **Breaking for consumer-defined themes**: existing themes will throw `MissingTokenError` until they fill in the new tokens. Still in 0.6 beta, so no migration step beyond appending the tokens.
+
+### Bundle
+
+- `@labcat/tui` core: 18.07 kB → 18.62 kB brotli (six new tokens in three built-in themes; 25 kB budget).
+- `@labcat/tui-themes`: 1.22 kB → 3.07 kB gzip (54 new token-value pairs across 9 themes; 4 kB budget).
+- `@labcat/tui-shiki` synchronous entry: 8.86 kB brotli (10 kB budget). Shiki itself is dynamic-imported and code-split by the consumer bundler — pages that never render code don't pay for it.
+
 ## 0.6.0-beta.0 — Claude Code fidelity bump
 
 A focused pass on visual + structural fidelity to the actual Claude Code CLI. Theme tokens now mirror the reference's surface (shimmer pairs, mode indicators, subagent personas, diff variants), two new components ship for the patterns those tokens enable, and three real bugs surfaced during the audit were fixed.
