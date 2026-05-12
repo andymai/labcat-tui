@@ -1,7 +1,5 @@
 import { type ThemeDefinition, defineTheme } from '@labcat/tui';
 
-// Subagent palette is shared with claude — these are role-coded persona
-// colors, not palette identity, so we keep them consistent across themes.
 const subagent = {
   subagentAlpha: '#fb4934',
   subagentBravo: '#83a598',

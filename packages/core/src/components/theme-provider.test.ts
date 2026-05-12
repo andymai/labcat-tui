@@ -37,7 +37,7 @@ describe('<tui-theme-provider>', () => {
   });
 
   it('clears CSS vars that the previous theme set but the new one omits', async () => {
-    // Build the v0.6 required surface from a single base color so the test
+    // Build the full required surface from a single base color so the test
     // stays readable. Only the values we assert on are spelled out.
     const c = '#888';
     const base = {

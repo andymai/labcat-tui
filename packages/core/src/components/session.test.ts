@@ -99,6 +99,37 @@ describe('<tui-session>', () => {
     expect(el.style.getPropertyValue('--tui-active-mode-color').trim()).toBe('');
   });
 
+  it('mode is inherited via the same --tui-active-mode-color on the session host that the prompt-input CSS reads', async () => {
+    const el = await fixture<TuiSession>(html`
+      <tui-session mode="planMode">
+        <tui-prompt-input></tui-prompt-input>
+      </tui-session>
+    `);
+    expect(el.style.getPropertyValue('--tui-active-mode-color').trim()).toBe(
+      'var(--tui-mode-plan-mode)',
+    );
+    const prompt = el.querySelector('tui-prompt-input');
+    expect(prompt?.hasAttribute('mode')).toBe(false);
+  });
+
+  it('child mode attribute overrides the inherited session mode', async () => {
+    const el = await fixture<TuiSession>(html`
+      <tui-session mode="planMode">
+        <tui-prompt-input mode="autoAccept"></tui-prompt-input>
+      </tui-session>
+    `);
+    const prompt = el.querySelector('tui-prompt-input') as HTMLElement;
+    expect(prompt.getAttribute('mode')).toBe('autoAccept');
+  });
+
+  it('warns and ignores an unknown session mode in dev', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const el = await fixture<TuiSession>(html`<tui-session mode="bogus"></tui-session>`);
+    expect(warn).toHaveBeenCalled();
+    expect(el.style.getPropertyValue('--tui-active-mode-color').trim()).toBe('');
+    warn.mockRestore();
+  });
+
   it('ignores subtrees marked with the ignore-shortcuts attribute', async () => {
     const el = await fixture<TuiSession>(html`
       <tui-session>

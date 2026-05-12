@@ -1,17 +1,81 @@
+/* Static fallback values for every token in ThemeDefinition.
+ * Mirrors `claude` in src/theme/claude.ts so static / SSR consumers
+ * who import @labcat/tui/styles.css without mounting <tui-theme-provider>
+ * still get a complete surface (otherwise mode/agent-badge/shimmer-text
+ * resolve to unset). The data-tui-theme="claudeLight" block applies the
+ * minimal overrides needed for the built-in light pair. */
+
 :root {
+  /* Surfaces */
   --tui-bg: #1a1816;
   --tui-surface: #221f1c;
   --tui-surface-2: #2a2622;
-  --tui-fg: #e8e3dc;
+  --tui-border: #3a3530;
+  --tui-selection-bg: #264f78;
+
+  /* Text */
+  --tui-fg: #ffffff;
   --tui-fg-muted: #a89c8a;
   --tui-fg-dim: #6e6353;
-  --tui-accent: #d97757;
+
+  /* Brand */
+  --tui-accent: #d77757;
   --tui-accent-dim: #8a4a36;
-  --tui-border: #3a3530;
-  --tui-success: #7ab87a;
-  --tui-error: #e07b7b;
-  --tui-warning: #d9b06a;
+  --tui-accent-shimmer: #eb9f7f;
+
+  /* System spinner */
+  --tui-system-spinner: #93a5ff;
+  --tui-system-spinner-shimmer: #b1c3ff;
+
+  /* Prompt border */
+  --tui-prompt-border: #888888;
+  --tui-prompt-border-shimmer: #a6a6a6;
+
+  /* Inactive */
+  --tui-inactive: #999999;
+  --tui-inactive-shimmer: #c1c1c1;
+
+  /* Mode indicators */
+  --tui-mode-auto-accept: #af87ff;
+  --tui-mode-bash-border: #fd5db1;
+  --tui-mode-permission: #b1b9f9;
+  --tui-mode-permission-shimmer: #cfd7ff;
+  --tui-mode-plan-mode: #48968c;
+  --tui-mode-ide: #4782c8;
+
+  /* Fast mode */
+  --tui-fast-mode: #ff7814;
+  --tui-fast-mode-shimmer: #ffa546;
+
+  /* Semantic */
+  --tui-success: #4eba65;
+  --tui-error: #ff6b80;
+  --tui-warning: #ffc107;
+  --tui-warning-shimmer: #ffdf39;
   --tui-info: #7ab1d9;
+
+  /* Diff */
+  --tui-diff-added: #225c2b;
+  --tui-diff-removed: #7a2936;
+  --tui-diff-added-dimmed: #47584a;
+  --tui-diff-removed-dimmed: #69484d;
+  --tui-diff-added-word: #38a660;
+  --tui-diff-removed-word: #b3596b;
+
+  /* Subagent personas (NATO callsigns; same hex across light/dark) */
+  --tui-subagent-alpha: #dc2626;
+  --tui-subagent-bravo: #2563eb;
+  --tui-subagent-charlie: #16a34a;
+  --tui-subagent-delta: #ca8a04;
+  --tui-subagent-echo: #9333ea;
+  --tui-subagent-foxtrot: #ea580c;
+  --tui-subagent-golf: #db2777;
+  --tui-subagent-hotel: #0891b2;
+
+  /* Chrome integration */
+  --tui-chrome-yellow: #fbbc04;
+
+  /* Typography + motion */
   --tui-font-mono: "Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono",
     monospace;
   --tui-leading-tight: 1.25;
@@ -27,14 +91,44 @@
   --tui-bg: #faf6f1;
   --tui-surface: #f1ece4;
   --tui-surface-2: #e7e1d6;
-  --tui-fg: #2a2622;
+  --tui-border: #d4cdc1;
+  --tui-selection-bg: #b4d5ff;
+
+  --tui-fg: #000000;
   --tui-fg-muted: #5c544a;
   --tui-fg-dim: #8e8678;
-  --tui-accent: #c45a37;
+
   --tui-accent-dim: #9a4326;
-  --tui-border: #d4cdc1;
-  --tui-success: #3f8a3f;
-  --tui-error: #b04545;
-  --tui-warning: #a87825;
+  --tui-accent-shimmer: #f59575;
+
+  --tui-system-spinner: #5769f7;
+  --tui-system-spinner-shimmer: #7587ff;
+
+  --tui-prompt-border: #999999;
+  --tui-prompt-border-shimmer: #b7b7b7;
+
+  --tui-inactive: #666666;
+  --tui-inactive-shimmer: #8e8e8e;
+
+  --tui-mode-auto-accept: #8700ff;
+  --tui-mode-bash-border: #ff0087;
+  --tui-mode-permission: #5769f7;
+  --tui-mode-permission-shimmer: #899bff;
+  --tui-mode-plan-mode: #006666;
+
+  --tui-fast-mode: #ff6a00;
+  --tui-fast-mode-shimmer: #ff9632;
+
+  --tui-success: #2c7a39;
+  --tui-error: #ab2b3f;
+  --tui-warning: #966c1e;
+  --tui-warning-shimmer: #c89e50;
   --tui-info: #3e7ba8;
+
+  --tui-diff-added: #69db7c;
+  --tui-diff-removed: #ffa8b4;
+  --tui-diff-added-dimmed: #c7e1cb;
+  --tui-diff-removed-dimmed: #fdd2d8;
+  --tui-diff-added-word: #2f9d44;
+  --tui-diff-removed-word: #d1454b;
 }

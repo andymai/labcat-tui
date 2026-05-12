@@ -50,7 +50,24 @@ export class TuiToolCall extends LitElement {
     }
 
     :host([status='running']) .dot {
-      color: var(--tui-info);
+      color: var(--tui-system-spinner, var(--tui-info));
+      animation: tui-tool-call-pulse 1800ms ease-in-out infinite;
+    }
+
+    @keyframes tui-tool-call-pulse {
+      0%,
+      100% {
+        color: var(--tui-system-spinner, var(--tui-info));
+      }
+      50% {
+        color: var(--tui-system-spinner-shimmer, var(--tui-info));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :host([status='running']) .dot {
+        animation: none;
+      }
     }
 
     .tool {

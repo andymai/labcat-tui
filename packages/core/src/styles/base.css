@@ -2,6 +2,11 @@
   visibility: hidden;
 }
 
+::selection {
+  background: var(--tui-selection-bg);
+  color: var(--tui-fg);
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --tui-dur-fast: 0ms;

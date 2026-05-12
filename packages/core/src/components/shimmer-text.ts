@@ -19,8 +19,8 @@ export type ShimmerKind =
  * `fastMode`, or `promptBorder`. Honors `prefers-reduced-motion` — when
  * set, the slot renders in the base color with no animation.
  *
- * @attr {ShimmerKind} kind - Which color pair to animate (default `accent`)
- * @attr {number} duration - Pulse cycle in ms (default 1800)
+ * @attr {ShimmerKind} kind - Which color pair to animate
+ * @attr {number} duration - Pulse cycle in ms
  * @slot - Text content to shimmer
  */
 @customElement('tui-shimmer-text')

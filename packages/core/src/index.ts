@@ -25,7 +25,7 @@ export type { ToolCallStatus } from './components/tool-call.js';
 export { TuiBox } from './components/box.js';
 export type { BoxKind } from './components/box.js';
 export { TuiSpinner } from './components/spinner.js';
-export type { SpinnerKind } from './components/spinner.js';
+export type { SpinnerKind, SpinnerTone } from './components/spinner.js';
 export { TuiPromptLine } from './components/prompt-line.js';
 export { TuiThemeProvider } from './components/theme-provider.js';
 export { TuiWelcomeBanner } from './components/welcome-banner.js';

@@ -1,18 +1,7 @@
-/// <reference types="vite/client" />
+import { devWarn } from '../util/env.js';
 
 const Base: typeof HTMLElement =
   typeof HTMLElement !== 'undefined' ? HTMLElement : (class {} as unknown as typeof HTMLElement);
-
-function isDev(): boolean {
-  try {
-    if (typeof import.meta !== 'undefined' && import.meta.env) {
-      return import.meta.env.DEV !== false;
-    }
-  } catch {
-    /* not in a bundler env */
-  }
-  return true;
-}
 
 let activeSession: TuiSession | null = null;
 
@@ -54,9 +43,7 @@ const MODE_VAR: Record<SessionMode, string> = {
  *   ?           → open the slash overlay (skipped in form fields)
  *   Escape      → close the slash overlay if open
  *
- * v0.6: `mode` attribute sets the active prompt mode (autoAccept /
- * bashBorder / permission / planMode / ide). The session exposes the
- * resolved color via the `--tui-active-mode-color` CSS variable, which
+ * The `mode` attribute resolves to `--tui-active-mode-color`, which
  * descendant `<tui-prompt-input>` instances read for their caret + left
  * border. A prompt-input can set its own `mode` attribute to override.
  *
@@ -89,9 +76,14 @@ export class TuiSession extends Base {
     if (value && Object.hasOwn(MODE_VAR, value)) {
       const cssVar = MODE_VAR[value as SessionMode];
       this.style.setProperty('--tui-active-mode-color', `var(${cssVar})`);
-    } else {
-      this.style.removeProperty('--tui-active-mode-color');
+      return;
     }
+    if (value) {
+      devWarn(
+        `<tui-session> mode="${value}" is not a known SessionMode (autoAccept | bashBorder | permission | planMode | ide); ignoring.`,
+      );
+    }
+    this.style.removeProperty('--tui-active-mode-color');
   }
 
   private readonly onKeyDown = (e: KeyboardEvent): void => {
@@ -137,9 +129,9 @@ export class TuiSession extends Base {
   connectedCallback(): void {
     if (!this.classList.contains('tui-session')) this.classList.add('tui-session');
 
-    if (activeSession && activeSession !== this && isDev() && typeof console !== 'undefined') {
-      console.warn(
-        '[@labcat/tui] Multiple <tui-session> mounted; the last-mounted instance owns document keyboard shortcuts.',
+    if (activeSession && activeSession !== this) {
+      devWarn(
+        'Multiple <tui-session> mounted; the last-mounted instance owns document keyboard shortcuts.',
       );
     }
     activeSession = this;

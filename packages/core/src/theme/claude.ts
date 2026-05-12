@@ -1,9 +1,8 @@
 import { defineTheme } from './defineTheme.js';
 
-// Values aligned with Claude Code's reference theme (source-map extracted from
-// the official CLI). Where the reference has no direct counterpart (e.g. `bg`,
-// `accentDim`, `fgMuted`, `fgDim`), we keep the existing warm/desaturated web
-// translation. Otherwise we adopt the reference's RGB exactly.
+// Tokens marked `← reference: rgb(...)` are extracted from Claude Code's
+// official CLI source map. Unmarked tokens have no upstream counterpart and
+// use the local web translation.
 
 export const claude = defineTheme({
   name: 'claude',

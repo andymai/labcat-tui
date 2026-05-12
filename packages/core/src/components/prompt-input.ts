@@ -8,6 +8,7 @@ import type {
   TuiCommandSuccessDetail,
   TuiNavigateDetail,
 } from '../events/types.js';
+import { devWarn } from '../util/env.js';
 
 const HISTORY_PREFIX = 'tui:history:';
 const DEFAULT_HISTORY_LIMIT = 50;
@@ -56,6 +57,14 @@ function writeHistory(key: string, entries: readonly string[]): void {
 
 export type PromptMode = 'autoAccept' | 'bashBorder' | 'permission' | 'planMode' | 'ide';
 
+const PROMPT_MODES: ReadonlySet<PromptMode> = new Set([
+  'autoAccept',
+  'bashBorder',
+  'permission',
+  'planMode',
+  'ide',
+]);
+
 /**
  * `<tui-prompt-input>` — Functional `›` prompt with declarative commands.
  *
@@ -75,7 +84,6 @@ export type PromptMode = 'autoAccept' | 'bashBorder' | 'permission' | 'planMode'
  * @fires tui-navigate - `{ url }` after navigation callback fires
  * @csspart caret - The leading `›` glyph
  * @csspart input - The internal <input>
- * @csspart cursor - Reserved (unused in this implementation; native caret renders)
  */
 @customElement('tui-prompt-input')
 export class TuiPromptInput extends LitElement {
@@ -86,8 +94,7 @@ export class TuiPromptInput extends LitElement {
       color: var(--tui-fg);
       line-height: var(--tui-leading-body);
 
-      /* Resolved mode color: own mode wins, else parent session's, else accent.
-         Each :host([mode=…]) selector below overrides --tui-prompt-mode-color. */
+      /* Own mode wins, else parent session's, else accent. */
       --tui-prompt-mode-color: var(--tui-active-mode-color, var(--tui-accent));
     }
 
@@ -121,13 +128,11 @@ export class TuiPromptInput extends LitElement {
       transition: border-color var(--tui-dur-fast, 120ms) var(--tui-easing, ease);
     }
 
-    /* Light up the left border only when a mode is active (own or inherited). */
-    :host([mode]) .row,
-    :host(:not([mode])) .row {
+    :host([mode]) .row {
       border-color: var(--tui-prompt-mode-color);
     }
     :host(:not([mode])) .row {
-      border-color: var(--tui-active-mode-color, transparent);
+      border-color: var(--tui-active-mode-color, var(--tui-prompt-border, transparent));
     }
 
     .caret {
@@ -192,6 +197,15 @@ export class TuiPromptInput extends LitElement {
 
   @query('input')
   private inputEl?: HTMLInputElement;
+
+  override willUpdate(changed: Map<string, unknown>): void {
+    if (changed.has('mode') && this.mode !== null && !PROMPT_MODES.has(this.mode)) {
+      devWarn(
+        `<tui-prompt-input> mode="${this.mode}" is not a known PromptMode (autoAccept | bashBorder | permission | planMode | ide); ignoring.`,
+      );
+      this.mode = null;
+    }
+  }
 
   override connectedCallback(): void {
     super.connectedCallback();

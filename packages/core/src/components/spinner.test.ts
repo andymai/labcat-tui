@@ -1,5 +1,5 @@
 import { fixture, html } from '@open-wc/testing-helpers';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import './spinner.js';
 import type { TuiSpinner } from './spinner.js';
 
@@ -38,5 +38,23 @@ describe('<tui-spinner>', () => {
   it('reflects tone="system" so CSS resolves to the systemSpinner palette', async () => {
     const el = await fixture<TuiSpinner>(html`<tui-spinner tone="system"></tui-spinner>`);
     expect(el.getAttribute('tone')).toBe('system');
+  });
+
+  it('warns and resets unknown tone in dev', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const el = await fixture<TuiSpinner>(html`<tui-spinner></tui-spinner>`);
+    el.tone = 'rogue' as never;
+    await el.updateComplete;
+    expect(warn).toHaveBeenCalled();
+    expect(el.tone).toBe('accent');
+    warn.mockRestore();
+  });
+
+  it('resets frame index when kind changes mid-cycle', async () => {
+    const el = await fixture<TuiSpinner>(html`<tui-spinner kind="dots"></tui-spinner>`);
+    (el as unknown as { frameIndex: number }).frameIndex = 9;
+    el.kind = 'line';
+    await el.updateComplete;
+    expect((el as unknown as { frameIndex: number }).frameIndex).toBe(0);
   });
 });

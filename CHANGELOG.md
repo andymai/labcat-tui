@@ -10,7 +10,7 @@ A focused pass on visual + structural fidelity to the actual Claude Code CLI. Th
 
 ### Added — tokens
 
-- `accentShimmer`, `systemSpinner` + `Shimmer`, `permission` + `Shimmer`, `promptBorder` + `Shimmer`, `inactive` + `Shimmer`, `warningShimmer`, `fastMode` + `Shimmer`: the **shimmer family** that powers Claude Code's breathing / pulse animations.
+- Shimmer family that powers Claude Code's breathing/pulse animations: `accentShimmer`, `systemSpinner` + `systemSpinnerShimmer`, `modePermissionShimmer`, `promptBorder` + `promptBorderShimmer`, `inactive` + `inactiveShimmer`, `warningShimmer`, `fastMode` + `fastModeShimmer`.
 - `modeAutoAccept`, `modeBashBorder`, `modePermission`, `modePlanMode`, `modeIde`: **prompt-mode indicators**. Tints the prompt caret + left border depending on which mode the agent is in.
 - `subagentAlpha` / `Bravo` / `Charlie` / `Delta` / `Echo` / `Foxtrot` / `Golf` / `Hotel`: an 8-persona **subagent palette**, NATO-phonetic callsigns. Names are intentionally not bound to color (so themes can map them freely without misleading consumers).
 - `diffAddedDimmed`, `diffRemovedDimmed`, `diffAddedWord`, `diffRemovedWord`: nuanced diff rendering (dim row + bright word-level color).
@@ -43,7 +43,7 @@ A focused pass on visual + structural fidelity to the actual Claude Code CLI. Th
 
 ### Tests
 
-- 159 core + 31 themes tests = **190 passing**. Bundle: 18.07 kB brotli (25 kB budget).
+- 166 core + 31 themes tests = **197 passing**. Core bundle: 18.07 kB gzip (25 kB budget). Themes pack: 2.82 kB gzip (4 kB budget).
 
 ---
 

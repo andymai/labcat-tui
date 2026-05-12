@@ -1,4 +1,4 @@
-/// <reference types="vite/client" />
+import { isDev } from '../util/env.js';
 
 export interface ThemeDefinition {
   name: string;
@@ -227,17 +227,6 @@ const camelToKebab = (key: string): string =>
     .replace(/([A-Z])/g, '-$1')
     .toLowerCase();
 
-function isDevMode(): boolean {
-  try {
-    if (typeof import.meta !== 'undefined' && import.meta.env) {
-      return import.meta.env.DEV !== false;
-    }
-  } catch {
-    /* not in a bundler env */
-  }
-  return true;
-}
-
 function supportsColor(value: string): boolean {
   if (typeof CSS === 'undefined' || typeof CSS.supports !== 'function') return true;
   return CSS.supports('color', value);
@@ -272,7 +261,7 @@ export function validateTheme(theme: ThemeDefinition): void {
 }
 
 export function defineTheme(theme: ThemeDefinition): ThemeDefinition {
-  if (isDevMode()) {
+  if (isDev()) {
     validateTheme(theme);
   } else {
     try {

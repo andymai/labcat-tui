@@ -1,5 +1,6 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { devWarn } from '../util/env.js';
 
 export type SpinnerKind = 'dots' | 'line' | 'box' | 'pulse';
 export type SpinnerTone = 'accent' | 'system';
@@ -11,13 +12,15 @@ const FRAMES: Record<SpinnerKind, readonly string[]> = {
   pulse: ['·', '•', '●', '•'],
 };
 
+const SPINNER_TONES: ReadonlySet<SpinnerTone> = new Set(['accent', 'system']);
+
 /**
  * `<tui-spinner>` — Inline TUI spinner with several glyph styles.
  *
  * @attr {"dots"|"line"|"box"|"pulse"} kind - Glyph set
- * @attr {"accent"|"system"} tone - Color pair (default `accent` = brand
- *   coral; `system` = Claude's blue system spinner). The glyph pulses
- *   between the base and its shimmer companion via a CSS keyframe.
+ * @attr {"accent"|"system"} tone - Color pair. `system` selects Claude's
+ *   blue throbber; the glyph pulses between the base and its shimmer
+ *   companion via a CSS keyframe.
  * @attr {boolean} running - Whether the animation is running
  * @attr {string} aria-label - Accessibility label (default "Loading")
  * @csspart glyph - The animated character
@@ -103,6 +106,23 @@ export class TuiSpinner extends LitElement {
   }
 
   override updated(changed: Map<string, unknown>): void {
+    if (changed.has('kind')) {
+      if (!Object.hasOwn(FRAMES, this.kind)) {
+        devWarn(
+          `<tui-spinner> kind="${this.kind}" is not a known SpinnerKind; defaulting to dots.`,
+        );
+        this.kind = 'dots';
+        return;
+      }
+      this.frameIndex = 0;
+    }
+    if (changed.has('tone') && !SPINNER_TONES.has(this.tone)) {
+      devWarn(
+        `<tui-spinner> tone="${this.tone}" is not a known SpinnerTone; defaulting to accent.`,
+      );
+      this.tone = 'accent';
+      return;
+    }
     if (changed.has('running') || changed.has('kind')) this.syncTimer();
   }
 
@@ -132,7 +152,7 @@ export class TuiSpinner extends LitElement {
 
   override render() {
     const frames = FRAMES[this.kind];
-    const glyph = frames[this.frameIndex % frames.length] ?? frames[0] ?? '';
+    const glyph = frames[this.frameIndex % frames.length];
     return html`<span class="glyph" part="glyph" aria-hidden="true">${glyph}</span>`;
   }
 }
