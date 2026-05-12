@@ -9,6 +9,7 @@ import type {
   TuiNavigateDetail,
 } from '../events/types.js';
 import { devWarn } from '../util/env.js';
+import { MODE_LIST, MODE_SET, type Mode } from '../util/modes.js';
 
 const HISTORY_PREFIX = 'tui:history:';
 const DEFAULT_HISTORY_LIMIT = 50;
@@ -55,15 +56,7 @@ function writeHistory(key: string, entries: readonly string[]): void {
   }
 }
 
-export type PromptMode = 'autoAccept' | 'bashBorder' | 'permission' | 'planMode' | 'ide';
-
-const PROMPT_MODES: ReadonlySet<PromptMode> = new Set([
-  'autoAccept',
-  'bashBorder',
-  'permission',
-  'planMode',
-  'ide',
-]);
+export type PromptMode = Mode;
 
 /**
  * `<tui-prompt-input>` — Functional `›` prompt with declarative commands.
@@ -199,9 +192,9 @@ export class TuiPromptInput extends LitElement {
   private inputEl?: HTMLInputElement;
 
   override willUpdate(changed: Map<string, unknown>): void {
-    if (changed.has('mode') && this.mode !== null && !PROMPT_MODES.has(this.mode)) {
+    if (changed.has('mode') && this.mode !== null && !MODE_SET.has(this.mode)) {
       devWarn(
-        `<tui-prompt-input> mode="${this.mode}" is not a known PromptMode (autoAccept | bashBorder | permission | planMode | ide); ignoring.`,
+        `<tui-prompt-input> mode="${this.mode}" is not a known mode (${MODE_LIST}); ignoring.`,
       );
       this.mode = null;
     }

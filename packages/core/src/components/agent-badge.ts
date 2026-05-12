@@ -1,15 +1,20 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { devWarn } from '../util/env.js';
 
-export type AgentCallsign =
-  | 'alpha'
-  | 'bravo'
-  | 'charlie'
-  | 'delta'
-  | 'echo'
-  | 'foxtrot'
-  | 'golf'
-  | 'hotel';
+export const AGENT_CALLSIGNS = [
+  'alpha',
+  'bravo',
+  'charlie',
+  'delta',
+  'echo',
+  'foxtrot',
+  'golf',
+  'hotel',
+] as const;
+export type AgentCallsign = (typeof AGENT_CALLSIGNS)[number];
+
+const CALLSIGN_SET: ReadonlySet<AgentCallsign> = new Set(AGENT_CALLSIGNS);
 
 /**
  * `<tui-agent-badge>` — Per-agent persona indicator for multi-agent
@@ -77,6 +82,15 @@ export class TuiAgentBadge extends LitElement {
   override connectedCallback(): void {
     super.connectedCallback();
     if (!this.hasAttribute('role')) this.setAttribute('role', 'note');
+  }
+
+  override willUpdate(changed: Map<string, unknown>): void {
+    if (changed.has('callsign') && !CALLSIGN_SET.has(this.callsign)) {
+      devWarn(
+        `<tui-agent-badge> callsign="${this.callsign}" is not a known AgentCallsign (${AGENT_CALLSIGNS.join(' | ')}); defaulting to alpha.`,
+      );
+      this.callsign = 'alpha';
+    }
   }
 
   override render() {

@@ -172,4 +172,17 @@ describe('validateTheme', () => {
     );
     warn.mockRestore();
   });
+
+  it('aggregates every invalid color into a single error', () => {
+    try {
+      validateTheme({ ...valid, error: 'nope', warning: 'also nope', accent: 'still no' });
+      throw new Error('expected InvalidColorError');
+    } catch (err) {
+      expect(err).toBeInstanceOf(InvalidColorError);
+      const tokens = (err as InvalidColorError).issues.map((i) => i.token);
+      expect(tokens).toContain('error');
+      expect(tokens).toContain('warning');
+      expect(tokens).toContain('accent');
+    }
+  });
 });

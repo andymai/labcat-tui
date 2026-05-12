@@ -1,4 +1,5 @@
 import { devWarn } from '../util/env.js';
+import { MODE_LIST, MODE_SET, MODE_TO_VAR, type Mode } from '../util/modes.js';
 
 const Base: typeof HTMLElement =
   typeof HTMLElement !== 'undefined' ? HTMLElement : (class {} as unknown as typeof HTMLElement);
@@ -22,15 +23,7 @@ function isOptedOut(el: Element | null): boolean {
   return false;
 }
 
-export type SessionMode = 'autoAccept' | 'bashBorder' | 'permission' | 'planMode' | 'ide';
-
-const MODE_VAR: Record<SessionMode, string> = {
-  autoAccept: '--tui-mode-auto-accept',
-  bashBorder: '--tui-mode-bash-border',
-  permission: '--tui-mode-permission',
-  planMode: '--tui-mode-plan-mode',
-  ide: '--tui-mode-ide',
-};
+export type SessionMode = Mode;
 
 /**
  * `<tui-session>` — High-level Light-DOM orchestrator. Holds the
@@ -73,15 +66,12 @@ export class TuiSession extends Base {
   }
 
   private applyMode(value: string | null): void {
-    if (value && Object.hasOwn(MODE_VAR, value)) {
-      const cssVar = MODE_VAR[value as SessionMode];
-      this.style.setProperty('--tui-active-mode-color', `var(${cssVar})`);
+    if (value && MODE_SET.has(value as Mode)) {
+      this.style.setProperty('--tui-active-mode-color', `var(${MODE_TO_VAR[value as Mode]})`);
       return;
     }
     if (value) {
-      devWarn(
-        `<tui-session> mode="${value}" is not a known SessionMode (autoAccept | bashBorder | permission | planMode | ide); ignoring.`,
-      );
+      devWarn(`<tui-session> mode="${value}" is not a known mode (${MODE_LIST}); ignoring.`);
     }
     this.style.removeProperty('--tui-active-mode-color');
   }

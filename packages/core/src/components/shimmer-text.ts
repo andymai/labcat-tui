@@ -1,14 +1,19 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { devWarn } from '../util/env.js';
 
-export type ShimmerKind =
-  | 'accent'
-  | 'systemSpinner'
-  | 'permission'
-  | 'warning'
-  | 'inactive'
-  | 'fastMode'
-  | 'promptBorder';
+export const SHIMMER_KINDS = [
+  'accent',
+  'systemSpinner',
+  'permission',
+  'warning',
+  'inactive',
+  'fastMode',
+  'promptBorder',
+] as const;
+export type ShimmerKind = (typeof SHIMMER_KINDS)[number];
+
+const KIND_SET: ReadonlySet<ShimmerKind> = new Set(SHIMMER_KINDS);
 
 /**
  * `<tui-shimmer-text>` — Animates slotted text between a base color and
@@ -88,6 +93,15 @@ export class TuiShimmerText extends LitElement {
 
   @property({ type: Number, reflect: true })
   duration = 1800;
+
+  override willUpdate(changed: Map<string, unknown>): void {
+    if (changed.has('kind') && !KIND_SET.has(this.kind)) {
+      devWarn(
+        `<tui-shimmer-text> kind="${this.kind}" is not a known ShimmerKind (${SHIMMER_KINDS.join(' | ')}); defaulting to accent.`,
+      );
+      this.kind = 'accent';
+    }
+  }
 
   override updated(changed: Map<string, unknown>): void {
     if (changed.has('duration')) {

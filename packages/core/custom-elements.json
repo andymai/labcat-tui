@@ -1031,6 +1031,14 @@
       "path": "src/components/agent-badge.ts",
       "declarations": [
         {
+          "kind": "variable",
+          "name": "AGENT_CALLSIGNS",
+          "type": {
+            "text": "[\n  'alpha',\n  'bravo',\n  'charlie',\n  'delta',\n  'echo',\n  'foxtrot',\n  'golf',\n  'hotel',\n]"
+          },
+          "default": "[ 'alpha', 'bravo', 'charlie', 'delta', 'echo', 'foxtrot', 'golf', 'hotel', ]"
+        },
+        {
           "kind": "class",
           "description": "`<tui-agent-badge>` — Per-agent persona indicator for multi-agent\nvisualisations (e.g. when several subagents are working in parallel).\n\nThe `callsign` attribute selects one of the 8 NATO-phonetic personas\nshipped in every theme (`subagentAlpha` … `subagentHotel`). The colors\nare intentionally not bound to color names — each theme maps callsigns\nto whatever palette colors fit its identity.",
           "name": "TuiAgentBadge",
@@ -1081,6 +1089,14 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "AGENT_CALLSIGNS",
+          "declaration": {
+            "name": "AGENT_CALLSIGNS",
+            "module": "src/components/agent-badge.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "TuiAgentBadge",
@@ -2147,6 +2163,14 @@
       "path": "src/components/shimmer-text.ts",
       "declarations": [
         {
+          "kind": "variable",
+          "name": "SHIMMER_KINDS",
+          "type": {
+            "text": "[\n  'accent',\n  'systemSpinner',\n  'permission',\n  'warning',\n  'inactive',\n  'fastMode',\n  'promptBorder',\n]"
+          },
+          "default": "[ 'accent', 'systemSpinner', 'permission', 'warning', 'inactive', 'fastMode', 'promptBorder', ]"
+        },
+        {
           "kind": "class",
           "description": "`<tui-shimmer-text>` — Animates slotted text between a base color and\nits shimmer companion, matching Claude Code's breathing / pulse effect.\n\nThe `kind` attribute selects one of the shimmer pairs from the active\ntheme: `accent`, `systemSpinner`, `permission`, `warning`, `inactive`,\n`fastMode`, or `promptBorder`. Honors `prefers-reduced-motion` — when\nset, the slot renders in the base color with no animation.",
           "name": "TuiShimmerText",
@@ -2207,6 +2231,14 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "SHIMMER_KINDS",
+          "declaration": {
+            "name": "SHIMMER_KINDS",
+            "module": "src/components/shimmer-text.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "TuiShimmerText",

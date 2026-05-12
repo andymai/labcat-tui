@@ -51,9 +51,11 @@ export interface ThemeDefinition {
   warningShimmer: string;
   info: string;
 
-  // Diff
-  diffAdded: string;
-  diffRemoved: string;
+  // Diff. The bright `diffAdded` / `diffRemoved` are optional escape hatches
+  // for consumer overrides — the library renders rows with the dimmed
+  // background + word color.
+  diffAdded?: string;
+  diffRemoved?: string;
   diffAddedDimmed: string;
   diffRemovedDimmed: string;
   diffAddedWord: string;
@@ -71,8 +73,9 @@ export interface ThemeDefinition {
   subagentGolf: string;
   subagentHotel: string;
 
-  // Chrome integration badges
-  chromeYellow: string;
+  // Chrome integration badges (optional — only consumed by chrome-specific
+  // surfaces that the library doesn't ship).
+  chromeYellow?: string;
 
   // Typography + motion (optional — sensible defaults via tokens.css)
   fontMono: string;
@@ -124,9 +127,7 @@ const REQUIRED_TOKENS = [
   'warning',
   'warningShimmer',
   'info',
-  // Diff
-  'diffAdded',
-  'diffRemoved',
+  // Diff (bright variants are optional)
   'diffAddedDimmed',
   'diffRemovedDimmed',
   'diffAddedWord',
@@ -140,8 +141,6 @@ const REQUIRED_TOKENS = [
   'subagentFoxtrot',
   'subagentGolf',
   'subagentHotel',
-  // Chrome
-  'chromeYellow',
   // Typography
   'fontMono',
 ] as const satisfies readonly (keyof ThemeDefinition)[];
@@ -207,13 +206,24 @@ export class MissingTokenError extends Error {
 }
 
 export class InvalidColorError extends Error {
+  /** All invalid colors in this theme. `token`/`value` mirror the first entry
+   *  for back-compat; consumers wanting full coverage iterate `issues`. */
+  public readonly issues: ReadonlyArray<{ token: string; value: string }>;
+  public readonly token: string;
+  public readonly value: string;
+
   constructor(
-    public readonly token: string,
-    public readonly value: string,
+    issues: ReadonlyArray<{ token: string; value: string }> | { token: string; value: string },
     themeName?: string,
   ) {
-    super(`Theme${themeName ? ` "${themeName}"` : ''} has invalid color for "${token}": ${value}`);
+    const all = Array.isArray(issues) ? issues : [issues];
+    const first = all[0] ?? { token: '?', value: '?' };
+    const list = all.map((i) => `"${i.token}": ${i.value}`).join(', ');
+    super(`Theme${themeName ? ` "${themeName}"` : ''} has invalid color(s): ${list}`);
     this.name = 'InvalidColorError';
+    this.issues = all;
+    this.token = first.token;
+    this.value = first.value;
   }
 }
 
@@ -254,10 +264,7 @@ export function validateTheme(theme: ThemeDefinition): void {
   if (missing.length > 0) throw new MissingTokenError(missing, theme.name);
 
   const invalid = findInvalidColors(theme);
-  if (invalid.length > 0) {
-    const first = invalid[0];
-    if (first) throw new InvalidColorError(first.token, first.value, theme.name);
-  }
+  if (invalid.length > 0) throw new InvalidColorError(invalid, theme.name);
 }
 
 export function defineTheme(theme: ThemeDefinition): ThemeDefinition {
