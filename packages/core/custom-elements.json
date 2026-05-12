@@ -4106,6 +4106,35 @@
           "members": [
             {
               "kind": "field",
+              "name": "issues",
+              "type": {
+                "text": "ReadonlyArray<{ token: string; value: string }>"
+              },
+              "privacy": "public",
+              "readonly": true,
+              "description": "All invalid colors in this theme. `token`/`value` mirror the first entry\nfor back-compat; consumers wanting full coverage iterate `issues`.",
+              "default": "all"
+            },
+            {
+              "kind": "field",
+              "name": "token",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "public",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "public",
+              "readonly": true
+            },
+            {
+              "kind": "field",
               "name": "name",
               "type": {
                 "text": "string"
@@ -4450,6 +4479,77 @@
           "declaration": {
             "name": "devWarn",
             "module": "src/util/env.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/util/modes.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "MODE_NAMES",
+          "type": {
+            "text": "['autoAccept', 'bashBorder', 'permission', 'planMode', 'ide']"
+          },
+          "default": "['autoAccept', 'bashBorder', 'permission', 'planMode', 'ide']",
+          "description": "The single source of truth for prompt-mode names. The 5 entries are mirrored by:\n- the `mode<Pascal>` tokens in `ThemeDefinition`\n- the `:host([mode='…'])` CSS rules in `prompt-input.ts`\n- `<tui-session>`'s `applyMode` and `<tui-prompt-input>`'s `willUpdate` validation\n\nAdding a 6th mode means: append here, add the matching `mode<Pascal>` to every\ntheme + `ThemeDefinition`, add a `:host([mode='X'])` block in prompt-input.ts."
+        },
+        {
+          "kind": "variable",
+          "name": "MODE_SET",
+          "type": {
+            "text": "ReadonlySet<Mode>"
+          },
+          "default": "new Set(MODE_NAMES)"
+        },
+        {
+          "kind": "variable",
+          "name": "MODE_TO_VAR",
+          "type": {
+            "text": "Readonly<Record<Mode, string>>"
+          },
+          "default": "Object.fromEntries( MODE_NAMES.map((name) => { const kebab = name.replace(/([A-Z])/g, '-$1').toLowerCase(); return [name, `--tui-mode-${kebab}`]; }), )",
+          "description": "`'autoAccept'` → `'--tui-mode-auto-accept'`."
+        },
+        {
+          "kind": "variable",
+          "name": "MODE_LIST",
+          "description": "Human-readable list for warning messages."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "MODE_NAMES",
+          "declaration": {
+            "name": "MODE_NAMES",
+            "module": "src/util/modes.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MODE_SET",
+          "declaration": {
+            "name": "MODE_SET",
+            "module": "src/util/modes.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MODE_TO_VAR",
+          "declaration": {
+            "name": "MODE_TO_VAR",
+            "module": "src/util/modes.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MODE_LIST",
+          "declaration": {
+            "name": "MODE_LIST",
+            "module": "src/util/modes.ts"
           }
         }
       ]
