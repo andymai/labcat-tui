@@ -1,3 +1,4 @@
+import type { SessionStore } from '../commands/types.js';
 import { devWarn } from '../util/env.js';
 import { MODE_LIST, MODE_SET, MODE_TO_VAR, type Mode } from '../util/modes.js';
 
@@ -6,11 +7,64 @@ const Base: typeof HTMLElement =
 
 let activeSession: TuiSession | null = null;
 
-function isFormField(target: EventTarget | null): boolean {
-  if (!(target instanceof HTMLElement)) return false;
-  const tag = target.tagName;
-  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return true;
-  if (target.isContentEditable) return true;
+/** Pull-only SessionStore: providers are called on each `read`. */
+class TuiSessionStore implements SessionStore {
+  private readonly providers = new Map<string, () => unknown>();
+
+  register<T>(key: string, get: () => T): () => void {
+    if (this.providers.has(key)) {
+      devWarn(
+        `<tui-session> provider "${key}" was overwritten; the previous provider is now unreachable.`,
+      );
+    }
+    this.providers.set(key, get as () => unknown);
+    return () => {
+      // Only unregister if it's still the same provider we registered.
+      if (this.providers.get(key) === (get as () => unknown)) {
+        this.providers.delete(key);
+      }
+    };
+  }
+
+  read<T>(key: string): T | undefined {
+    const fn = this.providers.get(key);
+    if (!fn) return undefined;
+    return fn() as T;
+  }
+
+  has(key: string): boolean {
+    return this.providers.has(key);
+  }
+
+  keys(): string[] {
+    return [...this.providers.keys()];
+  }
+}
+
+/**
+ * Returns the active session's store, or a detached store if no
+ * `<tui-session>` is mounted. The detached store still works — it just isn't
+ * shared with anything.
+ */
+export function getActiveSessionStore(): SessionStore {
+  return activeSession?.store ?? detachedStore;
+}
+
+const detachedStore = new TuiSessionStore();
+
+function isFormField(e: KeyboardEvent): boolean {
+  // Walk the composed path so we see through shadow DOM. Custom elements
+  // like <tui-prompt-input> contain an internal <input>; their host's
+  // tagName is NOT 'INPUT', so a tagName check on `target` alone misses
+  // the inner field and the global shortcuts fire while the user is
+  // typing — preventing them from typing `?` or `/` mid-sentence.
+  const path = typeof e.composedPath === 'function' ? e.composedPath() : [e.target];
+  for (const node of path) {
+    if (!(node instanceof HTMLElement)) continue;
+    const tag = node.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return true;
+    if (node.isContentEditable) return true;
+  }
   return false;
 }
 
@@ -31,7 +85,9 @@ export type SessionMode = Mode;
  * `<tui-slash-overlay>` instances don't need to.
  *
  * Per SPEC §10.2:
- *   /           → focus first descendant <tui-prompt-input> (skipped in form fields)
+ *   /           → open first descendant <tui-slash-overlay> if present;
+ *                 else focus first descendant <tui-prompt-input>
+ *                 (skipped in form fields — typing `/` in an input is just text)
  *   Cmd/Ctrl-K  → open first descendant <tui-slash-overlay>
  *   ?           → open the slash overlay (skipped in form fields)
  *   Escape      → close the slash overlay if open
@@ -52,6 +108,8 @@ export class TuiSession extends Base {
   static get observedAttributes(): string[] {
     return ['mode'];
   }
+
+  readonly store: SessionStore = new TuiSessionStore();
 
   get mode(): SessionMode | null {
     return (this.getAttribute('mode') as SessionMode | null) ?? null;
@@ -80,7 +138,13 @@ export class TuiSession extends Base {
     if (activeSession !== this) return;
     if (isOptedOut(e.target as Element | null)) return;
 
-    if (e.key === '/' && !isFormField(e.target)) {
+    if (e.key === '/' && !isFormField(e)) {
+      const overlay = this.querySelector('tui-slash-overlay');
+      if (overlay) {
+        e.preventDefault();
+        (overlay as HTMLElement & { open?: boolean }).open = true;
+        return;
+      }
       const input = this.querySelector<HTMLElement>('tui-prompt-input');
       if (input) {
         e.preventDefault();
@@ -98,7 +162,7 @@ export class TuiSession extends Base {
       return;
     }
 
-    if (e.key === '?' && !isFormField(e.target)) {
+    if (e.key === '?' && !isFormField(e)) {
       const overlay = this.querySelector('tui-slash-overlay');
       if (overlay) {
         e.preventDefault();

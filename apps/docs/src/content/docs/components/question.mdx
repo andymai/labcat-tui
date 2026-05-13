@@ -1,0 +1,92 @@
+---
+title: '<tui-question>'
+description: Multi-choice picker that emulates Claude Code's AskUserQuestion tool.
+---
+
+import '@labcat/tui';
+
+A keyboard-first multi-choice picker that emulates Claude Code's `AskUserQuestion` tool. Arrow keys (or `j`/`k`) navigate, `Enter` commits, and number keys `1`–`9` jump to a row — in single-select mode they also commit immediately. Pass `multi` to switch to a `Space`-toggles checklist with a single deferred `Enter` commit.
+
+## Example
+
+```html
+<tui-question
+  question="Which dependency strategy do you want?"
+  options='[
+    {"value":"pin","label":"Pin exact versions","description":"Most reproducible; updates require a PR."},
+    {"value":"caret","label":"Caret ranges","description":"Auto-pick compatible minors."},
+    {"value":"latest","label":"Latest","description":"Bleeding edge; expect breakage."}
+  ]'
+></tui-question>
+```
+
+Setting options as a property at runtime is the more typical path:
+
+```ts
+const q = document.querySelector('tui-question')!;
+(q as HTMLElement & { options: unknown }).options = [
+  { value: 'pin', label: 'Pin exact versions' },
+  { value: 'caret', label: 'Caret ranges' },
+  { value: 'latest', label: 'Latest' },
+];
+
+q.addEventListener('tui-question-select', (e) => {
+  const { values, labels, indices } = (e as CustomEvent).detail;
+  console.log('picked', values, labels, indices);
+});
+```
+
+## Multi-select
+
+```html
+<tui-question
+  multi
+  question="Which checks should run on save?"
+  options='[
+    {"value":"lint","label":"Biome lint"},
+    {"value":"types","label":"tsc --noEmit"},
+    {"value":"tests","label":"Vitest affected"}
+  ]'
+></tui-question>
+```
+
+In multi mode each row gets a `[ ]` / `[x]` shortcut cell. `Space` toggles the focused row; number keys also toggle (instead of committing). The element does not emit `tui-question-select` until you press `Enter`.
+
+## API
+
+| Attribute / Property | Type | Description |
+| --- | --- | --- |
+| `question` | `string` | Heading text shown above the options. Also used as the host's `aria-label` when none is set. |
+| `selected` | `number` | Index of the currently highlighted row (the keyboard caret). Reflected; defaults to `0`. |
+| `multi` | `boolean` | Multi-select mode — `Space` toggles, `Enter` commits the chosen set. |
+| `options` | `Array<{ value, label, description? }>` | Settable as a JSON-encoded attribute or as a JS property. |
+
+### Events
+
+| Event | Detail | Description |
+| --- | --- | --- |
+| `tui-question-select` | `{ values: string[]; labels: string[]; indices: number[] }` | Fired on `Enter` (and, in single mode, on number-key or click). Arrays are sorted ascending by index. Never fires when `options` is empty. |
+
+### Keyboard
+
+| Key | Behavior |
+| --- | --- |
+| `↓` / `j` | Move caret down (clamped at last option). |
+| `↑` / `k` | Move caret up (clamped at first option). |
+| `Home` / `End` | Jump to first / last option. |
+| `1`–`9` | Jump to that row. Single mode: commits. Multi mode: toggles. |
+| `Space` | Toggle the focused row (multi mode only). |
+| `Enter` | Commit and fire `tui-question-select`. |
+| Click | Single mode: selects + commits. Multi mode: toggles. |
+
+### CSS parts
+
+`question`, `list`, `option`, `marker`, `shortcut`.
+
+### Accessibility
+
+The host applies `tabindex="0"` and `role="group"` on connect, plus `aria-label` from the `question` attribute when one isn't already set. The internal list uses `role="listbox"` with `aria-activedescendant` pointing at the highlighted row; each option carries `role="option"` and `aria-selected`. The leading `▸` marker is `aria-hidden` (it duplicates the `aria-selected` state visually).
+
+### Focus auto-claim
+
+The element claims focus once when it scrolls at least 60% into view via an `IntersectionObserver`, so a user can immediately use arrow keys without first clicking the question. The claim **never** steals from a focused `<input>`, `<textarea>`, or another `tui-*` element — typing in a `<tui-prompt-input>` above the question is preserved.

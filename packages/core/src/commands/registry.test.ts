@@ -7,6 +7,15 @@ const noopCtx: CommandContext = {
   toggleTheme: () => undefined,
   setTheme: () => undefined,
   emit: () => undefined,
+  write: () => undefined,
+  clear: () => undefined,
+  history: { all: () => [], clear: () => undefined },
+  session: {
+    register: () => () => undefined,
+    read: () => undefined,
+    has: () => false,
+    keys: () => [],
+  },
 };
 
 const POSTS: Command = { name: 'posts', aliases: ['ls posts'], route: '/posts/' };
@@ -42,13 +51,22 @@ describe('defineCommands', () => {
     expect(() => defineCommands([neither])).toThrow(CommandDefinitionError);
   });
 
-  it('rejects duplicate command names', () => {
-    expect(() =>
-      defineCommands([
-        { name: 'x', route: '/x' },
-        { name: 'x', route: '/y' },
-      ]),
-    ).toThrow(CommandDefinitionError);
+  it('allows later-wins override of a duplicate name', () => {
+    const cmds = defineCommands([
+      { name: 'x', route: '/x' },
+      { name: 'x', route: '/y' },
+    ]);
+    expect(cmds).toHaveLength(1);
+    expect((cmds[0] as { route: string }).route).toBe('/y');
+  });
+
+  it("keeps the override's position in the list", () => {
+    const cmds = defineCommands([
+      { name: 'a', route: '/a' },
+      { name: 'b', route: '/b' },
+      { name: 'a', route: '/a2' },
+    ]);
+    expect(cmds.map((c) => c.name)).toEqual(['b', 'a']);
   });
 
   it('rejects alias conflicts', () => {

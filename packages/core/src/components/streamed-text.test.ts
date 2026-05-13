@@ -102,3 +102,94 @@ describe('<tui-streamed-text>', () => {
     expect(chars).toHaveLength(4);
   });
 });
+
+describe('<tui-streamed-text mode="token">', () => {
+  function readDelays(el: TuiStreamedText): number[] {
+    const spans = Array.from(el.shadowRoot?.querySelectorAll<HTMLElement>('[part~="char"]') ?? []);
+    return spans.map((s) => Number.parseFloat(s.style.animationDelay) || 0);
+  }
+
+  it('produces monotonically non-decreasing per-char delays', async () => {
+    const el = await fixture<TuiStreamedText>(
+      html`<tui-streamed-text mode="token" speed="40"
+        >hello, world. how are you?</tui-streamed-text
+      >`,
+    );
+    await el.updateComplete;
+    const delays = readDelays(el);
+    expect(delays.length).toBe('hello, world. how are you?'.length);
+    for (let i = 1; i < delays.length; i++) {
+      // Within-burst gaps are tiny but never go backwards.
+      const d = delays[i] as number;
+      const prev = delays[i - 1] as number;
+      expect(d).toBeGreaterThanOrEqual(prev);
+    }
+  });
+
+  it('adds an extra pause after sentence punctuation', async () => {
+    const el = await fixture<TuiStreamedText>(
+      html`<tui-streamed-text mode="token" speed="40">a.b</tui-streamed-text>`,
+    );
+    await el.updateComplete;
+    const [d0, d1, d2] = readDelays(el) as [number, number, number];
+    // Gap between `.` (d1) and the next char (d2) must include the sentence
+    // pause (≥80ms by the engine constant) PLUS any inter-burst step time.
+    expect(d2 - d1).toBeGreaterThan(80);
+    // Sanity: first char delay is just `base`.
+    expect(d0).toBe(0);
+  });
+
+  it('produces deterministic delays for identical input (seeded)', async () => {
+    const a = await fixture<TuiStreamedText>(
+      html`<tui-streamed-text mode="token" speed="30">deterministic</tui-streamed-text>`,
+    );
+    const b = await fixture<TuiStreamedText>(
+      html`<tui-streamed-text mode="token" speed="30">deterministic</tui-streamed-text>`,
+    );
+    await a.updateComplete;
+    await b.updateComplete;
+    expect(readDelays(a)).toEqual(readDelays(b));
+  });
+
+  it('character mode (default) still produces uniform step delays', async () => {
+    const el = await fixture<TuiStreamedText>(
+      html`<tui-streamed-text speed="40">abc</tui-streamed-text>`,
+    );
+    await el.updateComplete;
+    expect(readDelays(el)).toEqual([0, 40, 80]);
+  });
+});
+
+describe('<tui-streamed-text skippable>', () => {
+  it('click on the host interrupts the in-progress stream', async () => {
+    const events: Event[] = [];
+    const el = await fixture<TuiStreamedText>(
+      html`<tui-streamed-text skippable speed="500">hello world</tui-streamed-text>`,
+    );
+    el.addEventListener('tui-stream-interrupt', (e) => events.push(e));
+    await el.updateComplete;
+    el.click();
+    expect(events).toHaveLength(1);
+  });
+
+  it('click is a no-op when skippable is not set', async () => {
+    const events: Event[] = [];
+    const el = await fixture<TuiStreamedText>(
+      html`<tui-streamed-text speed="500">hello</tui-streamed-text>`,
+    );
+    el.addEventListener('tui-stream-interrupt', (e) => events.push(e));
+    await el.updateComplete;
+    el.click();
+    expect(events).toHaveLength(0);
+  });
+
+  it('sets data-completed after interrupt so CSS can drop the pointer cursor', async () => {
+    const el = await fixture<TuiStreamedText>(
+      html`<tui-streamed-text skippable speed="500">hello</tui-streamed-text>`,
+    );
+    await el.updateComplete;
+    expect(el.hasAttribute('data-completed')).toBe(false);
+    el.click();
+    expect(el.hasAttribute('data-completed')).toBe(true);
+  });
+});

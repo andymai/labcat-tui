@@ -20,3 +20,4 @@ export { SlashOverlay } from './components/slash-overlay.js';
 export { Session } from './components/session.js';
 export { AgentBadge } from './components/agent-badge.js';
 export { ShimmerText } from './components/shimmer-text.js';
+export { Question } from './components/question.js';

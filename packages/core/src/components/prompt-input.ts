@@ -10,6 +10,7 @@ import type {
 } from '../events/types.js';
 import { devWarn } from '../util/env.js';
 import { MODE_LIST, MODE_SET, type Mode } from '../util/modes.js';
+import { getActiveSessionStore } from './session.js';
 
 const HISTORY_PREFIX = 'tui:history:';
 const DEFAULT_HISTORY_LIMIT = 50;
@@ -54,6 +55,17 @@ function writeHistory(key: string, entries: readonly string[]): void {
   } catch {
     /* quota / private mode — ignore */
   }
+}
+
+function wrapStringNode(text: string): HTMLElement {
+  // String writes auto-stream with token-burst feel; consumers wanting the
+  // legacy "instant text div" can pre-build a Node and call ctx.write(node).
+  const el = document.createElement('tui-streamed-text');
+  el.setAttribute('mode', 'token');
+  el.setAttribute('skippable', '');
+  el.classList.add('tui-cmd-output');
+  el.textContent = text;
+  return el;
 }
 
 export type PromptMode = Mode;
@@ -153,6 +165,32 @@ export class TuiPromptInput extends LitElement {
     .input:disabled {
       cursor: not-allowed;
     }
+
+    .hint-wrap {
+      position: relative;
+      flex: 1 1 auto;
+      min-inline-size: 0;
+    }
+
+    .hint-wrap .input {
+      position: relative;
+      z-index: 1;
+      inline-size: 100%;
+    }
+
+    .hint {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      color: var(--tui-fg-dim);
+      font: inherit;
+      white-space: pre;
+      overflow: hidden;
+    }
+
+    .hint .typed {
+      visibility: hidden;
+    }
   `;
 
   @property({ type: String, reflect: true })
@@ -176,11 +214,23 @@ export class TuiPromptInput extends LitElement {
   @property({ attribute: false })
   onNavigate: ((url: string) => void) | null = null;
 
+  /**
+   * Hook for consumers to override `ctx.write` behavior. Default behavior
+   * inserts the node as a sibling immediately before this prompt-input
+   * (terminal scrollback feel). Return `false` to fall back to the default
+   * after running custom logic; return `true` (or void) to claim the write.
+   */
+  @property({ attribute: false })
+  onWrite: ((node: Node) => boolean | undefined) | null = null;
+
   @state()
   private value = '';
 
   @state()
   private running = false;
+
+  @state()
+  private hint = '';
 
   private history: string[] = [];
   private historyCursor: number | null = null;
@@ -220,7 +270,7 @@ export class TuiPromptInput extends LitElement {
     return this.registryCache;
   }
 
-  private buildContext(): CommandContext {
+  buildContext(): CommandContext {
     return {
       navigate: (url: string) => this.navigate(url),
       toggleTheme: () =>
@@ -231,7 +281,57 @@ export class TuiPromptInput extends LitElement {
         ),
       emit: (event, detail) =>
         this.dispatchEvent(new CustomEvent(event, { detail, bubbles: true, composed: true })),
+      write: (input) => this.write(input),
+      clear: () => this.clearScrollback(),
+      history: {
+        all: () => [...this.history],
+        clear: () => this.clearHistory(),
+      },
+      session: getActiveSessionStore(),
     };
+  }
+
+  private write(input: Node | string): void {
+    const node = typeof input === 'string' ? wrapStringNode(input) : input;
+    if (this.onWrite) {
+      const claimed = this.onWrite(node);
+      if (claimed === true || claimed === undefined) return;
+    }
+    const parent = this.parentNode;
+    if (!parent) return;
+    parent.insertBefore(node, this);
+  }
+
+  /**
+   * Terminal `clear`: removes preceding siblings (the "scrollback") and
+   * closes any open slash overlay. Designed to be visually identical to
+   * starting fresh. Does not touch history or prefs.
+   */
+  private clearScrollback(): void {
+    const parent = this.parentNode;
+    if (parent) {
+      // Iterate snapshot — removing nodes mutates the live `previousSibling` chain.
+      const siblings: ChildNode[] = [];
+      let cur = this.previousSibling;
+      while (cur) {
+        siblings.push(cur);
+        cur = cur.previousSibling;
+      }
+      for (const node of siblings) node.remove();
+    }
+    if (typeof document !== 'undefined') {
+      const overlay = document.querySelector<HTMLElement & { open?: boolean }>(
+        'tui-slash-overlay[open]',
+      );
+      if (overlay) overlay.open = false;
+    }
+    this.focus();
+  }
+
+  private clearHistory(): void {
+    this.history = [];
+    this.historyCursor = null;
+    writeHistory(this.resolvedKey, this.history);
   }
 
   private navigate(url: string): void {
@@ -258,7 +358,31 @@ export class TuiPromptInput extends LitElement {
   private onInput = (e: Event): void => {
     this.value = (e.target as HTMLInputElement).value;
     this.historyCursor = null;
+    void this.refreshHint();
   };
+
+  /**
+   * Computes the inline argument hint — the first completion candidate for
+   * the *current arg position* (after the last space), rendered as ghost
+   * text behind the live input. Skipped when there's no space yet (the slash
+   * overlay handles bare-name completion).
+   */
+  private async refreshHint(): Promise<void> {
+    const raw = this.value;
+    if (!raw.includes(' ')) {
+      // Bare-name completion happens in the slash-overlay; we only hint args.
+      if (this.hint) this.hint = '';
+      return;
+    }
+    const tail = raw.slice(raw.lastIndexOf(' ') + 1);
+    try {
+      const candidates = await this.registry.completions(raw, this.buildContext());
+      const match = candidates.find((c) => c.startsWith(tail) && c !== tail);
+      this.hint = match ? match.slice(tail.length) : '';
+    } catch {
+      this.hint = '';
+    }
+  }
 
   private onKeyDown = (e: KeyboardEvent): void => {
     if (e.key === 'Enter') {
@@ -401,21 +525,30 @@ export class TuiPromptInput extends LitElement {
     return html`
       <div class="row">
         <span class="caret" part="caret" aria-hidden="true">›</span>
-        <input
-          class="input"
-          part="input"
-          type="text"
-          autocomplete="off"
-          autocapitalize="off"
-          spellcheck="false"
-          inputmode="text"
-          aria-label="terminal command"
-          .value=${this.value}
-          .placeholder=${this.placeholder}
-          ?disabled=${this.disabled || this.running}
-          @input=${this.onInput}
-          @keydown=${this.onKeyDown}
-        />
+        <div class="hint-wrap">
+          <input
+            class="input"
+            part="input"
+            type="text"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            inputmode="text"
+            aria-label="terminal command"
+            .value=${this.value}
+            .placeholder=${this.placeholder}
+            ?disabled=${this.disabled || this.running}
+            @input=${this.onInput}
+            @keydown=${this.onKeyDown}
+          />
+          ${
+            this.hint
+              ? html`<span class="hint" part="hint" aria-hidden="true"
+                ><span class="typed">${this.value}</span>${this.hint}</span
+              >`
+              : null
+          }
+        </div>
       </div>
     `;
   }

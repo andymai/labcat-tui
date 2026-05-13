@@ -1,3 +1,4 @@
+import { devWarn } from '../util/env.js';
 import { closestMatch } from './levenshtein.js';
 import { parseInput } from './parser.js';
 import type { Command, MatchResult } from './types.js';
@@ -19,8 +20,15 @@ export class CommandDefinitionError extends Error {
  * this catches that.
  */
 export function defineCommands(commands: readonly Command[]): Command[] {
-  const seen = new Set<string>();
-  for (const cmd of commands) {
+  // Names: later wins (with devWarn). Lets consumers override `builtinCommands()`
+  // entries by re-declaring them downstream without filtering first.
+  // Aliases: still hard-conflict — aliases must resolve deterministically to a
+  // single canonical name, and silently picking a winner would mask real bugs.
+  const nameToIndex = new Map<string, number>();
+  const aliasOwner = new Map<string, string>();
+  const result: (Command | null)[] = [];
+
+  commands.forEach((cmd, i) => {
     const hasRoute = typeof (cmd as { route?: unknown }).route === 'string';
     const hasHandler = typeof (cmd as { handler?: unknown }).handler === 'function';
     if (hasRoute === hasHandler) {
@@ -32,21 +40,36 @@ export function defineCommands(commands: readonly Command[]): Command[] {
       throw new CommandDefinitionError('Every command requires a non-empty `name`.');
     }
     const normalized = normalizeName(cmd.name);
-    if (seen.has(normalized)) {
-      throw new CommandDefinitionError(`Duplicate command name "${cmd.name}".`);
+
+    const prev = nameToIndex.get(normalized);
+    if (prev !== undefined) {
+      devWarn(
+        `Command "${cmd.name}" overrides an earlier definition (source: ${commands[prev]?.source ?? 'consumer'} → ${cmd.source ?? 'consumer'}).`,
+      );
+      // Free any aliases the previous one held so the override can re-claim
+      // them (or claim none — that's fine too).
+      for (const [a, owner] of aliasOwner) {
+        if (owner === normalized) aliasOwner.delete(a);
+      }
+      result[prev] = null;
     }
-    seen.add(normalized);
+    nameToIndex.set(normalized, i);
+    result[i] = cmd;
+
     for (const alias of cmd.aliases ?? []) {
       const a = normalizeName(alias);
-      if (seen.has(a)) {
+      const existingOwner = aliasOwner.get(a);
+      const conflictsWithName = nameToIndex.has(a) && nameToIndex.get(a) !== i;
+      if (conflictsWithName || (existingOwner && existingOwner !== normalized)) {
         throw new CommandDefinitionError(
           `Alias "${alias}" on "${cmd.name}" conflicts with another command name or alias.`,
         );
       }
-      seen.add(a);
+      aliasOwner.set(a, normalized);
     }
-  }
-  return Array.from(commands);
+  });
+
+  return result.filter((c): c is Command => c !== null);
 }
 
 export function normalizeName(name: string): string {

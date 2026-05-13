@@ -297,6 +297,22 @@
         },
         {
           "kind": "js",
+          "name": "TuiQuestion",
+          "declaration": {
+            "name": "TuiQuestion",
+            "module": "./components/question.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiQuestionOption",
+          "declaration": {
+            "name": "TuiQuestionOption",
+            "module": "./components/question.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "defineTheme",
           "declaration": {
             "name": "defineTheme",
@@ -449,9 +465,25 @@
         },
         {
           "kind": "js",
+          "name": "builtinCommands",
+          "declaration": {
+            "name": "builtinCommands",
+            "module": "./commands/index.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "BaseCommand",
           "declaration": {
             "name": "BaseCommand",
+            "module": "./commands/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BuiltinOptions",
+          "declaration": {
+            "name": "BuiltinOptions",
             "module": "./commands/index.js"
           }
         },
@@ -476,6 +508,22 @@
           "name": "CommandHandler",
           "declaration": {
             "name": "CommandHandler",
+            "module": "./commands/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CommandHistoryAccess",
+          "declaration": {
+            "name": "CommandHistoryAccess",
+            "module": "./commands/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CommandSource",
+          "declaration": {
+            "name": "CommandSource",
             "module": "./commands/index.js"
           }
         },
@@ -508,6 +556,14 @@
           "name": "RouteCommand",
           "declaration": {
             "name": "RouteCommand",
+            "module": "./commands/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SessionStore",
+          "declaration": {
+            "name": "SessionStore",
             "module": "./commands/index.js"
           }
         },
@@ -569,10 +625,53 @@
         },
         {
           "kind": "js",
+          "name": "TuiQuestionSelectDetail",
+          "declaration": {
+            "name": "TuiQuestionSelectDetail",
+            "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "TuiEventMap",
           "declaration": {
             "name": "TuiEventMap",
             "module": "./events/types.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/commands/builtins.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "builtinCommands",
+          "return": {
+            "type": {
+              "text": "Command[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "opts",
+              "default": "{}",
+              "type": {
+                "text": "BuiltinOptions"
+              }
+            }
+          ],
+          "description": "Returns a tree-shake-friendly array of selected builtin commands, each\ntagged with `source: 'builtin'`. Pass through `defineCommands(...)` along\nwith the consumer's own commands; later same-name commands override."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "builtinCommands",
+          "declaration": {
+            "name": "builtinCommands",
+            "module": "src/commands/builtins.ts"
           }
         }
       ]
@@ -640,6 +739,22 @@
         },
         {
           "kind": "js",
+          "name": "builtinCommands",
+          "declaration": {
+            "name": "builtinCommands",
+            "module": "./builtins.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BuiltinOptions",
+          "declaration": {
+            "name": "BuiltinOptions",
+            "module": "./builtins.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "BaseCommand",
           "declaration": {
             "name": "BaseCommand",
@@ -672,6 +787,22 @@
         },
         {
           "kind": "js",
+          "name": "CommandHistoryAccess",
+          "declaration": {
+            "name": "CommandHistoryAccess",
+            "module": "./types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CommandSource",
+          "declaration": {
+            "name": "CommandSource",
+            "module": "./types.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "HandlerCommand",
           "declaration": {
             "name": "HandlerCommand",
@@ -699,6 +830,14 @@
           "name": "RouteCommand",
           "declaration": {
             "name": "RouteCommand",
+            "module": "./types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SessionStore",
+          "declaration": {
+            "name": "SessionStore",
             "module": "./types.js"
           }
         }
@@ -1023,196 +1162,6 @@
     {
       "kind": "javascript-module",
       "path": "src/commands/types.ts",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/events/names.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND_SUCCESS",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command-success'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_COMMAND_ERROR",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-command-error'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_NAVIGATE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-navigate'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_THEME_CHANGE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-theme-change'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_START",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-start'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_COMPLETE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-complete'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_STREAM_INTERRUPT",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-stream-interrupt'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_SLASH_SELECT",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-slash-select'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_SLASH_DISMISS",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-slash-dismiss'"
-        },
-        {
-          "kind": "variable",
-          "name": "TUI_TODO_CHANGE",
-          "type": {
-            "text": "string"
-          },
-          "default": "'tui-todo-change'"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND",
-          "declaration": {
-            "name": "TUI_COMMAND",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND_SUCCESS",
-          "declaration": {
-            "name": "TUI_COMMAND_SUCCESS",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_COMMAND_ERROR",
-          "declaration": {
-            "name": "TUI_COMMAND_ERROR",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_NAVIGATE",
-          "declaration": {
-            "name": "TUI_NAVIGATE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_THEME_CHANGE",
-          "declaration": {
-            "name": "TUI_THEME_CHANGE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_START",
-          "declaration": {
-            "name": "TUI_STREAM_START",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_COMPLETE",
-          "declaration": {
-            "name": "TUI_STREAM_COMPLETE",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_STREAM_INTERRUPT",
-          "declaration": {
-            "name": "TUI_STREAM_INTERRUPT",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_SLASH_SELECT",
-          "declaration": {
-            "name": "TUI_SLASH_SELECT",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_SLASH_DISMISS",
-          "declaration": {
-            "name": "TUI_SLASH_DISMISS",
-            "module": "src/events/names.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TUI_TODO_CHANGE",
-          "declaration": {
-            "name": "TUI_TODO_CHANGE",
-            "module": "src/events/names.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/events/types.ts",
       "declarations": [],
       "exports": []
     },
@@ -1817,6 +1766,15 @@
             },
             {
               "kind": "field",
+              "name": "onWrite",
+              "type": {
+                "text": "((node: Node) => boolean | undefined) | null"
+              },
+              "default": "null",
+              "description": "Hook for consumers to override `ctx.write` behavior. Default behavior\ninserts the node as a sibling immediately before this prompt-input\n(terminal scrollback feel). Return `false` to fall back to the default\nafter running custom logic; return `true` (or void) to claim the write."
+            },
+            {
+              "kind": "field",
               "name": "value",
               "type": {
                 "text": "string"
@@ -1832,6 +1790,15 @@
               },
               "privacy": "private",
               "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
             },
             {
               "kind": "field",
@@ -1908,10 +1875,48 @@
             {
               "kind": "method",
               "name": "buildContext",
-              "privacy": "private",
               "return": {
                 "type": {
                   "text": "CommandContext"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "write",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "input",
+                  "type": {
+                    "text": "Node | string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "clearScrollback",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Terminal `clear`: removes preceding siblings (the \"scrollback\") and\ncloses any open slash overlay. Designed to be visually identical to\nstarting fresh. Does not touch history or prefs."
+            },
+            {
+              "kind": "method",
+              "name": "clearHistory",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
                 }
               }
             },
@@ -1955,6 +1960,17 @@
               "kind": "field",
               "name": "onInput",
               "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "refreshHint",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              },
+              "description": "Computes the inline argument hint — the first completion candidate for\nthe *current arg position* (after the last space), rendered as ghost\ntext behind the live input. Skipped when there's no space yet (the slash\noverlay handles bare-name completion)."
             },
             {
               "kind": "field",
@@ -2277,13 +2293,255 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/session.ts",
+      "path": "src/components/question.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "`<tui-session>` — High-level Light-DOM orchestrator. Holds the\ndocument-level keyboard shortcuts so embedded `<tui-prompt-input>` /\n`<tui-slash-overlay>` instances don't need to.\n\nPer SPEC §10.2:\n  /           → focus first descendant <tui-prompt-input> (skipped in form fields)\n  Cmd/Ctrl-K  → open first descendant <tui-slash-overlay>\n  ?           → open the slash overlay (skipped in form fields)\n  Escape      → close the slash overlay if open\n\nThe `mode` attribute resolves to `--tui-active-mode-color`, which\ndescendant `<tui-prompt-input>` instances read for their caret + left\nborder. A prompt-input can set its own `mode` attribute to override.\n\nMultiple sessions on a page: **last-mounted wins** shortcut routing\n(with `console.warn` in dev). Subtrees opt out via the\n`ignore-shortcuts` attribute on any ancestor element.\n\nLight DOM (per SPEC §7.2) — slotted children behave naturally in any\nframework. Layout is consumer-driven; the element only adds the\n`tui-session` class.",
+          "description": "`<tui-question>` — A multi-choice picker that emulates Claude Code's\nAskUserQuestion tool. Arrow keys navigate, Enter commits, number keys\n1–9 jump-and-select. Single-select by default; `multi` enables\nspace-toggle multi-select.",
+          "name": "TuiQuestion",
+          "cssParts": [
+            {
+              "description": "The question text wrapper",
+              "name": "question"
+            },
+            {
+              "description": "The options listbox",
+              "name": "list"
+            },
+            {
+              "description": "Each option row",
+              "name": "option"
+            },
+            {
+              "description": "The leading `▸` arrow on the selected row",
+              "name": "marker"
+            },
+            {
+              "description": "The leading `1.` / `[x]` cell",
+              "name": "shortcut"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "question",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "question",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "multi",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "multi",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "TuiQuestionOption[]"
+              },
+              "default": "[]",
+              "description": "Array of `{ value, label, description? }`",
+              "attribute": "options"
+            },
+            {
+              "kind": "field",
+              "name": "chosen",
+              "privacy": "private",
+              "default": "new Set<number>()"
+            },
+            {
+              "kind": "field",
+              "name": "hasAutoFocused",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "viewObserver",
+              "type": {
+                "text": "IntersectionObserver | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "method",
+              "name": "shouldClaimFocus",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "clampSelected",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onKeyDown",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "toggle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "commit",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "tui-question-select",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ values: string[]; labels: string[] }` on Enter"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "The question text shown above the options",
+              "name": "question",
+              "default": "''",
+              "fieldName": "question"
+            },
+            {
+              "type": {
+                "text": "number"
+              },
+              "description": "Index of the currently highlighted option",
+              "name": "selected",
+              "default": "0",
+              "fieldName": "selected"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Multi-select mode (Space toggles, Enter commits)",
+              "name": "multi",
+              "default": "false",
+              "fieldName": "multi"
+            },
+            {
+              "name": "options",
+              "type": {
+                "text": "TuiQuestionOption[]"
+              },
+              "default": "[]",
+              "description": "Array of `{ value, label, description? }`",
+              "fieldName": "options"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "tui-question",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TuiQuestion",
+          "declaration": {
+            "name": "TuiQuestion",
+            "module": "src/components/question.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "tui-question",
+          "declaration": {
+            "name": "TuiQuestion",
+            "module": "src/components/question.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/session.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "getActiveSessionStore",
+          "return": {
+            "type": {
+              "text": "SessionStore"
+            }
+          },
+          "description": "Returns the active session's store, or a detached store if no\n`<tui-session>` is mounted. The detached store still works — it just isn't\nshared with anything."
+        },
+        {
+          "kind": "class",
+          "description": "`<tui-session>` — High-level Light-DOM orchestrator. Holds the\ndocument-level keyboard shortcuts so embedded `<tui-prompt-input>` /\n`<tui-slash-overlay>` instances don't need to.\n\nPer SPEC §10.2:\n  /           → open first descendant <tui-slash-overlay> if present;\n                else focus first descendant <tui-prompt-input>\n                (skipped in form fields — typing `/` in an input is just text)\n  Cmd/Ctrl-K  → open first descendant <tui-slash-overlay>\n  ?           → open the slash overlay (skipped in form fields)\n  Escape      → close the slash overlay if open\n\nThe `mode` attribute resolves to `--tui-active-mode-color`, which\ndescendant `<tui-prompt-input>` instances read for their caret + left\nborder. A prompt-input can set its own `mode` attribute to override.\n\nMultiple sessions on a page: **last-mounted wins** shortcut routing\n(with `console.warn` in dev). Subtrees opt out via the\n`ignore-shortcuts` attribute on any ancestor element.\n\nLight DOM (per SPEC §7.2) — slotted children behave naturally in any\nframework. Layout is consumer-driven; the element only adds the\n`tui-session` class.",
           "name": "TuiSession",
           "members": [
+            {
+              "kind": "field",
+              "name": "store",
+              "type": {
+                "text": "SessionStore"
+              },
+              "readonly": true,
+              "default": "new TuiSessionStore()"
+            },
             {
               "kind": "field",
               "name": "mode",
@@ -2330,6 +2588,14 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "getActiveSessionStore",
+          "declaration": {
+            "name": "getActiveSessionStore",
+            "module": "src/components/session.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "TuiSession",
@@ -2452,12 +2718,50 @@
       "path": "src/components/slash-overlay.ts",
       "declarations": [
         {
+          "kind": "variable",
+          "name": "COMMAND_GROUP_ORDER",
+          "type": {
+            "text": "['Navigation', 'System', 'Posts', 'Utility', 'Other']"
+          },
+          "default": "['Navigation', 'System', 'Posts', 'Utility', 'Other']",
+          "description": "Ordering for command groups in both the slash-overlay listing and the\n`/help` output. Anything not in this list sorts at the end in insertion\norder. Exported so /help can use the exact same ordering."
+        },
+        {
+          "kind": "function",
+          "name": "groupCommands",
+          "return": {
+            "type": {
+              "text": "{ group: string; commands: Command[] }[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "commands",
+              "type": {
+                "text": "readonly Command[]"
+              }
+            }
+          ]
+        },
+        {
           "kind": "class",
           "description": "`<tui-slash-overlay>` — Modal command palette.",
           "name": "TuiSlashOverlay",
           "cssParts": [
             {
               "name": "backdrop"
+            },
+            {
+              "description": "The list+search container (override radius/shadow/width)",
+              "name": "panel"
+            },
+            {
+              "description": "The search-input row",
+              "name": "search"
+            },
+            {
+              "description": "The leading `›` in the search row",
+              "name": "caret"
             },
             {
               "name": "list"
@@ -2485,6 +2789,15 @@
               },
               "default": "[]",
               "description": "Array of Command"
+            },
+            {
+              "kind": "field",
+              "name": "getContext",
+              "type": {
+                "text": "(() => CommandContext) | null"
+              },
+              "default": "null",
+              "description": "If set, the overlay executes the picked command itself (route → navigates\nvia the returned context's `navigate`; handler → invokes with the\ncontext). When unset, the overlay only fires `tui-slash-select` with\n`executed: false`, leaving execution to the consumer."
             },
             {
               "kind": "field",
@@ -2602,6 +2915,20 @@
               "kind": "field",
               "name": "onBackdropClick",
               "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderGrouped",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "list",
+                  "type": {
+                    "text": "readonly Command[]"
+                  }
+                }
+              ],
+              "description": "Render commands grouped by `group?`, preserving a flat `selected` index\nso keyboard navigation still works across group boundaries. Group\nheaders are skipped when no group is set on any command (or only one\ngroup exists) to keep the legacy look for small consumer lists."
             }
           ],
           "events": [
@@ -2639,6 +2966,22 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "COMMAND_GROUP_ORDER",
+          "declaration": {
+            "name": "COMMAND_GROUP_ORDER",
+            "module": "src/components/slash-overlay.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "groupCommands",
+          "declaration": {
+            "name": "groupCommands",
+            "module": "src/components/slash-overlay.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "TuiSlashOverlay",
@@ -3052,6 +3395,26 @@
             },
             {
               "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "'char' | 'token'"
+              },
+              "default": "'char'",
+              "attribute": "mode",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "skippable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "skippable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "chars",
               "type": {
                 "text": "string[]"
@@ -3206,6 +3569,11 @@
             },
             {
               "kind": "field",
+              "name": "onHostClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
               "name": "effectiveSpeedMs",
               "type": {
                 "text": "number"
@@ -3297,6 +3665,22 @@
               "name": "skip-on-revisit",
               "default": "false",
               "fieldName": "skipOnRevisit"
+            },
+            {
+              "name": "mode",
+              "type": {
+                "text": "'char' | 'token'"
+              },
+              "default": "'char'",
+              "fieldName": "mode"
+            },
+            {
+              "name": "skippable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "skippable"
             }
           ],
           "superclass": {
@@ -4023,6 +4407,212 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/events/names.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_SUCCESS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-success'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_COMMAND_ERROR",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-command-error'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_NAVIGATE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-navigate'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_THEME_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-theme-change'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_START",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-start'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_COMPLETE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-complete'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_STREAM_INTERRUPT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-stream-interrupt'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_SELECT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-select'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_SLASH_DISMISS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-slash-dismiss'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_TODO_CHANGE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-todo-change'"
+        },
+        {
+          "kind": "variable",
+          "name": "TUI_QUESTION_SELECT",
+          "type": {
+            "text": "string"
+          },
+          "default": "'tui-question-select'"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND",
+          "declaration": {
+            "name": "TUI_COMMAND",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_SUCCESS",
+          "declaration": {
+            "name": "TUI_COMMAND_SUCCESS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_COMMAND_ERROR",
+          "declaration": {
+            "name": "TUI_COMMAND_ERROR",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_NAVIGATE",
+          "declaration": {
+            "name": "TUI_NAVIGATE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_THEME_CHANGE",
+          "declaration": {
+            "name": "TUI_THEME_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_START",
+          "declaration": {
+            "name": "TUI_STREAM_START",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_COMPLETE",
+          "declaration": {
+            "name": "TUI_STREAM_COMPLETE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_STREAM_INTERRUPT",
+          "declaration": {
+            "name": "TUI_STREAM_INTERRUPT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_SELECT",
+          "declaration": {
+            "name": "TUI_SLASH_SELECT",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_SLASH_DISMISS",
+          "declaration": {
+            "name": "TUI_SLASH_DISMISS",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_TODO_CHANGE",
+          "declaration": {
+            "name": "TUI_TODO_CHANGE",
+            "module": "src/events/names.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TUI_QUESTION_SELECT",
+          "declaration": {
+            "name": "TUI_QUESTION_SELECT",
+            "module": "src/events/names.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/events/types.ts",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",

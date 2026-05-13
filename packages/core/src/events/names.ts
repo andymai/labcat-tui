@@ -9,3 +9,4 @@ export const TUI_STREAM_INTERRUPT = 'tui-stream-interrupt';
 export const TUI_SLASH_SELECT = 'tui-slash-select';
 export const TUI_SLASH_DISMISS = 'tui-slash-dismiss';
 export const TUI_TODO_CHANGE = 'tui-todo-change';
+export const TUI_QUESTION_SELECT = 'tui-question-select';

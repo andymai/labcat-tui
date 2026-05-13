@@ -1,8 +1,35 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { CommandRegistry } from '../commands/registry.js';
-import type { Command } from '../commands/types.js';
+import type { Command, CommandContext } from '../commands/types.js';
 import type { TuiSlashSelectDetail } from '../events/types.js';
+
+/**
+ * Ordering for command groups in both the slash-overlay listing and the
+ * `/help` output. Anything not in this list sorts at the end in insertion
+ * order. Exported so /help can use the exact same ordering.
+ */
+export const COMMAND_GROUP_ORDER = ['Navigation', 'System', 'Posts', 'Utility', 'Other'] as const;
+
+export function groupCommands(
+  commands: readonly Command[],
+): { group: string; commands: Command[] }[] {
+  const groups = new Map<string, Command[]>();
+  for (const cmd of commands) {
+    const g = cmd.group ?? 'Other';
+    const arr = groups.get(g) ?? [];
+    arr.push(cmd);
+    groups.set(g, arr);
+  }
+  const known = COMMAND_GROUP_ORDER as readonly string[];
+  return [...groups.keys()]
+    .sort((a, b) => {
+      const ai = known.indexOf(a);
+      const bi = known.indexOf(b);
+      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+    })
+    .map((group) => ({ group, commands: groups.get(group) ?? [] }));
+}
 
 /**
  * `<tui-slash-overlay>` — Modal command palette.
@@ -12,6 +39,9 @@ import type { TuiSlashSelectDetail } from '../events/types.js';
  * @fires tui-slash-select - `{ command }` (command name) on pick
  * @fires tui-slash-dismiss - when the overlay is closed without a selection
  * @csspart backdrop
+ * @csspart panel - The list+search container (override radius/shadow/width)
+ * @csspart search - The search-input row
+ * @csspart caret - The leading `›` in the search row
  * @csspart list
  * @csspart item
  */
@@ -103,6 +133,14 @@ export class TuiSlashOverlay extends LitElement {
       color: var(--tui-fg-muted);
       text-align: center;
     }
+
+    .group-title {
+      padding: 0.4rem 0.5rem 0.2rem;
+      color: var(--tui-fg-muted);
+      font-size: 0.75em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
   `;
 
   @property({ type: Boolean, reflect: true })
@@ -110,6 +148,15 @@ export class TuiSlashOverlay extends LitElement {
 
   @property({ attribute: false })
   commands: Command[] = [];
+
+  /**
+   * If set, the overlay executes the picked command itself (route → navigates
+   * via the returned context's `navigate`; handler → invokes with the
+   * context). When unset, the overlay only fires `tui-slash-select` with
+   * `executed: false`, leaving execution to the consumer.
+   */
+  @property({ attribute: false })
+  getContext: (() => CommandContext) | null = null;
 
   @state()
   private query_ = '';
@@ -162,13 +209,18 @@ export class TuiSlashOverlay extends LitElement {
   private get filtered(): Command[] {
     if (!this.commands.length) return [];
     const reg = new CommandRegistry(this.commands);
-    if (!this.query_.trim()) return reg.list();
-    const q = this.query_.toLowerCase();
-    return reg.list().filter((c) => {
-      if (c.name.toLowerCase().includes(q)) return true;
-      if (c.description?.toLowerCase().includes(q)) return true;
-      return c.aliases?.some((a) => a.toLowerCase().includes(q)) ?? false;
-    });
+    const base = reg.list();
+    const matched = this.query_.trim()
+      ? base.filter((c) => {
+          const q = this.query_.toLowerCase();
+          if (c.name.toLowerCase().includes(q)) return true;
+          if (c.description?.toLowerCase().includes(q)) return true;
+          return c.aliases?.some((a) => a.toLowerCase().includes(q)) ?? false;
+        })
+      : base;
+    // Pre-order by group so keyboard nav (indexes into this flat list)
+    // and grouped rendering walk the commands in the same sequence.
+    return groupCommands(matched).flatMap((g) => g.commands);
   }
 
   private onInput = (e: Event): void => {
@@ -201,9 +253,30 @@ export class TuiSlashOverlay extends LitElement {
   };
 
   private pick(cmd: Command): void {
+    let executed = false;
+    if (this.getContext) {
+      const ctx = this.getContext();
+      const route = (cmd as { route?: unknown }).route;
+      const handler = (cmd as { handler?: unknown }).handler;
+      if (typeof route === 'string') {
+        ctx.navigate(route);
+        executed = true;
+      } else if (typeof handler === 'function') {
+        // Args are always empty for palette picks — slash-overlay is name-only.
+        // Resolve any async work but don't block the close; dispatch errors
+        // through console so they're visible in dev.
+        Promise.resolve()
+          .then(() => (handler as (a: string, c: CommandContext) => unknown)('', ctx))
+          .catch((err) => {
+            // eslint-disable-next-line no-console
+            console.error('[@labcat/tui] slash-overlay handler threw:', err);
+          });
+        executed = true;
+      }
+    }
     this.dispatchEvent(
       new CustomEvent<TuiSlashSelectDetail>('tui-slash-select', {
-        detail: { command: cmd.name },
+        detail: { command: cmd.name, executed },
         bubbles: true,
         composed: true,
       }),
@@ -218,13 +291,46 @@ export class TuiSlashOverlay extends LitElement {
 
   private onBackdropClick = (): void => this.dismiss();
 
+  /**
+   * Render commands grouped by `group?`, preserving a flat `selected` index
+   * so keyboard navigation still works across group boundaries. Group
+   * headers are skipped when no group is set on any command (or only one
+   * group exists) to keep the legacy look for small consumer lists.
+   */
+  private renderGrouped(list: readonly Command[]) {
+    const groups = groupCommands(list);
+    const showHeaders = groups.length > 1 || groups[0]?.group !== 'Other';
+    let flatIndex = -1;
+    return groups.map(
+      ({ group, commands }) => html`
+        ${showHeaders ? html`<li class="group-title" role="presentation">${group}</li>` : null}
+        ${commands.map((cmd) => {
+          flatIndex++;
+          const isSelected = flatIndex === this.selected;
+          return html`
+            <li
+              class="item"
+              part="item"
+              role="option"
+              aria-selected=${isSelected ? 'true' : 'false'}
+              @click=${() => this.pick(cmd)}
+            >
+              <span>${cmd.name}</span>
+              ${cmd.description ? html`<span class="desc">${cmd.description}</span>` : null}
+            </li>
+          `;
+        })}
+      `,
+    );
+  }
+
   override render() {
     const list = this.filtered;
     return html`
       <div class="backdrop" part="backdrop" @click=${this.onBackdropClick}></div>
-      <div class="panel" @keydown=${this.onKeyDown}>
-        <div class="search">
-          <span class="caret" aria-hidden="true">›</span>
+      <div class="panel" part="panel" @keydown=${this.onKeyDown}>
+        <div class="search" part="search">
+          <span class="caret" part="caret" aria-hidden="true">›</span>
           <input
             class="input"
             type="text"
@@ -236,24 +342,7 @@ export class TuiSlashOverlay extends LitElement {
           />
         </div>
         <ul class="list" part="list" role="listbox">
-          ${
-            list.length === 0
-              ? html`<li class="empty">No commands match.</li>`
-              : list.map(
-                  (cmd, i) => html`
-                  <li
-                    class="item"
-                    part="item"
-                    role="option"
-                    aria-selected=${i === this.selected ? 'true' : 'false'}
-                    @click=${() => this.pick(cmd)}
-                  >
-                    <span>${cmd.name}</span>
-                    ${cmd.description ? html`<span class="desc">${cmd.description}</span>` : null}
-                  </li>
-                `,
-                )
-          }
+          ${list.length === 0 ? html`<li class="empty">No commands match.</li>` : this.renderGrouped(list)}
         </ul>
       </div>
     `;

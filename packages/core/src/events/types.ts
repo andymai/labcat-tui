@@ -25,11 +25,23 @@ export interface TuiThemeChangeDetail {
 
 export interface TuiSlashSelectDetail {
   command: string;
+  /**
+   * True when the overlay's `getContext` was set and the overlay executed
+   * the command (handler invoked or navigation triggered). Consumers should
+   * treat this as a fait accompli and skip their own dispatch path.
+   */
+  executed: boolean;
 }
 
 export interface TuiTodoChangeDetail {
   status: 'pending' | 'in-progress' | 'completed';
   previousStatus: 'pending' | 'in-progress' | 'completed';
+}
+
+export interface TuiQuestionSelectDetail {
+  values: string[];
+  labels: string[];
+  indices: number[];
 }
 
 export interface TuiEventMap {
@@ -44,4 +56,5 @@ export interface TuiEventMap {
   'tui-slash-select': CustomEvent<TuiSlashSelectDetail>;
   'tui-slash-dismiss': CustomEvent<Record<string, never>>;
   'tui-todo-change': CustomEvent<TuiTodoChangeDetail>;
+  'tui-question-select': CustomEvent<TuiQuestionSelectDetail>;
 }

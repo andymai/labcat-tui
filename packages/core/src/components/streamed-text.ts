@@ -5,10 +5,74 @@ const DEFAULT_SPEED_MS = 30;
 const FADE_DURATION_MS = 50;
 const SESSION_KEY_PREFIX = 'tui:streamed:';
 
+const SENTENCE_PAUSE_MS = 80;
+const CLAUSE_PAUSE_MS = 50;
+
 function hashText(text: string): string {
   let h = 5381;
   for (let i = 0; i < text.length; i++) h = ((h << 5) + h + text.charCodeAt(i)) | 0;
   return `${h >>> 0}`;
+}
+
+/**
+ * Deterministic small PRNG (mulberry32). Seeded by a string hash so the same
+ * text always animates with the same burst layout — keeps tests stable and
+ * means a user revisiting a page sees the same rhythm as last time.
+ */
+function mulberry32(seed: number): () => number {
+  let s = seed >>> 0;
+  return () => {
+    s = (s + 0x6d2b79f5) >>> 0;
+    let t = s;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/**
+ * Char-by-char metronome: every char gets the same step delay.
+ */
+function computeCharDelays(chars: readonly string[], stepMs: number, baseMs: number): number[] {
+  const delays = new Array<number>(chars.length);
+  for (let i = 0; i < chars.length; i++) delays[i] = baseMs + i * stepMs;
+  return delays;
+}
+
+/**
+ * Token-burst delays: chars are grouped into 1–4 char bursts with a small
+ * within-burst gap (20% of step) and a full step gap between bursts.
+ * Sentence/clause punctuation adds extra pause time. Seeded by content hash
+ * so repeat reveals have the same rhythm.
+ */
+function computeTokenDelays(
+  chars: readonly string[],
+  stepMs: number,
+  baseMs: number,
+  seed: number,
+): number[] {
+  const rand = mulberry32(seed || 1);
+  const delays = new Array<number>(chars.length);
+  let t = baseMs;
+  let burstRemaining = 0;
+  for (let i = 0; i < chars.length; i++) {
+    if (burstRemaining === 0) {
+      // First char of a new burst — `t` already carries the inter-burst gap
+      // (or `baseMs` on the very first iteration).
+      burstRemaining = 1 + Math.floor(rand() * 4); // 1..4
+    } else {
+      t += stepMs * 0.2;
+    }
+    delays[i] = t;
+    burstRemaining--;
+    if (burstRemaining === 0) {
+      t += stepMs;
+      const ch = chars[i];
+      if (ch === '.' || ch === '!' || ch === '?') t += SENTENCE_PAUSE_MS;
+      else if (ch === ',' || ch === ';' || ch === ':') t += CLAUSE_PAUSE_MS;
+    }
+  }
+  return delays;
 }
 
 const pendingStarts = new Set<TuiStreamedText>();
@@ -88,6 +152,10 @@ export class TuiStreamedText extends LitElement {
         opacity: 1;
       }
     }
+
+    :host([skippable]:not([data-completed])) {
+      cursor: pointer;
+    }
   `;
 
   @property({ type: Number, reflect: true })
@@ -104,6 +172,12 @@ export class TuiStreamedText extends LitElement {
 
   @property({ type: Boolean, reflect: true, attribute: 'skip-on-revisit' })
   skipOnRevisit = false;
+
+  @property({ type: String, reflect: true })
+  mode: 'char' | 'token' = 'char';
+
+  @property({ type: Boolean, reflect: true })
+  skippable = false;
 
   @state()
   private chars: string[] = [];
@@ -130,6 +204,7 @@ export class TuiStreamedText extends LitElement {
       this.reducedMotion = this.reducedMotionMql.matches;
       this.reducedMotionMql.addEventListener('change', this.onReducedMotionChange);
     }
+    this.addEventListener('click', this.onHostClick);
   }
 
   override disconnectedCallback(): void {
@@ -139,6 +214,7 @@ export class TuiStreamedText extends LitElement {
     this.intersectionObserver = null;
     this.reducedMotionMql?.removeEventListener('change', this.onReducedMotionChange);
     this.reducedMotionMql = null;
+    this.removeEventListener('click', this.onHostClick);
   }
 
   private onSlotChange(e: Event): void {
@@ -215,6 +291,7 @@ export class TuiStreamedText extends LitElement {
   private emitComplete(): void {
     if (this.completed) return;
     this.completed = true;
+    this.setAttribute('data-completed', '');
     if (this.skipOnRevisit && typeof sessionStorage !== 'undefined' && this.currentHash) {
       sessionStorage.setItem(`${SESSION_KEY_PREFIX}${this.currentHash}`, '1');
     }
@@ -231,7 +308,13 @@ export class TuiStreamedText extends LitElement {
     this.revealed = true;
     this.dispatchEvent(new CustomEvent('tui-stream-interrupt', { bubbles: true, composed: true }));
     this.completed = true;
+    this.setAttribute('data-completed', '');
   }
+
+  private onHostClick = (): void => {
+    if (!this.skippable || this.completed) return;
+    this.interrupt();
+  };
 
   private get effectiveSpeedMs(): number {
     if (typeof this.speed === 'number' && this.speed > 0) return this.speed;
@@ -247,8 +330,16 @@ export class TuiStreamedText extends LitElement {
   }
 
   override render() {
-    const baseDelay = this.delay;
     const step = this.effectiveSpeedMs;
+    const delays =
+      this.mode === 'token'
+        ? computeTokenDelays(
+            this.chars,
+            step,
+            this.delay,
+            Number.parseInt(this.currentHash || '1', 10),
+          )
+        : computeCharDelays(this.chars, step, this.delay);
 
     return html`
       <span class="src" aria-hidden="true">
@@ -266,8 +357,7 @@ export class TuiStreamedText extends LitElement {
         if (!this.revealed) {
           return html`<span class="char" part="char" style="animation: none;">${ch}</span>`;
         }
-        const delayMs = baseDelay + i * step;
-        return html`<span class="char" part="char" style="animation-delay: ${delayMs}ms;">${ch}</span>`;
+        return html`<span class="char" part="char" style="animation-delay: ${delays[i]}ms;">${ch}</span>`;
       })}</span>
     `;
   }

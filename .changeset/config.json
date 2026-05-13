@@ -3,9 +3,17 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [],
-  "linked": [["@labcat/tui", "@labcat/tui-react", "@labcat/tui-themes", "@labcat/tui-shiki"]],
+  "linked": [
+    [
+      "@labcat/tui",
+      "@labcat/tui-react",
+      "@labcat/tui-themes",
+      "@labcat/tui-shiki",
+      "@labcat/tui-agent"
+    ]
+  ],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@labcat/tui-docs"]
+  "ignore": ["@labcat/tui-docs", "@labcat/tui-clone"]
 }

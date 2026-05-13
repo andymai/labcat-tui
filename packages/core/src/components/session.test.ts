@@ -20,7 +20,21 @@ describe('<tui-session>', () => {
     expect(el.classList.contains('tui-session')).toBe(true);
   });
 
-  it('focuses the inner <tui-prompt-input> when "/" is pressed', async () => {
+  it('opens <tui-slash-overlay> when "/" is pressed', async () => {
+    const el = await fixture<TuiSession>(html`
+      <tui-session>
+        <tui-slash-overlay></tui-slash-overlay>
+        <tui-prompt-input></tui-prompt-input>
+      </tui-session>
+    `);
+    const overlay = el.querySelector('tui-slash-overlay');
+    if (!overlay) throw new Error('expected tui-slash-overlay');
+    expect((overlay as HTMLElement & { open?: boolean }).open).toBe(false);
+    press('/');
+    expect((overlay as HTMLElement & { open?: boolean }).open).toBe(true);
+  });
+
+  it('falls back to focusing <tui-prompt-input> on "/" when no overlay is present', async () => {
     const el = await fixture<TuiSession>(html`
       <tui-session>
         <tui-prompt-input></tui-prompt-input>
@@ -150,5 +164,43 @@ describe('<tui-session>', () => {
     // Simulate the key event coming from INSIDE the opted-out subtree.
     input.dispatchEvent(new KeyboardEvent('keydown', { key: '/', bubbles: true }));
     expect(focusSpy).not.toHaveBeenCalled();
+  });
+});
+
+describe('<tui-session> store', () => {
+  afterEach(() => {
+    for (const s of document.querySelectorAll('tui-session')) s.remove();
+  });
+
+  it('register/read returns the latest computed value', async () => {
+    const el = await fixture<TuiSession>(html`<tui-session></tui-session>`);
+    let counter = 0;
+    el.store.register('counter', () => ++counter);
+    expect(el.store.read<number>('counter')).toBe(1);
+    expect(el.store.read<number>('counter')).toBe(2);
+  });
+
+  it('unregister stops the provider', async () => {
+    const el = await fixture<TuiSession>(html`<tui-session></tui-session>`);
+    const off = el.store.register('x', () => 'hello');
+    expect(el.store.has('x')).toBe(true);
+    off();
+    expect(el.store.has('x')).toBe(false);
+    expect(el.store.read<string>('x')).toBeUndefined();
+  });
+
+  it('unregister is a no-op after the provider was replaced', async () => {
+    const el = await fixture<TuiSession>(html`<tui-session></tui-session>`);
+    const off = el.store.register('x', () => 'first');
+    el.store.register('x', () => 'second');
+    off();
+    expect(el.store.read<string>('x')).toBe('second');
+  });
+
+  it('keys() returns the registered keys', async () => {
+    const el = await fixture<TuiSession>(html`<tui-session></tui-session>`);
+    el.store.register('a', () => 1);
+    el.store.register('b', () => 2);
+    expect(el.store.keys().sort()).toEqual(['a', 'b']);
   });
 });

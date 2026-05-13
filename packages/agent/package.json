@@ -1,0 +1,85 @@
+{
+  "name": "@labcat/tui-agent",
+  "version": "0.7.0-beta.0",
+  "description": "Framework-agnostic agent runtime for @labcat/tui — turn model, transport interface, mock + Anthropic adapters",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "README.md"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./mock": {
+      "types": "./dist/transports/mock.d.ts",
+      "default": "./dist/transports/mock.js"
+    },
+    "./anthropic": {
+      "types": "./dist/transports/anthropic.d.ts",
+      "default": "./dist/transports/anthropic.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "default": "./dist/react/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "size": "size-limit",
+    "clean": "rm -rf dist *.tsbuildinfo"
+  },
+  "peerDependencies": {
+    "@anthropic-ai/sdk": ">=0.30.0",
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "@anthropic-ai/sdk": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.30.0",
+    "@size-limit/preset-small-lib": "^11.1.6",
+    "@types/react": "^19.0.2",
+    "react": "^19.0.0",
+    "size-limit": "^11.1.6",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.0"
+  },
+  "size-limit": [
+    {
+      "name": "@labcat/tui-agent core (ESM, gzip)",
+      "path": "dist/index.js",
+      "limit": "4 kB",
+      "import": "*"
+    },
+    {
+      "name": "@labcat/tui-agent/mock (ESM, gzip)",
+      "path": "dist/transports/mock.js",
+      "limit": "2 kB",
+      "import": "*"
+    },
+    {
+      "name": "@labcat/tui-agent/react (ESM, gzip)",
+      "path": "dist/react/index.js",
+      "limit": "2 kB",
+      "import": "*"
+    }
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

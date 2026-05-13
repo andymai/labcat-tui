@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`RTL — lighthouse components (SPEC §10.5) > <tui-prompt-input> inherits rtl and renders without errors 1`] = `"<!----> <div class="row"> <span class="caret" part="caret" aria-hidden="true">›</span> <input class="input" part="input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text" aria-label="terminal command" placeholder=""> </div>"`;
+exports[`RTL — lighthouse components (SPEC §10.5) > <tui-prompt-input> inherits rtl and renders without errors 1`] = `"<!----> <div class="row"> <span class="caret" part="caret" aria-hidden="true">›</span> <div class="hint-wrap"> <input class="input" part="input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text" aria-label="terminal command" placeholder=""> <!--?lit$0$--> </div> </div>"`;
 
 exports[`RTL — lighthouse components (SPEC §10.5) > <tui-status-line> inherits rtl and renders without errors 1`] = `"<!----> <div class="row"> <!--?lit$0$--><span class="breadcrumb" part="breadcrumb"><!--?lit$0$-->labcat / posts</span> <slot name="left"></slot> <div class="segments"> <!--?lit$0$--> </div> <slot hidden=""></slot> <slot name="right"></slot> </div>"`;
 

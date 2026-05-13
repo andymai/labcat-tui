@@ -120,6 +120,7 @@ tui-thinking-block       tui-todo-list           tui-todo-item
 tui-diff-block           tui-spinner             tui-streamed-text
 tui-chat-bubble          tui-tool-use-timeline   tui-md
 tui-theme-provider       tui-session             tui-slash-overlay
+tui-agent-badge          tui-shimmer-text        tui-question
 ```
 
 ### 4.2 Component contracts
@@ -249,6 +250,16 @@ Modal command palette. Rendered by `<tui-session>` on Cmd-K; can be used standal
 - **Events**: `tui-slash-select` (`{ command }`), `tui-slash-dismiss`
 - **Parts**: `backdrop`, `list`, `item`
 - **A11y**: focus-trap when open, `aria-modal="true"`
+
+#### `<tui-question>`
+Multi-choice picker emulating Claude Code's `AskUserQuestion` tool. Two independent selection states: `selected` is the keyboard caret, `chosen` is the (multi-mode) checked set.
+- **Attrs**: `question` (str), `selected` (number, default `0`), `multi` (bool)
+- **Props**: `options` (`{ value, label, description? }[]`) — also settable as a JSON-encoded attribute for declarative Astro/MDX use
+- **Events**: `tui-question-select` (`{ values: string[]; labels: string[]; indices: number[] }`) fired on Enter (single-select also commits on number key / click)
+- **Parts**: `question`, `list`, `option`, `marker`, `shortcut`
+- **A11y**: `role="group"`, internal `role="listbox"` with `aria-activedescendant`, options use `role="option"` + `aria-selected`; auto-applies `tabindex="0"` and `aria-label` from `question` when absent
+- **Keyboard**: `↓`/`j` next, `↑`/`k` prev, `Home`/`End` jump, `1`–`9` jump (and commit in single mode / toggle in multi), `Space` toggles in multi, `Enter` commits
+- **Edge cases**: empty `options` array makes Enter a no-op (no event fired); auto-claims focus once when scrolled ≥60% into view, but never steals from a focused `<input>`, `<textarea>`, or other `tui-*` element
 
 ## 5. API & Events
 
@@ -486,6 +497,7 @@ interface BaseCommand {
   aliases?: string[];
   description?: string;
   group?: string;
+  source?: 'builtin' | 'consumer';
   completions?: (currentArg: string, ctx: CommandContext)
     => string[] | Promise<string[]>;
 }
@@ -502,10 +514,16 @@ interface CommandContext {
   toggleTheme: () => void;
   setTheme:    (theme: string | ThemeDefinition) => void;
   emit:        (event: string, detail?: unknown) => void;
+  write:       (node: Node | string) => void;   // append to scrollback before the active prompt
+  clear:       () => void;                      // wipe scrollback, close overlay, refocus prompt
+  history:     { all(): string[]; clear(): void };
+  session:     SessionStore;                    // pull-only registry; see §5.4
 }
 ```
 
 `defineCommands()` runtime-validates the XOR; TS already enforces it at compile time.
+
+**Built-ins.** `builtinCommands({ help, clear, config, memory, history, alias, which, echo, date })` returns a tree-shake-friendly array of opt-in commands tagged `source: 'builtin'`. Compose with consumer commands via `defineCommands([...builtinCommands({ help: true, clear: true }), ...mine])` — later same-name commands override.
 
 ### 8.2 Parsing
 
@@ -612,14 +630,14 @@ Kinds: `dots` (⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏), `line` (`- \ | /`), `box` (▖�
 
 ### 10.2 Keyboard shortcuts (registered by `<tui-session>`)
 
-| Key                | Effect                                              |
-| ------------------ | --------------------------------------------------- |
-| `/`                | Focus `<tui-prompt-input>` (not in form fields)     |
-| `Esc`              | Interrupt scoped animations (see §9.2)              |
-| `↑` / `↓`          | History prev/next when prompt focused               |
-| `Tab`              | Completion in prompt                                |
-| `Cmd-K` / `Ctrl-K` | Open `<tui-slash-overlay>`                          |
-| `?`                | Open slash-command help (not in form fields)        |
+| Key                | Effect                                                              |
+| ------------------ | ------------------------------------------------------------------- |
+| `/`                | Open `<tui-slash-overlay>` if present, else focus `<tui-prompt-input>` (not in form fields) |
+| `Esc`              | Interrupt scoped animations (see §9.2)                              |
+| `↑` / `↓`          | History prev/next when prompt focused                               |
+| `Tab`              | Completion in prompt                                                |
+| `Cmd-K` / `Ctrl-K` | Open `<tui-slash-overlay>`                                          |
+| `?`                | Open slash-command help (not in form fields)                        |
 
 Form-field detection (`<input>`, `<textarea>`, `[contenteditable]`) is built in.
 

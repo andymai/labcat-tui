@@ -1,8 +1,28 @@
 import { fixture, html } from '@open-wc/testing-helpers';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { defineCommands } from '../commands/registry.js';
+import type { CommandContext } from '../commands/types.js';
 import './slash-overlay.js';
 import type { TuiSlashOverlay } from './slash-overlay.js';
+
+function noopCtx(overrides: Partial<CommandContext> = {}): CommandContext {
+  return {
+    navigate: () => undefined,
+    toggleTheme: () => undefined,
+    setTheme: () => undefined,
+    emit: () => undefined,
+    write: () => undefined,
+    clear: () => undefined,
+    history: { all: () => [], clear: () => undefined },
+    session: {
+      register: () => () => undefined,
+      read: () => undefined,
+      has: () => false,
+      keys: () => [],
+    },
+    ...overrides,
+  };
+}
 
 describe('<tui-slash-overlay>', () => {
   it('starts closed and sets aria-modal', async () => {
@@ -33,7 +53,7 @@ describe('<tui-slash-overlay>', () => {
     item?.click();
     await el.updateComplete;
     expect(events).toHaveLength(1);
-    expect(events[0]?.detail).toEqual({ command: 'posts' });
+    expect(events[0]?.detail).toEqual({ command: 'posts', executed: false });
     expect(el.open).toBe(false);
   });
 
@@ -71,7 +91,7 @@ describe('<tui-slash-overlay>', () => {
     // Enter picks the highlighted command.
     panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
     expect(events).toHaveLength(1);
-    expect(events[0]?.detail).toEqual({ command: 'three' });
+    expect(events[0]?.detail).toEqual({ command: 'three', executed: false });
   });
 
   it('Escape closes the overlay and emits tui-slash-dismiss', async () => {
@@ -101,5 +121,68 @@ describe('<tui-slash-overlay>', () => {
     const items = el.shadowRoot?.querySelectorAll('[part~="item"]');
     expect(items).toHaveLength(1);
     expect(items?.[0]?.textContent).toContain('help');
+  });
+
+  it('with getContext set: route command navigates and emits executed: true', async () => {
+    const navigate = vi.fn();
+    const el = await fixture<TuiSlashOverlay>(html`<tui-slash-overlay open></tui-slash-overlay>`);
+    el.commands = defineCommands([{ name: 'posts', route: '/posts/' }]);
+    el.getContext = () => noopCtx({ navigate });
+    const events: CustomEvent[] = [];
+    el.addEventListener('tui-slash-select', (e) => events.push(e as CustomEvent));
+    await el.updateComplete;
+    const item = el.shadowRoot?.querySelector<HTMLElement>('[part~="item"]');
+    item?.click();
+    await el.updateComplete;
+    expect(navigate).toHaveBeenCalledWith('/posts/');
+    expect(events[0]?.detail).toEqual({ command: 'posts', executed: true });
+  });
+
+  it('with getContext set: handler command is invoked with the provided ctx', async () => {
+    const handler = vi.fn();
+    const el = await fixture<TuiSlashOverlay>(html`<tui-slash-overlay open></tui-slash-overlay>`);
+    el.commands = defineCommands([{ name: 'theme', handler }]);
+    el.getContext = () => noopCtx();
+    await el.updateComplete;
+    const item = el.shadowRoot?.querySelector<HTMLElement>('[part~="item"]');
+    item?.click();
+    // Allow microtask queue to flush the handler invocation.
+    await new Promise<void>((r) => queueMicrotask(() => r()));
+    expect(handler).toHaveBeenCalledTimes(1);
+    expect(handler.mock.calls[0]?.[0]).toBe('');
+  });
+
+  it('renders group titles and orders Navigation before Utility', async () => {
+    const el = await fixture<TuiSlashOverlay>(html`<tui-slash-overlay open></tui-slash-overlay>`);
+    el.commands = defineCommands([
+      { name: 'echo', group: 'Utility', handler: () => undefined },
+      { name: 'posts', group: 'Navigation', route: '/posts/' },
+    ]);
+    await el.updateComplete;
+    const titles = [...(el.shadowRoot?.querySelectorAll('.group-title') ?? [])].map(
+      (t) => t.textContent,
+    );
+    expect(titles).toEqual(['Navigation', 'Utility']);
+    const items = [...(el.shadowRoot?.querySelectorAll('[part~="item"]') ?? [])].map(
+      (n) => n.querySelector('span')?.textContent,
+    );
+    expect(items).toEqual(['posts', 'echo']);
+  });
+
+  it('keyboard nav steps through commands in displayed (grouped) order', async () => {
+    const el = await fixture<TuiSlashOverlay>(html`<tui-slash-overlay open></tui-slash-overlay>`);
+    const events: CustomEvent[] = [];
+    el.commands = defineCommands([
+      { name: 'echo', group: 'Utility', handler: () => undefined },
+      { name: 'posts', group: 'Navigation', route: '/posts/' },
+    ]);
+    el.addEventListener('tui-slash-select', (e) => events.push(e as CustomEvent));
+    await el.updateComplete;
+    const panel = el.shadowRoot?.querySelector('[part~="panel"]');
+    if (!panel) throw new Error('expected panel');
+    // Default selection is 0 → first visible item which is `posts` (Navigation).
+    panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    await el.updateComplete;
+    expect(events[0]?.detail.command).toBe('posts');
   });
 });

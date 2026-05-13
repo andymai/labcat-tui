@@ -229,3 +229,170 @@ describe('<tui-prompt-input>', () => {
     expect(events[0]?.detail).toEqual({ name: 'unknown-thing', args: '' });
   });
 });
+
+describe('<tui-prompt-input> ctx.write / clear / history', () => {
+  beforeEach(() => {
+    if (typeof localStorage !== 'undefined') localStorage.clear();
+  });
+
+  async function withFixture(): Promise<{ wrap: HTMLElement; prompt: TuiPromptInput }> {
+    const wrap = await fixture<HTMLElement>(html`
+      <div>
+        <tui-prompt-input></tui-prompt-input>
+      </div>
+    `);
+    const prompt = wrap.querySelector('tui-prompt-input') as TuiPromptInput;
+    return { wrap, prompt };
+  }
+
+  it('ctx.write(string) auto-wraps in <tui-streamed-text mode="token" skippable>', async () => {
+    const { wrap, prompt } = await withFixture();
+    const writeCmd: Command = {
+      name: 'echo',
+      handler: (arg, ctx) => ctx.write(arg),
+    };
+    prompt.commands = defineCommands([writeCmd]);
+    typeInto(prompt, 'echo hello world');
+    pressEnter(prompt);
+    await prompt.updateComplete;
+    const first = wrap.firstElementChild as HTMLElement;
+    expect(first.tagName.toLowerCase()).toBe('tui-streamed-text');
+    expect(first.getAttribute('mode')).toBe('token');
+    expect(first.hasAttribute('skippable')).toBe(true);
+    expect(first.textContent).toBe('hello world');
+    expect(first.nextElementSibling).toBe(prompt);
+  });
+
+  it('ctx.write(Node) inserts the node as-is without streaming-wrapping', async () => {
+    const { wrap, prompt } = await withFixture();
+    prompt.commands = defineCommands([
+      {
+        name: 'rich',
+        handler: (_, ctx) => {
+          const section = document.createElement('section');
+          section.className = 'my-output';
+          section.textContent = 'rich';
+          ctx.write(section);
+        },
+      },
+    ]);
+    typeInto(prompt, 'rich');
+    pressEnter(prompt);
+    await prompt.updateComplete;
+    const first = wrap.firstElementChild as HTMLElement;
+    expect(first.tagName.toLowerCase()).toBe('section');
+    expect(first.classList.contains('my-output')).toBe(true);
+  });
+
+  it('ctx.write delegates to onWrite when set', async () => {
+    const { wrap, prompt } = await withFixture();
+    const seen: Node[] = [];
+    prompt.onWrite = (n) => {
+      seen.push(n);
+      return true; // claim — default insertion should not run
+    };
+    prompt.commands = defineCommands([{ name: 'echo', handler: (arg, ctx) => ctx.write(arg) }]);
+    typeInto(prompt, 'echo hi');
+    pressEnter(prompt);
+    await prompt.updateComplete;
+    expect(seen).toHaveLength(1);
+    // No new DOM sibling because onWrite claimed.
+    expect(wrap.firstElementChild).toBe(prompt);
+  });
+
+  it('ctx.clear removes preceding siblings and closes the slash overlay', async () => {
+    const wrap = await fixture<HTMLElement>(html`
+      <div>
+        <tui-slash-overlay open></tui-slash-overlay>
+        <div class="output-row">a</div>
+        <div class="output-row">b</div>
+        <tui-prompt-input></tui-prompt-input>
+      </div>
+    `);
+    const prompt = wrap.querySelector('tui-prompt-input') as TuiPromptInput;
+    const overlay = wrap.querySelector('tui-slash-overlay') as HTMLElement & { open: boolean };
+    // Sanity: overlay is mounted at document level for clearScrollback's
+    // document.querySelector to find it; move it there.
+    document.body.appendChild(overlay);
+    overlay.open = true;
+    prompt.commands = defineCommands([{ name: 'clear', handler: (_, ctx) => ctx.clear() }]);
+    typeInto(prompt, 'clear');
+    pressEnter(prompt);
+    await prompt.updateComplete;
+    expect(wrap.querySelectorAll('.output-row').length).toBe(0);
+    expect(overlay.open).toBe(false);
+    overlay.remove();
+  });
+
+  it('ctx.history.all returns submitted commands', async () => {
+    const { prompt } = await withFixture();
+    prompt.id = 'history-test-1';
+    let seen: string[] = [];
+    prompt.commands = defineCommands([
+      {
+        name: 'log',
+        handler: (_, ctx) => {
+          seen = ctx.history.all();
+        },
+      },
+      { name: 'noop', handler: () => undefined },
+    ]);
+    typeInto(prompt, 'noop');
+    pressEnter(prompt);
+    await prompt.updateComplete;
+    typeInto(prompt, 'log');
+    pressEnter(prompt);
+    await prompt.updateComplete;
+    // Newest first
+    expect(seen[0]).toBe('log');
+    expect(seen[1]).toBe('noop');
+  });
+
+  it('renders an inline argument hint after a space when a completion matches', async () => {
+    const { prompt } = await withFixture();
+    prompt.commands = defineCommands([
+      {
+        name: 'theme',
+        handler: () => undefined,
+        completions: (cur) => ['light', 'dark', 'system'].filter((c) => c.startsWith(cur)),
+      },
+    ]);
+    typeInto(prompt, 'theme d');
+    await prompt.updateComplete;
+    // refreshHint is async — let it settle.
+    await new Promise<void>((r) => queueMicrotask(() => r()));
+    await prompt.updateComplete;
+    const hint = prompt.shadowRoot?.querySelector('[part~="hint"]');
+    expect(hint?.textContent).toContain('ark');
+  });
+
+  it('does not render an argument hint without a space (command-name region)', async () => {
+    const { prompt } = await withFixture();
+    prompt.commands = defineCommands([{ name: 'theme', handler: () => undefined }]);
+    typeInto(prompt, 'the');
+    await prompt.updateComplete;
+    await new Promise<void>((r) => queueMicrotask(() => r()));
+    await prompt.updateComplete;
+    expect(prompt.shadowRoot?.querySelector('[part~="hint"]')).toBeNull();
+  });
+
+  it('ctx.history.clear empties the recall buffer', async () => {
+    const { prompt } = await withFixture();
+    prompt.id = 'history-test-2';
+    prompt.commands = defineCommands([
+      { name: 'noop', handler: () => undefined },
+      { name: 'wipe', handler: (_, ctx) => ctx.history.clear() },
+    ]);
+    typeInto(prompt, 'noop');
+    pressEnter(prompt);
+    await prompt.updateComplete;
+    typeInto(prompt, 'wipe');
+    pressEnter(prompt);
+    await prompt.updateComplete;
+    // ArrowUp should not recall anything.
+    pressKey(prompt, 'ArrowUp');
+    await prompt.updateComplete;
+    const input = prompt.shadowRoot?.querySelector<HTMLInputElement>('input');
+    expect(input?.value ?? '').toBe('');
+  });
+});

@@ -4,17 +4,21 @@ Claude Code-styled TUI component library for the web. Default theme matches Clau
 
 ## Status
 
-**v0.5 — feature-complete pre-release.** All 17 components from SPEC §4.1 ship, with 138 Vitest browser-mode tests green on Chromium across Node 22 + 24. See [`CHANGELOG.md`](./CHANGELOG.md) for the full v0.5 surface and [`SPEC.md`](./SPEC.md) for the design.
+**Pre-release beta.** All 21 components from SPEC §4.1 ship, alongside a slash-command system with opt-in built-ins and a framework-agnostic agent runtime. 223 Vitest browser-mode tests green on Chromium across Node 22 + 24. See [`CHANGELOG.md`](./CHANGELOG.md) for the surface and [`SPEC.md`](./SPEC.md) for the design.
 
-Not yet published to npm — the release is staged via `.changeset/v0-5-beta.md`; consumers can install via `pnpm link` against the local repo today.
+Not yet published to npm — releases are staged via Changesets; consumers can install via `pnpm link` against the local repo today.
 
 ## Packages
 
-| Package | Purpose | Bundle (brotli) |
+| Package | Purpose | Bundle |
 | --- | --- | --- |
-| [`@labcat/tui`](./packages/core) | Lit web components core + `claude` / `claudeLight` themes + command system | ~16 kB / 25 kB budget |
-| [`@labcat/tui-react`](./packages/react) | React wrappers via `@lit/react` | ~1.6 kB / 2 kB |
-| [`@labcat/tui-themes`](./packages/themes) | 9 add-on theme presets (gruvbox, rose-pine, kanagawa, synthwave, phosphor) | ~1.2 kB / 2 kB |
+| [`@labcat/tui`](./packages/core) | Lit web components core + `claude` / `claudeLight` themes + command system | ~22 kB / 25 kB (brotli) |
+| [`@labcat/tui-react`](./packages/react) | React wrappers via `@lit/react` | ~1.7 kB / 2 kB (brotli) |
+| [`@labcat/tui-themes`](./packages/themes) | Add-on theme presets (gruvbox, rose-pine, kanagawa, synthwave, phosphor, …) | ~3.1 kB / 4 kB (gzip) |
+| [`@labcat/tui-shiki`](./packages/shiki) | `<tui-code-block>` + Shiki-driven markdown upgrade | ~8.9 kB / 10 kB (brotli) |
+| [`@labcat/tui-agent`](./packages/agent) | Framework-agnostic agent runtime — turn model + transport interface + mock/Anthropic adapters + React hook | ~1.2 kB / 4 kB (brotli) |
+
+A reference Claude Code-style clone lives at [`apps/clone`](./apps/clone/) — React + Vite, runs against scripted mock transcripts by default, switches to live `claude-opus-4-7` via `VITE_ANTHROPIC_API_KEY`.
 
 ## Quickstart
 
@@ -47,7 +51,7 @@ corepack enable
 pnpm install
 pnpm build     # all packages
 pnpm dev       # core build watch + docs dev server
-pnpm test      # 138 tests across core + 31 across themes
+pnpm test      # 223 tests across core, themes, shiki, agent
 pnpm typecheck # all packages
 pnpm size      # bundle-size budgets
 ```

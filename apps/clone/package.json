@@ -1,0 +1,32 @@
+{
+  "name": "@labcat/tui-clone",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reference Claude Code-style clone built on @labcat/tui",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "echo \"no clone tests yet\"",
+    "clean": "rm -rf dist *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0",
+    "@labcat/tui": "workspace:^",
+    "@labcat/tui-agent": "workspace:^",
+    "@labcat/tui-react": "workspace:^",
+    "@labcat/tui-shiki": "workspace:^",
+    "@labcat/tui-themes": "workspace:^",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
+  }
+}

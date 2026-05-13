@@ -19,6 +19,7 @@ import './components/slash-overlay.js';
 import './components/session.js';
 import './components/agent-badge.js';
 import './components/shimmer-text.js';
+import './components/question.js';
 
 export { TuiToolCall } from './components/tool-call.js';
 export type { ToolCallStatus } from './components/tool-call.js';
@@ -52,6 +53,8 @@ export { TuiAgentBadge } from './components/agent-badge.js';
 export type { AgentCallsign } from './components/agent-badge.js';
 export { TuiShimmerText } from './components/shimmer-text.js';
 export type { ShimmerKind } from './components/shimmer-text.js';
+export { TuiQuestion } from './components/question.js';
+export type { TuiQuestionOption } from './components/question.js';
 
 export {
   defineTheme,
@@ -76,16 +79,21 @@ export {
   parseInput,
   levenshtein,
   closestMatch,
+  builtinCommands,
 } from './commands/index.js';
 export type {
   BaseCommand,
+  BuiltinOptions,
   Command,
   CommandContext,
   CommandHandler,
+  CommandHistoryAccess,
+  CommandSource,
   HandlerCommand,
   MatchResult,
   ParsedInput,
   RouteCommand,
+  SessionStore,
 } from './commands/index.js';
 
 export type {
@@ -96,5 +104,6 @@ export type {
   TuiThemeChangeDetail,
   TuiSlashSelectDetail,
   TuiTodoChangeDetail,
+  TuiQuestionSelectDetail,
   TuiEventMap,
 } from './events/types.js';
