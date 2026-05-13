@@ -1,0 +1,49 @@
+---
+title: '<tui-shimmer-text>'
+description: Animates slotted text between a base color and its shimmer companion.
+---
+
+import '@labcat/tui';
+
+Animates slotted text between a base colour and its shimmer companion, matching Claude Code's breathing / pulse effect. The `kind` attribute selects one of seven shimmer pairs from the active theme. Honours `prefers-reduced-motion` — when set, the slot renders in the base colour with no animation.
+
+## Example
+
+<tui-shimmer-text kind="accent">thinking…</tui-shimmer-text>
+<tui-shimmer-text kind="systemSpinner">connecting…</tui-shimmer-text>
+<tui-shimmer-text kind="warning">retrying…</tui-shimmer-text>
+
+```html
+<tui-shimmer-text kind="accent">thinking…</tui-shimmer-text>
+```
+
+A slower pulse:
+
+```html
+<tui-shimmer-text kind="permission" duration="2800">awaiting approval</tui-shimmer-text>
+```
+
+## API
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `kind` | `'accent'` \| `'systemSpinner'` \| `'permission'` \| `'warning'` \| `'inactive'` \| `'fastMode'` \| `'promptBorder'` | `'accent'` | Which `(base, shimmer)` colour pair to animate against. Reflected. |
+| `duration` | `number` | `1800` | Pulse cycle length in ms. Reflected. |
+
+The `SHIMMER_KINDS` array and `ShimmerKind` type are exported from `@labcat/tui` for consumer code that needs to enumerate or branch over the shimmer pairs.
+
+### Slots
+
+Default slot: the text content to shimmer. Inline only — block-level content inside the shimmer is unsupported.
+
+### Theming
+
+Each kind reads two CSS custom properties off the active theme — for example, `kind="accent"` reads `var(--tui-accent)` and `var(--tui-accent-shimmer)`. All seven pairs ship populated in every built-in theme and add-on theme.
+
+### Reduced motion
+
+When the user has `prefers-reduced-motion: reduce` set, the keyframe animation is disabled and the slot renders in the base colour. The element stays in the document — only the pulse stops.
+
+### Dev-mode warning
+
+Setting an unknown `kind` value emits a `console.warn` in dev mode and silently resets the attribute to `accent`. Production builds fall back without warning.

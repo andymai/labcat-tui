@@ -1,0 +1,48 @@
+---
+title: '<tui-agent-badge>'
+description: Per-agent persona indicator for multi-agent visualisations.
+---
+
+import '@labcat/tui';
+
+A small inline persona indicator for multi-agent surfaces — when several subagents are working in parallel, each gets a coloured dot + slotted label. The `callsign` attribute selects one of the 8 NATO-phonetic personas (`alpha` through `hotel`) shipped in every theme; theming maps each callsign to whatever palette colour fits the theme's identity.
+
+## Example
+
+<tui-agent-badge callsign="alpha">claude-1</tui-agent-badge>
+<tui-agent-badge callsign="bravo">claude-2</tui-agent-badge>
+<tui-agent-badge callsign="charlie">claude-3</tui-agent-badge>
+<tui-agent-badge callsign="delta">claude-4</tui-agent-badge>
+
+```html
+<tui-agent-badge callsign="alpha">claude-1</tui-agent-badge>
+<tui-agent-badge callsign="bravo">claude-2</tui-agent-badge>
+```
+
+## API
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `callsign` | `'alpha'` \| `'bravo'` \| `'charlie'` \| `'delta'` \| `'echo'` \| `'foxtrot'` \| `'golf'` \| `'hotel'` | `'alpha'` | Which persona slot to colour against. Reflected. |
+
+The `AGENT_CALLSIGNS` array and `AgentCallsign` type are exported from `@labcat/tui` for consumer code that needs to enumerate or branch over personas.
+
+### Slots
+
+Default slot: the agent's label (e.g. `claude-1`, `subagent-3`, anything you'd like to read aloud beside the dot).
+
+### CSS parts
+
+`dot`, `label`.
+
+### Theming
+
+Each callsign reads `var(--tui-subagent-{name})` from the active theme — so a theme can choose any palette colours it likes for its eight personas without redefining attribute selectors. Built-in themes ship all eight tokens.
+
+### Accessibility
+
+The host applies `role="note"` on connect. The dot glyph is marked `aria-hidden="true"` so screen readers announce only the slotted label.
+
+### Dev-mode warning
+
+Setting an unknown `callsign` value (e.g. `india`) emits a `console.warn` in dev mode and silently resets the attribute to `alpha`. Production builds fall back without warning.

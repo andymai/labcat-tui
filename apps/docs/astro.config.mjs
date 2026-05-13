@@ -23,6 +23,7 @@ export default defineConfig({
             { label: 'Prompt input', slug: 'components/prompt-input' },
             { label: 'Prompt line', slug: 'components/prompt-line' },
             { label: 'Slash overlay', slug: 'components/slash-overlay' },
+            { label: 'Question', slug: 'components/question' },
             { label: 'Status line', slug: 'components/status-line' },
           ],
         },
@@ -33,6 +34,7 @@ export default defineConfig({
             { label: 'Tool-use timeline', slug: 'components/tool-use-timeline' },
             { label: 'Diff block', slug: 'components/diff-block' },
             { label: 'Streamed text', slug: 'components/streamed-text' },
+            { label: 'Shimmer text', slug: 'components/shimmer-text' },
             { label: 'Spinner', slug: 'components/spinner' },
           ],
         },
@@ -40,6 +42,7 @@ export default defineConfig({
           label: 'Conversation',
           items: [
             { label: 'Chat bubble', slug: 'components/chat-bubble' },
+            { label: 'Agent badge', slug: 'components/agent-badge' },
             { label: 'Thinking block', slug: 'components/thinking-block' },
             { label: 'Todo list', slug: 'components/todo-list' },
             { label: 'Todo item', slug: 'components/todo-item' },
