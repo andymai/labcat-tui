@@ -1,6 +1,19 @@
+<div align="center">
+
 # @labcat/tui
 
-Claude Code-styled TUI component library for the web. Default theme matches Claude Code; themable for other aesthetics. Lit web components core + React wrappers.
+[![CI](https://github.com/andymai/labcat-tui/actions/workflows/ci.yml/badge.svg)](https://github.com/andymai/labcat-tui/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/github/license/andymai/labcat-tui)](./LICENSE)
+
+Claude Code-styled TUI component library for the web — Lit web components core with React wrappers, themable for other aesthetics.
+
+[Spec](./SPEC.md) · [Changelog](./CHANGELOG.md) · [Clone app](./apps/clone)
+
+</div>
+
+---
+
+Pre-release library of 21 browser-rendered TUI components matching the Claude Code aesthetic, with a slash-command system, theme presets, Shiki-driven code blocks, and a thin agent runtime. Not yet published to npm.
 
 ## Status
 
@@ -19,6 +32,16 @@ Not yet published to npm — releases are staged via Changesets; consumers can i
 | [`@labcat/tui-agent`](./packages/agent) | Framework-agnostic agent runtime — turn model + transport interface + mock/Anthropic adapters + React hook | ~1.2 kB / 4 kB (brotli) |
 
 A reference Claude Code-style clone lives at [`apps/clone`](./apps/clone/) — React + Vite, runs against scripted mock transcripts by default, switches to live `claude-opus-4-7` via `VITE_ANTHROPIC_API_KEY`.
+
+## Scope
+
+To set expectations, this library deliberately does not:
+
+- **Not a terminal emulator** — components render in the browser DOM; they replicate the TUI aesthetic, not a PTY or actual terminal session
+- **Not a chat or messaging SDK** — the agent runtime is a thin adapter layer (transport interface + mock/Anthropic implementations) wired to the component surface; it does not handle auth, conversation history persistence, or server-side concerns
+- **No built-in transports beyond mock and Anthropic** — other model providers require a custom transport implementing the same interface
+- **Not framework-coupled** — the core package is framework-agnostic Lit; React wrappers are a separate opt-in package (`@labcat/tui-react`), not a dependency
+- **No accessibility or mobile target** — the components reproduce a terminal aesthetic designed for desktop developer tooling; WCAG compliance and touch interaction are out of scope
 
 ## Quickstart
 
@@ -41,8 +64,6 @@ import '@labcat/tui/styles.css';
   <tui-prompt-input placeholder="Type / for commands"></tui-prompt-input>
 </tui-session>
 ```
-
-Full docs: [tui.labcat.dev](https://tui.labcat.dev/).
 
 ## Development
 
