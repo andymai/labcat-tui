@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from 'vitest';
+import type { ThemeDefinition } from './defineTheme.js';
 import {
+  defineTheme,
   InvalidColorError,
   MissingTokenError,
-  defineTheme,
   themeToCssVars,
   validateTheme,
 } from './defineTheme.js';
-import type { ThemeDefinition } from './defineTheme.js';
 
 const valid: ThemeDefinition = {
   name: 'test',

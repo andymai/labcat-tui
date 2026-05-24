@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { SUPPORTED_LANGS, normalizeLang } from './grammars.js';
+import { normalizeLang, SUPPORTED_LANGS } from './grammars.js';
 
 describe('normalizeLang', () => {
   it('passes through canonical names', () => {

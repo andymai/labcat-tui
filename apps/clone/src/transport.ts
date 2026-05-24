@@ -1,10 +1,13 @@
 import type { AgentTransport } from '@labcat/tui-agent';
 import { createAnthropicTransport } from '@labcat/tui-agent/anthropic';
 import { createMockTransport } from '@labcat/tui-agent/mock';
-import { FALLBACK_GREETING, pickScenario } from './transcripts/index.js';
+import { pickScenario } from './transcripts/index.js';
 
 interface AnthropicConstructor {
-  new (config: { apiKey: string; dangerouslyAllowBrowser?: boolean }): {
+  new (config: {
+    apiKey: string;
+    dangerouslyAllowBrowser?: boolean;
+  }): {
     messages: {
       stream: (params: Parameters<typeof anthropicStream>[0]) => ReturnType<typeof anthropicStream>;
     };

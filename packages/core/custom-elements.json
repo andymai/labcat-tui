@@ -9,470 +9,6 @@
       "exports": [
         {
           "kind": "js",
-          "name": "TuiToolCall",
-          "declaration": {
-            "name": "TuiToolCall",
-            "module": "./components/tool-call.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ToolCallStatus",
-          "declaration": {
-            "name": "ToolCallStatus",
-            "module": "./components/tool-call.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiBox",
-          "declaration": {
-            "name": "TuiBox",
-            "module": "./components/box.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "BoxKind",
-          "declaration": {
-            "name": "BoxKind",
-            "module": "./components/box.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiSpinner",
-          "declaration": {
-            "name": "TuiSpinner",
-            "module": "./components/spinner.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "SpinnerKind",
-          "declaration": {
-            "name": "SpinnerKind",
-            "module": "./components/spinner.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "SpinnerTone",
-          "declaration": {
-            "name": "SpinnerTone",
-            "module": "./components/spinner.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiPromptLine",
-          "declaration": {
-            "name": "TuiPromptLine",
-            "module": "./components/prompt-line.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiThemeProvider",
-          "declaration": {
-            "name": "TuiThemeProvider",
-            "module": "./components/theme-provider.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiWelcomeBanner",
-          "declaration": {
-            "name": "TuiWelcomeBanner",
-            "module": "./components/welcome-banner.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiThinkingBlock",
-          "declaration": {
-            "name": "TuiThinkingBlock",
-            "module": "./components/thinking-block.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiStatusLine",
-          "declaration": {
-            "name": "TuiStatusLine",
-            "module": "./components/status-line.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "StatusLineKind",
-          "declaration": {
-            "name": "StatusLineKind",
-            "module": "./components/status-line.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "StatusLiveness",
-          "declaration": {
-            "name": "StatusLiveness",
-            "module": "./components/status-line.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "StatusSegment",
-          "declaration": {
-            "name": "StatusSegment",
-            "module": "./components/status-line.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiTodoList",
-          "declaration": {
-            "name": "TuiTodoList",
-            "module": "./components/todo-list.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TodoListKind",
-          "declaration": {
-            "name": "TodoListKind",
-            "module": "./components/todo-list.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiTodoItem",
-          "declaration": {
-            "name": "TuiTodoItem",
-            "module": "./components/todo-item.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TodoStatus",
-          "declaration": {
-            "name": "TodoStatus",
-            "module": "./components/todo-item.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiStreamedText",
-          "declaration": {
-            "name": "TuiStreamedText",
-            "module": "./components/streamed-text.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiPromptInput",
-          "declaration": {
-            "name": "TuiPromptInput",
-            "module": "./components/prompt-input.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiChatBubble",
-          "declaration": {
-            "name": "TuiChatBubble",
-            "module": "./components/chat-bubble.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ChatRole",
-          "declaration": {
-            "name": "ChatRole",
-            "module": "./components/chat-bubble.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiDiffBlock",
-          "declaration": {
-            "name": "TuiDiffBlock",
-            "module": "./components/diff-block.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "DiffLine",
-          "declaration": {
-            "name": "DiffLine",
-            "module": "./components/diff-block.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "DiffLineKind",
-          "declaration": {
-            "name": "DiffLineKind",
-            "module": "./components/diff-block.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiToolUseTimeline",
-          "declaration": {
-            "name": "TuiToolUseTimeline",
-            "module": "./components/tool-use-timeline.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiMd",
-          "declaration": {
-            "name": "TuiMd",
-            "module": "./components/md.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiSlashOverlay",
-          "declaration": {
-            "name": "TuiSlashOverlay",
-            "module": "./components/slash-overlay.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiSession",
-          "declaration": {
-            "name": "TuiSession",
-            "module": "./components/session.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "SessionMode",
-          "declaration": {
-            "name": "SessionMode",
-            "module": "./components/session.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "PromptMode",
-          "declaration": {
-            "name": "PromptMode",
-            "module": "./components/prompt-input.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiAgentBadge",
-          "declaration": {
-            "name": "TuiAgentBadge",
-            "module": "./components/agent-badge.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "AgentCallsign",
-          "declaration": {
-            "name": "AgentCallsign",
-            "module": "./components/agent-badge.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiShimmerText",
-          "declaration": {
-            "name": "TuiShimmerText",
-            "module": "./components/shimmer-text.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ShimmerKind",
-          "declaration": {
-            "name": "ShimmerKind",
-            "module": "./components/shimmer-text.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiQuestion",
-          "declaration": {
-            "name": "TuiQuestion",
-            "module": "./components/question.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiQuestionOption",
-          "declaration": {
-            "name": "TuiQuestionOption",
-            "module": "./components/question.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "defineTheme",
-          "declaration": {
-            "name": "defineTheme",
-            "module": "./theme/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "validateTheme",
-          "declaration": {
-            "name": "validateTheme",
-            "module": "./theme/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "themeToCssText",
-          "declaration": {
-            "name": "themeToCssText",
-            "module": "./theme/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "themeToCssVars",
-          "declaration": {
-            "name": "themeToCssVars",
-            "module": "./theme/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "resolveTheme",
-          "declaration": {
-            "name": "resolveTheme",
-            "module": "./theme/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "claude",
-          "declaration": {
-            "name": "claude",
-            "module": "./theme/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "claudeLight",
-          "declaration": {
-            "name": "claudeLight",
-            "module": "./theme/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "listBuiltInThemes",
-          "declaration": {
-            "name": "listBuiltInThemes",
-            "module": "./theme/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "getBuiltInTheme",
-          "declaration": {
-            "name": "getBuiltInTheme",
-            "module": "./theme/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "MissingTokenError",
-          "declaration": {
-            "name": "MissingTokenError",
-            "module": "./theme/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "InvalidColorError",
-          "declaration": {
-            "name": "InvalidColorError",
-            "module": "./theme/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ThemeDefinition",
-          "declaration": {
-            "name": "ThemeDefinition",
-            "module": "./theme/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "defineCommands",
-          "declaration": {
-            "name": "defineCommands",
-            "module": "./commands/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CommandRegistry",
-          "declaration": {
-            "name": "CommandRegistry",
-            "module": "./commands/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CommandDefinitionError",
-          "declaration": {
-            "name": "CommandDefinitionError",
-            "module": "./commands/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "normalizeName",
-          "declaration": {
-            "name": "normalizeName",
-            "module": "./commands/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "parseInput",
-          "declaration": {
-            "name": "parseInput",
-            "module": "./commands/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "levenshtein",
-          "declaration": {
-            "name": "levenshtein",
-            "module": "./commands/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "closestMatch",
-          "declaration": {
-            "name": "closestMatch",
-            "module": "./commands/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "builtinCommands",
-          "declaration": {
-            "name": "builtinCommands",
-            "module": "./commands/index.js"
-          }
-        },
-        {
-          "kind": "js",
           "name": "BaseCommand",
           "declaration": {
             "name": "BaseCommand",
@@ -569,17 +105,377 @@
         },
         {
           "kind": "js",
-          "name": "TuiCommandDetail",
+          "name": "builtinCommands",
           "declaration": {
-            "name": "TuiCommandDetail",
-            "module": "./events/types.js"
+            "name": "builtinCommands",
+            "module": "./commands/index.js"
           }
         },
         {
           "kind": "js",
-          "name": "TuiCommandSuccessDetail",
+          "name": "CommandDefinitionError",
           "declaration": {
-            "name": "TuiCommandSuccessDetail",
+            "name": "CommandDefinitionError",
+            "module": "./commands/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CommandRegistry",
+          "declaration": {
+            "name": "CommandRegistry",
+            "module": "./commands/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "closestMatch",
+          "declaration": {
+            "name": "closestMatch",
+            "module": "./commands/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "defineCommands",
+          "declaration": {
+            "name": "defineCommands",
+            "module": "./commands/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "levenshtein",
+          "declaration": {
+            "name": "levenshtein",
+            "module": "./commands/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "normalizeName",
+          "declaration": {
+            "name": "normalizeName",
+            "module": "./commands/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "parseInput",
+          "declaration": {
+            "name": "parseInput",
+            "module": "./commands/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "AgentCallsign",
+          "declaration": {
+            "name": "AgentCallsign",
+            "module": "./components/agent-badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiAgentBadge",
+          "declaration": {
+            "name": "TuiAgentBadge",
+            "module": "./components/agent-badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BoxKind",
+          "declaration": {
+            "name": "BoxKind",
+            "module": "./components/box.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiBox",
+          "declaration": {
+            "name": "TuiBox",
+            "module": "./components/box.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ChatRole",
+          "declaration": {
+            "name": "ChatRole",
+            "module": "./components/chat-bubble.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiChatBubble",
+          "declaration": {
+            "name": "TuiChatBubble",
+            "module": "./components/chat-bubble.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "DiffLine",
+          "declaration": {
+            "name": "DiffLine",
+            "module": "./components/diff-block.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "DiffLineKind",
+          "declaration": {
+            "name": "DiffLineKind",
+            "module": "./components/diff-block.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiDiffBlock",
+          "declaration": {
+            "name": "TuiDiffBlock",
+            "module": "./components/diff-block.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiMd",
+          "declaration": {
+            "name": "TuiMd",
+            "module": "./components/md.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PromptMode",
+          "declaration": {
+            "name": "PromptMode",
+            "module": "./components/prompt-input.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiPromptInput",
+          "declaration": {
+            "name": "TuiPromptInput",
+            "module": "./components/prompt-input.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiPromptLine",
+          "declaration": {
+            "name": "TuiPromptLine",
+            "module": "./components/prompt-line.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiQuestionOption",
+          "declaration": {
+            "name": "TuiQuestionOption",
+            "module": "./components/question.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiQuestion",
+          "declaration": {
+            "name": "TuiQuestion",
+            "module": "./components/question.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SessionMode",
+          "declaration": {
+            "name": "SessionMode",
+            "module": "./components/session.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiSession",
+          "declaration": {
+            "name": "TuiSession",
+            "module": "./components/session.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ShimmerKind",
+          "declaration": {
+            "name": "ShimmerKind",
+            "module": "./components/shimmer-text.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiShimmerText",
+          "declaration": {
+            "name": "TuiShimmerText",
+            "module": "./components/shimmer-text.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiSlashOverlay",
+          "declaration": {
+            "name": "TuiSlashOverlay",
+            "module": "./components/slash-overlay.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SpinnerKind",
+          "declaration": {
+            "name": "SpinnerKind",
+            "module": "./components/spinner.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SpinnerTone",
+          "declaration": {
+            "name": "SpinnerTone",
+            "module": "./components/spinner.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiSpinner",
+          "declaration": {
+            "name": "TuiSpinner",
+            "module": "./components/spinner.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "StatusLineKind",
+          "declaration": {
+            "name": "StatusLineKind",
+            "module": "./components/status-line.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "StatusLiveness",
+          "declaration": {
+            "name": "StatusLiveness",
+            "module": "./components/status-line.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "StatusSegment",
+          "declaration": {
+            "name": "StatusSegment",
+            "module": "./components/status-line.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiStatusLine",
+          "declaration": {
+            "name": "TuiStatusLine",
+            "module": "./components/status-line.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiStreamedText",
+          "declaration": {
+            "name": "TuiStreamedText",
+            "module": "./components/streamed-text.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiThemeProvider",
+          "declaration": {
+            "name": "TuiThemeProvider",
+            "module": "./components/theme-provider.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiThinkingBlock",
+          "declaration": {
+            "name": "TuiThinkingBlock",
+            "module": "./components/thinking-block.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TodoStatus",
+          "declaration": {
+            "name": "TodoStatus",
+            "module": "./components/todo-item.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiTodoItem",
+          "declaration": {
+            "name": "TuiTodoItem",
+            "module": "./components/todo-item.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TodoListKind",
+          "declaration": {
+            "name": "TodoListKind",
+            "module": "./components/todo-list.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiTodoList",
+          "declaration": {
+            "name": "TuiTodoList",
+            "module": "./components/todo-list.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ToolCallStatus",
+          "declaration": {
+            "name": "ToolCallStatus",
+            "module": "./components/tool-call.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiToolCall",
+          "declaration": {
+            "name": "TuiToolCall",
+            "module": "./components/tool-call.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiToolUseTimeline",
+          "declaration": {
+            "name": "TuiToolUseTimeline",
+            "module": "./components/tool-use-timeline.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiWelcomeBanner",
+          "declaration": {
+            "name": "TuiWelcomeBanner",
+            "module": "./components/welcome-banner.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiCommandDetail",
+          "declaration": {
+            "name": "TuiCommandDetail",
             "module": "./events/types.js"
           }
         },
@@ -593,33 +489,25 @@
         },
         {
           "kind": "js",
+          "name": "TuiCommandSuccessDetail",
+          "declaration": {
+            "name": "TuiCommandSuccessDetail",
+            "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiEventMap",
+          "declaration": {
+            "name": "TuiEventMap",
+            "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "TuiNavigateDetail",
           "declaration": {
             "name": "TuiNavigateDetail",
-            "module": "./events/types.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiThemeChangeDetail",
-          "declaration": {
-            "name": "TuiThemeChangeDetail",
-            "module": "./events/types.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiSlashSelectDetail",
-          "declaration": {
-            "name": "TuiSlashSelectDetail",
-            "module": "./events/types.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TuiTodoChangeDetail",
-          "declaration": {
-            "name": "TuiTodoChangeDetail",
             "module": "./events/types.js"
           }
         },
@@ -633,10 +521,122 @@
         },
         {
           "kind": "js",
-          "name": "TuiEventMap",
+          "name": "TuiSlashSelectDetail",
           "declaration": {
-            "name": "TuiEventMap",
+            "name": "TuiSlashSelectDetail",
             "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiThemeChangeDetail",
+          "declaration": {
+            "name": "TuiThemeChangeDetail",
+            "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TuiTodoChangeDetail",
+          "declaration": {
+            "name": "TuiTodoChangeDetail",
+            "module": "./events/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ThemeDefinition",
+          "declaration": {
+            "name": "ThemeDefinition",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "claude",
+          "declaration": {
+            "name": "claude",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "claudeLight",
+          "declaration": {
+            "name": "claudeLight",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "defineTheme",
+          "declaration": {
+            "name": "defineTheme",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getBuiltInTheme",
+          "declaration": {
+            "name": "getBuiltInTheme",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "InvalidColorError",
+          "declaration": {
+            "name": "InvalidColorError",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "listBuiltInThemes",
+          "declaration": {
+            "name": "listBuiltInThemes",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MissingTokenError",
+          "declaration": {
+            "name": "MissingTokenError",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "resolveTheme",
+          "declaration": {
+            "name": "resolveTheme",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "themeToCssText",
+          "declaration": {
+            "name": "themeToCssText",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "themeToCssVars",
+          "declaration": {
+            "name": "themeToCssVars",
+            "module": "./theme/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "validateTheme",
+          "declaration": {
+            "name": "validateTheme",
+            "module": "./theme/index.js"
           }
         }
       ]
@@ -683,9 +683,49 @@
       "exports": [
         {
           "kind": "js",
-          "name": "defineCommands",
+          "name": "BuiltinOptions",
           "declaration": {
-            "name": "defineCommands",
+            "name": "BuiltinOptions",
+            "module": "./builtins.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "builtinCommands",
+          "declaration": {
+            "name": "builtinCommands",
+            "module": "./builtins.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "closestMatch",
+          "declaration": {
+            "name": "closestMatch",
+            "module": "./levenshtein.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "levenshtein",
+          "declaration": {
+            "name": "levenshtein",
+            "module": "./levenshtein.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "parseInput",
+          "declaration": {
+            "name": "parseInput",
+            "module": "./parser.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CommandDefinitionError",
+          "declaration": {
+            "name": "CommandDefinitionError",
             "module": "./registry.js"
           }
         },
@@ -699,9 +739,9 @@
         },
         {
           "kind": "js",
-          "name": "CommandDefinitionError",
+          "name": "defineCommands",
           "declaration": {
-            "name": "CommandDefinitionError",
+            "name": "defineCommands",
             "module": "./registry.js"
           }
         },
@@ -711,46 +751,6 @@
           "declaration": {
             "name": "normalizeName",
             "module": "./registry.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "parseInput",
-          "declaration": {
-            "name": "parseInput",
-            "module": "./parser.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "levenshtein",
-          "declaration": {
-            "name": "levenshtein",
-            "module": "./levenshtein.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "closestMatch",
-          "declaration": {
-            "name": "closestMatch",
-            "module": "./levenshtein.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "builtinCommands",
-          "declaration": {
-            "name": "builtinCommands",
-            "module": "./builtins.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "BuiltinOptions",
-          "declaration": {
-            "name": "BuiltinOptions",
-            "module": "./builtins.js"
           }
         },
         {
@@ -4912,9 +4912,57 @@
       "exports": [
         {
           "kind": "js",
+          "name": "claude",
+          "declaration": {
+            "name": "claude",
+            "module": "./claude.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "claudeLight",
+          "declaration": {
+            "name": "claudeLight",
+            "module": "./claude.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "claudeAnsi",
+          "declaration": {
+            "name": "claudeAnsi",
+            "module": "./claude-ansi.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ThemeDefinition",
+          "declaration": {
+            "name": "ThemeDefinition",
+            "module": "./defineTheme.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "defineTheme",
           "declaration": {
             "name": "defineTheme",
+            "module": "./defineTheme.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "InvalidColorError",
+          "declaration": {
+            "name": "InvalidColorError",
+            "module": "./defineTheme.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MissingTokenError",
+          "declaration": {
+            "name": "MissingTokenError",
             "module": "./defineTheme.js"
           }
         },
@@ -4940,54 +4988,6 @@
           "declaration": {
             "name": "validateTheme",
             "module": "./defineTheme.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "MissingTokenError",
-          "declaration": {
-            "name": "MissingTokenError",
-            "module": "./defineTheme.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "InvalidColorError",
-          "declaration": {
-            "name": "InvalidColorError",
-            "module": "./defineTheme.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ThemeDefinition",
-          "declaration": {
-            "name": "ThemeDefinition",
-            "module": "./defineTheme.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "claude",
-          "declaration": {
-            "name": "claude",
-            "module": "./claude.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "claudeLight",
-          "declaration": {
-            "name": "claudeLight",
-            "module": "./claude.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "claudeAnsi",
-          "declaration": {
-            "name": "claudeAnsi",
-            "module": "./claude-ansi.js"
           }
         },
         {

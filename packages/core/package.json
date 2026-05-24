@@ -4,8 +4,15 @@
   "description": "Claude Code-styled TUI web components (Lit core)",
   "license": "MIT",
   "type": "module",
-  "sideEffects": ["./dist/index.js", "*.css"],
-  "files": ["dist", "custom-elements.json", "README.md"],
+  "sideEffects": [
+    "./dist/index.js",
+    "*.css"
+  ],
+  "files": [
+    "dist",
+    "custom-elements.json",
+    "README.md"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
