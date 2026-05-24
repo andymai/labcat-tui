@@ -10,9 +10,9 @@ const { theme, exportName } = Astro.props;
 
 // Cards scope their tokens to a per-card class so multiple themes can preview
 // on the same page without colliding with the global Starlight theme.
-const _cardClass = `theme-card-${exportName}`;
+const cardClass = `theme-card-${exportName}`;
 
-const _swatches: Array<{ label: string; var: string; value: string }> = [
+const swatches: Array<{ label: string; var: string; value: string }> = [
   { label: 'bg', var: '--tui-bg', value: theme.bg },
   { label: 'surface', var: '--tui-surface', value: theme.surface },
   { label: 'fg', var: '--tui-fg', value: theme.fg },
