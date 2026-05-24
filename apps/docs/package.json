@@ -15,9 +15,9 @@
     "@labcat/tui": "workspace:^",
     "@labcat/tui-shiki": "workspace:^",
     "@labcat/tui-themes": "workspace:^",
-    "astro": "^6.1.6"
+    "astro": "^6.3.3"
   },
   "devDependencies": {
-    "typescript": "^5.7.3"
+    "typescript": "^6.0.3"
   }
 }

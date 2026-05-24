@@ -1,12 +1,12 @@
+export { type BuiltinOptions, builtinCommands } from './builtins.js';
+export { closestMatch, levenshtein } from './levenshtein.js';
+export { parseInput } from './parser.js';
 export {
-  defineCommands,
-  CommandRegistry,
   CommandDefinitionError,
+  CommandRegistry,
+  defineCommands,
   normalizeName,
 } from './registry.js';
-export { parseInput } from './parser.js';
-export { levenshtein, closestMatch } from './levenshtein.js';
-export { builtinCommands, type BuiltinOptions } from './builtins.js';
 export type {
   BaseCommand,
   Command,

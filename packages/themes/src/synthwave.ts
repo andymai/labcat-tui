@@ -1,4 +1,4 @@
-import { type ThemeDefinition, defineTheme } from '@labcat/tui';
+import { defineTheme, type ThemeDefinition } from '@labcat/tui';
 
 const motion = {
   fontMono:

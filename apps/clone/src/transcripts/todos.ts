@@ -1,4 +1,4 @@
-import { type MockEvent, chunkText } from '@labcat/tui-agent/mock';
+import { chunkText, type MockEvent } from '@labcat/tui-agent/mock';
 
 const turnId = 'asst_todos_1';
 

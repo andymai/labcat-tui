@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 export type ToolCallStatus = 'ok' | 'pending' | 'running' | 'error';
