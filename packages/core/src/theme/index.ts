@@ -1,17 +1,17 @@
+export { claude, claudeLight } from './claude.js';
+export { claudeAnsi } from './claude-ansi.js';
+export type { ThemeDefinition } from './defineTheme.js';
 export {
   defineTheme,
+  InvalidColorError,
+  MissingTokenError,
   themeToCssText,
   themeToCssVars,
   validateTheme,
-  MissingTokenError,
-  InvalidColorError,
 } from './defineTheme.js';
-export type { ThemeDefinition } from './defineTheme.js';
-export { claude, claudeLight } from './claude.js';
-export { claudeAnsi } from './claude-ansi.js';
 
-import { claudeAnsi } from './claude-ansi.js';
 import { claude, claudeLight } from './claude.js';
+import { claudeAnsi } from './claude-ansi.js';
 import type { ThemeDefinition } from './defineTheme.js';
 
 const builtIns: Record<string, ThemeDefinition> = {

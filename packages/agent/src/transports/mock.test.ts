@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { AgentAbortError, type AgentEvent } from '../types.js';
-import { type MockEvent, chunkText, createMockTransport } from './mock.js';
+import { chunkText, createMockTransport, type MockEvent } from './mock.js';
 
 async function collect(stream: AsyncIterable<AgentEvent>): Promise<AgentEvent[]> {
   const out: AgentEvent[] = [];

@@ -109,6 +109,10 @@ function turnsToMessages(turns: readonly Turn[]): AnthropicMessage[] {
             };
           case 'thinking':
             return { type: 'thinking', thinking: b.thinking };
+          default: {
+            const _exhaustive: never = b;
+            return _exhaustive;
+          }
         }
       });
       return { role: t.role, content };

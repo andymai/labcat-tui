@@ -4,8 +4,13 @@
   "description": "Syntax-highlighted code blocks for @labcat/tui, powered by Shiki",
   "license": "MIT",
   "type": "module",
-  "sideEffects": ["./dist/index.js"],
-  "files": ["dist", "README.md"],
+  "sideEffects": [
+    "./dist/index.js"
+  ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -66,7 +71,12 @@
       "limit": "10 kB",
       "import": "*",
       "brotli": true,
-      "ignore": ["shiki", "shiki/core", "shiki/engine/oniguruma", "shiki/wasm"]
+      "ignore": [
+        "shiki",
+        "shiki/core",
+        "shiki/engine/oniguruma",
+        "shiki/wasm"
+      ]
     }
   ],
   "publishConfig": {

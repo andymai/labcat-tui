@@ -1,8 +1,8 @@
-import { LitElement, css, html } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import type { TuiThemeChangeDetail } from '../events/types.js';
-import { resolveTheme, themeToCssVars } from '../theme/index.js';
 import type { ThemeDefinition } from '../theme/index.js';
+import { resolveTheme, themeToCssVars } from '../theme/index.js';
 
 /**
  * `<tui-theme-provider>` — wraps a subtree and applies a theme via CSS custom

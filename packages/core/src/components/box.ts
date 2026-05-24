@@ -1,4 +1,4 @@
-import { LitElement, css, html, nothing } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 export type BoxKind = 'rounded' | 'sharp';

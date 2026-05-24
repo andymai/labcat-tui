@@ -1,4 +1,4 @@
-import { type MockEvent, chunkText } from '@labcat/tui-agent/mock';
+import { chunkText, type MockEvent } from '@labcat/tui-agent/mock';
 
 const t1 = 'asst_debug_1';
 const u1 = 'user_debug_tr1';

@@ -1,9 +1,9 @@
 import {
+  blockKey,
   type ContentBlock,
   type ToolResultBlock,
   type ToolUseBlock,
   type Turn,
-  blockKey,
 } from '@labcat/tui-agent';
 import { ThinkingBlock } from '@labcat/tui-react';
 import { EditDiffView } from './EditDiffView.js';

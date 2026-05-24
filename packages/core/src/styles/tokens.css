@@ -84,8 +84,8 @@
   --tui-code-type: #ffdf85;
 
   /* Typography + motion */
-  --tui-font-mono: "Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono",
-    monospace;
+  --tui-font-mono:
+    "Berkeley Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --tui-leading-tight: 1.25;
   --tui-leading-body: 1.55;
   --tui-content-max: 72ch;

@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { CommandRegistry } from '../commands/registry.js';
 import type { Command, CommandContext } from '../commands/types.js';
