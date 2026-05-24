@@ -33,11 +33,11 @@
   },
   "devDependencies": {
     "@labcat/tui": "workspace:^",
-    "@size-limit/preset-small-lib": "^11.1.6",
+    "@size-limit/preset-small-lib": "^12.1.0",
     "@types/react": "^19.0.2",
     "react": "^19.0.0",
-    "size-limit": "^11.1.6",
-    "typescript": "^5.7.3"
+    "size-limit": "^12.1.0",
+    "typescript": "^6.0.3"
   },
   "size-limit": [
     {
