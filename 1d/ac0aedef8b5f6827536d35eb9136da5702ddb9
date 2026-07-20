@@ -1,0 +1,19 @@
+packages/core/src/components/prompt-input.test.ts
+  s_ebb4b456640660::t_cdaf8d3660cbfb 101-102
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "1dac0aedef8b5f6827536d35eb9136da5702ddb9",
+  "prompts": {},
+  "sessions": {
+    "s_ebb4b456640660": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "988b40fd-9c61-4eee-84ed-db37f8238dc9",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
