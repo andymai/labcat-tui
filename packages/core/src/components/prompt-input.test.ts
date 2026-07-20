@@ -98,7 +98,8 @@ describe('<tui-prompt-input>', () => {
     pressEnter(el);
     await new Promise((r) => setTimeout(r, 0));
     expect(errors).toHaveLength(1);
-    expect((errors[0]?.detail as { error: Error }).error.message).toBe('kaboom');
+    const detail = errors[0]?.detail as { error: Error } | undefined;
+    expect(detail?.error.message).toBe('kaboom');
   });
 
   it('sets aria-busy during handler execution and clears after', async () => {
