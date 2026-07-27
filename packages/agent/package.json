@@ -53,12 +53,12 @@
     }
   },
   "devDependencies": {
-    "@anthropic-ai/sdk": "^0.111.0",
+    "@anthropic-ai/sdk": "^0.112.3",
     "@size-limit/preset-small-lib": "^12.1.0",
     "@types/react": "^19.2.17",
     "react": "^19.2.7",
     "size-limit": "^12.1.0",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vitest": "^4.1.10"
   },
   "size-limit": [

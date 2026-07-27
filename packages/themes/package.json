@@ -41,7 +41,7 @@
     "@labcat/tui": "workspace:^",
     "size-limit": "^12.1.0",
     "@size-limit/preset-small-lib": "^12.1.0",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vitest": "^4.1.10"
   },
   "publishConfig": {
