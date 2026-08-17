@@ -11,11 +11,11 @@
     "clean": "rm -rf dist .astro"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.41.6",
+    "@astrojs/starlight": "^0.41.7",
     "@labcat/tui": "workspace:^",
     "@labcat/tui-shiki": "workspace:^",
     "@labcat/tui-themes": "workspace:^",
-    "astro": "^7.1.6"
+    "astro": "^7.2.0"
   },
   "devDependencies": {
     "typescript": "^7.0.2"
