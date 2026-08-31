@@ -42,7 +42,7 @@
     "size-limit": "^13.0.3",
     "@size-limit/preset-small-lib": "^13.0.3",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.11"
   },
   "publishConfig": {
     "access": "public",
