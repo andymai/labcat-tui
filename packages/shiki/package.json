@@ -57,13 +57,13 @@
     "@open-wc/testing-helpers": "^3.0.1",
     "@size-limit/preset-small-lib": "^13.0.3",
     "@types/react": "^19.2.18",
-    "@vitest/browser": "^4.1.10",
-    "@vitest/browser-playwright": "4.1.10",
+    "@vitest/browser": "^4.1.11",
+    "@vitest/browser-playwright": "4.1.11",
     "playwright": "^1.62.1",
     "react": "^19.2.8",
     "size-limit": "^13.0.3",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.11"
   },
   "size-limit": [
     {
