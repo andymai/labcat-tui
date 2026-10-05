@@ -39,10 +39,10 @@
   },
   "devDependencies": {
     "@labcat/tui": "workspace:^",
-    "size-limit": "^13.1.1",
-    "@size-limit/preset-small-lib": "^13.1.1",
+    "size-limit": "^14.0.0",
+    "@size-limit/preset-small-lib": "^14.0.0",
     "typescript": "^7.0.2",
-    "vitest": "^5.0.1"
+    "vitest": "^5.0.2"
   },
   "publishConfig": {
     "access": "public",
