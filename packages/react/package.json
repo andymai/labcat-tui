@@ -36,10 +36,10 @@
   },
   "devDependencies": {
     "@labcat/tui": "workspace:^",
-    "@size-limit/preset-small-lib": "^14.0.0",
+    "@size-limit/preset-small-lib": "^14.1.0",
     "@types/react": "^19.3.0",
     "react": "^19.3.0",
-    "size-limit": "^14.0.0",
+    "size-limit": "^14.1.0",
     "typescript": "^7.0.2"
   },
   "size-limit": [
