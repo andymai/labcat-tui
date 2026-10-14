@@ -2055,8 +2055,8 @@ packages:
   html-whitespace-sensitive-tag-names@3.0.1:
     resolution: {integrity: sha512-q+310vW8zmymYHALr1da4HyXUQ0zgiIwIicEfotYPWGN0OJVEN/58IJ3A4GBYcEq3LGAZqKb+ugvP0GNB9CEAA==}
 
-  http-cache-semantics@4.2.0:
-    resolution: {integrity: sha512-dTxcvPXqPvXBQpq5dUr6mEMJX4oIEFv6bwom3FDwKRDsuIjjJGANqhBuoAn9c1RQJIdAKav33ED65E2ys+87QQ==}
+  http-cache-semantics@4.3.0:
+    resolution: {integrity: sha512-M5t5LlJpS1UHMjvwRQVdFHvPISGeLAxNcrWuJkeGh0KxsqCHZ1O3NXZU/8x7cD0BDcGW8kapxMKTvwlqrNkHkA==}
 
   human-id@4.2.1:
     resolution: {integrity: sha512-zPGsiS+dWoTZtZ4AtpA9Y+BdSFSNWvnouNlWNoUFyAM6xHOHmdCvqO3k8AIbdamCOv4gUFUVNPf6rJFfc4UiJw==}
@@ -2582,8 +2582,8 @@ packages:
       '@types/node':
         optional: true
 
-  shell-quote@1.10.0:
-    resolution: {integrity: sha512-w1aiOKwKuRgtwAReIIj89puqg+I7GvX4IbLrvmhXbzQsj1+Zwi4VO3+fa6ZF91TWSjIxoEkKnMeHcLEODK5ZXA==}
+  shell-quote@1.12.0:
+    resolution: {integrity: sha512-PcByqNyT/38F2kDNi006HAMRJaULuBzq/FOsw3qdZvX/GA9W/jamDaRskgHjubHiftXK5sIFxLNkvrXUwcof6Q==}
     engines: {node: '>= 0.4'}
 
   shiki@4.4.3:
@@ -4192,7 +4192,7 @@ snapshots:
       get-tsconfig: 5.0.0-beta.4
       github-slugger: 2.0.0
       html-escaper: 3.0.3
-      http-cache-semantics: 4.2.0
+      http-cache-semantics: 4.3.0
       js-yaml: 4.3.2
       jsonc-parser: 3.3.1
       magic-string: 1.4.2
@@ -4661,7 +4661,7 @@ snapshots:
 
   html-whitespace-sensitive-tag-names@3.0.1: {}
 
-  http-cache-semantics@4.2.0: {}
+  http-cache-semantics@4.3.0: {}
 
   human-id@4.2.1: {}
 
@@ -4722,7 +4722,7 @@ snapshots:
   launch-editor@2.14.1:
     dependencies:
       picocolors: 1.1.1
-      shell-quote: 1.10.0
+      shell-quote: 1.12.0
 
   lightningcss-android-arm64@1.33.0:
     optional: true
@@ -5341,7 +5341,7 @@ snapshots:
       '@types/node': 24.19.1
     optional: true
 
-  shell-quote@1.10.0: {}
+  shell-quote@1.12.0: {}
 
   shiki@4.4.3:
     dependencies:
