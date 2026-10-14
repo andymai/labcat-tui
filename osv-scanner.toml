@@ -16,11 +16,11 @@ reason = "no fixed braces release; dev-only via the cem analyzer, which expands 
 # postcss-selector-parser is fixed only in 7.1.6. It arrives through
 # @expressive-code/core 0.44.2 (latest, via Starlight in apps/docs), which
 # requires postcss-nested ^6, and postcss-nested 6 requires
-# postcss-selector-parser ^6. It parses the CSS expressive-code generates for
-# its own code-block themes while the docs site builds, never untrusted input.
+# postcss-selector-parser ^6. expressive-code runs it over the styles its
+# plugins register while the docs site builds, never over untrusted input.
 #
 # Delete when an expressive-code release moves to postcss-nested >= 8.
 [[IgnoredVulns]]
 id = "GHSA-rj75-hqrm-r3gf"
 ignoreUntil = 2027-01-15
-reason = "fix needs postcss-selector-parser 7, outside expressive-code's postcss-nested ^6 range; docs build parses only generated theme CSS"
+reason = "fix needs postcss-selector-parser 7, outside expressive-code's postcss-nested ^6 range; docs build parses only plugin-registered styles"
