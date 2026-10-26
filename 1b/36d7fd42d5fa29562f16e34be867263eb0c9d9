@@ -1,0 +1,19 @@
+pnpm-lock.yaml
+  s_b59294d1f6ab91::t_fe116f5f8a3126 2073-2074,3176,4583
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1b36d7fd42d5fa29562f16e34be867263eb0c9d9",
+  "prompts": {},
+  "sessions": {
+    "s_b59294d1f6ab91": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d066ae07-3f26-4053-8085-781d24d62ed6",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Andy Aragon <hi@andymai.com>"
+    }
+  }
+}
