@@ -13,14 +13,14 @@
     "clean": "rm -rf dist *.tsbuildinfo"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.133.0",
+    "@anthropic-ai/sdk": "^0.135.0",
     "@labcat/tui": "workspace:^",
     "@labcat/tui-agent": "workspace:^",
     "@labcat/tui-react": "workspace:^",
     "@labcat/tui-shiki": "workspace:^",
     "@labcat/tui-themes": "workspace:^",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@types/react": "^19.3.0",
