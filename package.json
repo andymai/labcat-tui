@@ -35,7 +35,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
     "size-limit": "^14.2.0",
-    "turbo": "^2.11.7",
+    "turbo": "^2.11.9",
     "typescript": "^7.0.2"
   }
 }
