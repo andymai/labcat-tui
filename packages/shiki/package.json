@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "lit": "^3.3.3",
-    "shiki": "^4.5.0"
+    "shiki": "^4.6.0"
   },
   "devDependencies": {
     "@labcat/tui": "workspace:^",
